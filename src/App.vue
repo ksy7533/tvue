@@ -1,18 +1,20 @@
 <template>
   <div id="app" class="wrap">
     <HeaderArea></HeaderArea>
+    <MainContainerArea></MainContainerArea>
   </div>
 </template>
 
 <script>
 import reset from 'reset-css'
 import HeaderArea from './components/HeaderComp/HeaderArea.vue'
+import MainContainerArea from './components/MainContainerComp/MainContainerArea.vue'
 
 export default {
   components : {
-    HeaderArea
+    HeaderArea,
+    MainContainerArea
   }
-
 }
 </script>
 
