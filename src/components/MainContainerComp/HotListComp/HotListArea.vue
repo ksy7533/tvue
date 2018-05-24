@@ -1,14 +1,14 @@
 <template>
     <section class="areaHotList">
         <HotHorizonList v-bind:contents=hotLiveContents>
-            <h2 slot="title">인기 라이브</h2>
+            <h2 slot="title">인기 동영상</h2>
         </HotHorizonList>
-        <HotHorizonList v-bind:contents=hotHighrightContents>
-            <h2 slot="title">인기 하이라이트</h2>
+        <HotHorizonList v-bind:contents=foodVideoContents>
+            <h2 slot="title">먹방 최신동영상</h2>
         </HotHorizonList>
-        <HotHorizonList v-bind:contents=hotPdContents>
+        <!-- <HotHorizonList v-bind:contents=hotPdContents>
             <h2 slot="title">인기 PD 동영상</h2>
-        </HotHorizonList>
+        </HotHorizonList> -->
     </section>
 </template>
 
@@ -16,174 +16,66 @@
 import HotHorizonList from './HotHorizonList.vue'
 
 
-var YOUTUBE_API = AIzaSyBQ1G-JhjIMd0bGr9IeF49NKeQ29roBttY;
+var YOUTUBE_API = "AIzaSyBQ1G-JhjIMd0bGr9IeF49NKeQ29roBttY";
+
+// var url = "https://www.googleapis.com/youtube/v3/videos?id=7lCDEYXw3mM&key="+YOUTUBE_API+"&part=snippet,contentDetails,statistics,status"
+
+/* 카테고리 확인 */
+// var url = "https://www.googleapis.com/youtube/v3/guideCategories?regionCode=KR&key="+YOUTUBE_API+"&part=snippet"
+
+/* 인기 동영상 */
+var hot_video_url = "https://www.googleapis.com/youtube/v3/videos?chart=mostPopular&regionCode=KR&key="+YOUTUBE_API+"&part=snippet&maxResults=30";
+
+var food_video_url = "https://www.googleapis.com/youtube/v3/search?key="+YOUTUBE_API+"&part=snippet&maxResults=30&order=date&q='먹방'";
 
 export default {
 
     created () {
-        this.$axios.get('https://www.googleapis.com/youtube/v3/videos', {
-
+        this.$axios.get(hot_video_url, {
         }).then((response) => {
-            console.log(response);
+            this.initHotVideoData(response);
+        }).catch((ex) => {
+            console.log("ERROR !", ex);
+        })
+
+        this.$axios.get(food_video_url, {
+        }).then((response) => {
+            this.initFoodVideoData(response);
         }).catch((ex) => {
             console.log("ERROR !", ex);
         })
     },
 
+    methods : {
+        initHotVideoData : function(response){
+            var items = response.data.items;
+            // console.log(items)
+            items.forEach(ele => {
+                this.hotLiveContents.push({
+                    title : ele.snippet.title,
+                    link : ele.id,
+                    img_src: ele.snippet.thumbnails.medium.url
+                })      
+            });
+        },
+
+        initFoodVideoData : function(response){
+            var items = response.data.items;
+            console.log(items)
+            items.forEach(ele => {
+                this.foodVideoContents.push({
+                    title : ele.snippet.title,
+                    link : ele.id.videoId,
+                    img_src: ele.snippet.thumbnails.medium.url
+                })      
+            });
+        }
+    },
+
     data() {
         return {
-            hotLiveContents : [
-                {
-                    no : 1,
-                    title : "YTN 데일리 라이브",
-                    source : "MLB LIVE",
-                    playtime : "1:00"
-                },
-                {
-                    no : 2,
-                    title : "YTN 데일리 라이브",
-                    source : "MLB LIVE",
-                    playtime : "2:00"
-                },
-                {
-                    no : 3,
-                    title : "YTN 데일리 라이브",
-                    source : "MLB LIVE",
-                    playtime : "3:00"
-                },
-                {
-                    no : 4,
-                    title : "YTN 데일리 라이브",
-                    source : "MLB LIVE",
-                    playtime : "4:00"
-                },
-                {
-                    no : 5,
-                    title : "YTN 데일리 라이브",
-                    source : "MLB LIVE",
-                    playtime : "5:00"
-                },
-                {
-                    no : 6,
-                    title : "YTN 데일리 라이브",
-                    source : "MLB LIVE",
-                    playtime : "6:00"
-                },
-                {
-                    no : 7,
-                    title : "YTN 데일리 라이브",
-                    source : "MLB LIVE",
-                    playtime : "7:00"
-                },
-                {
-                    no : 8,
-                    title : "YTN 데일리 라이브",
-                    source : "MLB LIVE",
-                    playtime : "8:00"
-                }
-            ],
-
-            hotHighrightContents : [
-                {
-                    no : 1,
-                    title : "인기라이브 정승환",
-                    source : "MLB LIVE",
-                    playtime : "1:00"
-                },
-                {
-                    no : 2,
-                    title : "인기라이브 정승환",
-                    source : "MLB LIVE",
-                    playtime : "2:00"
-                },
-                {
-                    no : 3,
-                    title : "인기라이브 정승환",
-                    source : "MLB LIVE",
-                    playtime : "3:00"
-                },
-                {
-                    no : 4,
-                    title : "인기라이브 정승환",
-                    source : "MLB LIVE",
-                    playtime : "4:00"
-                },
-                {
-                    no : 5,
-                    title : "인기라이브 정승환",
-                    source : "MLB LIVE",
-                    playtime : "5:00"
-                },
-                {
-                    no : 6,
-                    title : "인기라이브 정승환",
-                    source : "MLB LIVE",
-                    playtime : "6:00"
-                },
-                {
-                    no : 7,
-                    title : "인기라이브 정승환",
-                    source : "MLB LIVE",
-                    playtime : "7:00"
-                },
-                {
-                    no : 8,
-                    title : "인기라이브 정승환",
-                    source : "MLB LIVE",
-                    playtime : "8:00"
-                }
-            ],
-
-             hotPdContents : [
-                {
-                    no : 1,
-                    title : "한번에 180도를 볼수있다능",
-                    source : "MLB LIVE",
-                    playtime : "1:00"
-                },
-                {
-                    no : 2,
-                    title : "한번에 180도를 볼수있다능",
-                    source : "MLB LIVE",
-                    playtime : "2:00"
-                },
-                {
-                    no : 3,
-                    title : "한번에 180도를 볼수있다능",
-                    source : "MLB LIVE",
-                    playtime : "3:00"
-                },
-                {
-                    no : 4,
-                    title : "한번에 180도를 볼수있다능",
-                    source : "MLB LIVE",
-                    playtime : "4:00"
-                },
-                {
-                    no : 5,
-                    title : "한번에 180도를 볼수있다능",
-                    source : "MLB LIVE",
-                    playtime : "5:00"
-                },
-                {
-                    no : 6,
-                    title : "한번에 180도를 볼수있다능",
-                    source : "MLB LIVE",
-                    playtime : "6:00"
-                },
-                {
-                    no : 7,
-                    title : "한번에 180도를 볼수있다능",
-                    source : "MLB LIVE",
-                    playtime : "7:00"
-                },
-                {
-                    no : 8,
-                    title : "한번에 180도를 볼수있다능",
-                    source : "MLB LIVE",
-                    playtime : "8:00"
-                }
-            ]
+            hotLiveContents : [],
+            foodVideoContents : []
         }
     },
 
