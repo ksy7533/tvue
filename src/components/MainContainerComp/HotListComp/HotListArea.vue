@@ -88,5 +88,6 @@ export default {
 <style>
 .areaHotList{
     border:1px solid #ccc;
+    border-radius:5px
 }
 </style>

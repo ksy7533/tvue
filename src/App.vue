@@ -2,6 +2,7 @@
   <div id="app" class="wrap">
     <HeaderArea></HeaderArea>
     <MainContainerArea></MainContainerArea>
+    <FooterArea></FooterArea>
   </div>
 </template>
 
@@ -9,11 +10,13 @@
 import reset from 'reset-css'
 import HeaderArea from './components/HeaderComp/HeaderArea.vue'
 import MainContainerArea from './components/MainContainerComp/MainContainerArea.vue'
+import FooterArea from './components/FooterComp/FooterArea.vue'
 
 export default {
   components : {
     HeaderArea,
-    MainContainerArea
+    MainContainerArea,
+    FooterArea
   }
 }
 </script>
