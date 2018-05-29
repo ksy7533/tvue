@@ -2,8 +2,8 @@
     <div class="listHot">
         <slot name="title"></slot>
         <swiper :options="swiperOption">
-            <swiper-slide v-for="item in contents" v-bind:key="item.no">
-                <a v-bind:href="item.link" class="link">
+            <swiper-slide v-for="item in contents" v-bind:key="item.id">
+                <a v-bind:href="item.id" class="link">
                     <p class="wrap_img"><img v-bind:src="item.img_src" alt=""></p>
                     <p class="tit">{{item.title}}</p>
                 </a>
@@ -50,8 +50,14 @@ h2{
     font-weight:600
 }
 .listHot{
-    padding:20px;
+    padding:15px 20px;
+    border-top:1px solid #d9d9d9;
 }
+
+.listHot:first-child{
+    border-top:none;
+}
+
 .wrap_img img{
     width:200px;
     height:120px;

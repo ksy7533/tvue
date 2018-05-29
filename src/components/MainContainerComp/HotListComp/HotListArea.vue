@@ -53,7 +53,7 @@ export default {
             items.forEach(ele => {
                 this.hotLiveContents.push({
                     title : ele.snippet.title,
-                    link : ele.id,
+                    id : ele.id,
                     img_src: ele.snippet.thumbnails.medium.url
                 })      
             });
@@ -61,11 +61,11 @@ export default {
 
         initFoodVideoData : function(response){
             var items = response.data.items;
-            console.log(items)
+            // console.log(items)
             items.forEach(ele => {
                 this.foodVideoContents.push({
                     title : ele.snippet.title,
-                    link : ele.id.videoId,
+                    id : ele.id.videoId,
                     img_src: ele.snippet.thumbnails.medium.url
                 })      
             });
@@ -87,7 +87,9 @@ export default {
 
 <style>
 .areaHotList{
+    padding:20px 0;
     border:1px solid #ccc;
-    border-radius:5px
+    border-radius:5px;
+    background-color:#F5F5F8;
 }
 </style>
