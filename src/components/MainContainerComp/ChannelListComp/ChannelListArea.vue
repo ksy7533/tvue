@@ -1,9 +1,29 @@
 <template>
     <section class="areaChannel">
-        <channelList v-bind:contents="varietyChannelContents"></channelList>
-        <channelList v-bind:contents="musicChannelContents"></channelList>
-        <channelList v-bind:contents="gameChannelContents"></channelList>
-        <channelList v-bind:contents="dramaChannelContents"></channelList>
+        <channelList v-bind:contents="varietyChannelContents">
+            <a slot="channelName" href="#n" class="channelName type01">
+                <span slot="title" class="name">예능</span>
+                <span class="sub_name">최신 인기 동영상</span>
+            </a>
+        </channelList>
+        <channelList v-bind:contents="musicChannelContents">
+            <a slot="channelName" href="#n" class="channelName type02">
+                <span slot="title" class="name">음악</span>
+                <span class="sub_name">최신 인기 동영상</span>
+            </a>
+        </channelList>
+        <channelList v-bind:contents="gameChannelContents">
+            <a slot="channelName" href="#n" class="channelName type03">
+                <span slot="title" class="name">게임</span>
+                <span class="sub_name">최신 인기 동영상</span>
+            </a>
+        </channelList>
+        <channelList v-bind:contents="dramaChannelContents">
+            <a slot="channelName" href="#n" class="channelName type04">
+                <span slot="title" class="name">드라마</span>
+                <span class="sub_name">최신 인기 동영상</span>
+            </a>
+        </channelList>
     </section>
 </template>
 
@@ -55,7 +75,6 @@ export default {
     methods : {
         initVarietyChannelData : function(response){
             var items = response.data.items;
-            console.log(items)
             items.forEach(ele => {
                 this.varietyChannelContents.push({
                     title : ele.snippet.title,
@@ -67,7 +86,6 @@ export default {
 
         initMusicChannelData : function(response){
             var items = response.data.items;
-            console.log(items)
             items.forEach(ele => {
                 this.musicChannelContents.push({
                     title : ele.snippet.title,
@@ -79,7 +97,6 @@ export default {
 
         initGameChannelData : function(response){
             var items = response.data.items;
-            console.log(items)
             items.forEach(ele => {
                 this.gameChannelContents.push({
                     title : ele.snippet.title,
@@ -91,7 +108,6 @@ export default {
 
         initDramaChannelData : function(response){
             var items = response.data.items;
-            console.log(items)
             items.forEach(ele => {
                 this.dramaChannelContents.push({
                     title : ele.snippet.title,

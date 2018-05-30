@@ -1,5 +1,5 @@
 <template>
-    <div id="container">
+    <div>
         <HotListArea></HotListArea>
         <ChannelListArea></ChannelListArea>
     </div>
@@ -18,8 +18,4 @@ export default {
 </script>
 
 <style scoped>
-#container{
-    margin:30px auto 0;
-    width:1260px;
-}
 </style>

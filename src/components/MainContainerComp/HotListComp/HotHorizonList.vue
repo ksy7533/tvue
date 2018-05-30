@@ -3,7 +3,7 @@
         <slot name="title"></slot>
         <swiper :options="swiperOption">
             <swiper-slide v-for="item in contents" v-bind:key="item.id">
-                <a v-bind:href="item.id" class="link">
+                <a v-bind:href="item.id" class="link" v-on:click.prevent="changeContainer(item.id)">
                     <p class="wrap_img"><img v-bind:src="item.img_src" alt=""></p>
                     <p class="tit">{{item.title}}</p>
                 </a>
@@ -39,6 +39,15 @@ export default {
     components: {
         swiper,
         swiperSlide
+    },
+
+    methods: {
+        changeContainer : function(videoId){
+            this.$store.commit('changeContainer', {
+                currentVideoId: videoId,
+                containerValue: 'playVideo'
+            });
+        }
     }
 }
 </script>

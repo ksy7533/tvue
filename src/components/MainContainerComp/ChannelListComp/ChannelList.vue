@@ -1,9 +1,8 @@
 <template>
     <div class="listChannel">
-        <a href="#n" class="channelName">
-            <span class="name">예능</span>
-            <span class="sub_name">최신 인기 동영상</span>
-        </a>
+        <slot name="channelName">
+            <slot name="title"></slot>
+        </slot>
         <ul class="list">
             <li v-for="item in contents" v-bind:key="item.id">
                 <a v-bind:href="item.id">
@@ -37,6 +36,7 @@ export default {
     display:block;
     clear:both
 }
+
 .listChannel .channelName{
     text-decoration:none;
     float:left;
@@ -44,8 +44,23 @@ export default {
     padding:20px;
     width:185px;
     height:160px;
-    background-color:green;
     border-radius:5px;
+}
+
+.listChannel .channelName.type01{
+    background-color:#22B478;
+}
+
+.listChannel .channelName.type02{
+    background-color:#D8186B;
+}
+
+.listChannel .channelName.type03{
+    background-color:#EEA802;
+}
+
+.listChannel .channelName.type04{
+    background-color:#1984CE;
 }
 
 .listChannel .channelName .name{

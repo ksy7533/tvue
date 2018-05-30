@@ -1,7 +1,10 @@
 <template>
   <div id="app" class="wrap">
     <HeaderArea></HeaderArea>
-    <MainContainerArea></MainContainerArea>
+    <div class="container">
+      <MainContainerArea v-if="'main' === this.$store.state.containerValue"></MainContainerArea>
+      <PlayVideoContainerArea v-else-if="'playVideo' ===  this.$store.state.containerValue"></PlayVideoContainerArea>
+    </div>
     <FooterArea></FooterArea>
   </div>
 </template>
@@ -10,18 +13,30 @@
 import reset from 'reset-css'
 import HeaderArea from './components/HeaderComp/HeaderArea.vue'
 import MainContainerArea from './components/MainContainerComp/MainContainerArea.vue'
+import PlayVideoContainerArea from './components/PlayVideoContainerComp/PlayVideoArea.vue'
 import FooterArea from './components/FooterComp/FooterArea.vue'
 
 export default {
   components : {
     HeaderArea,
     MainContainerArea,
+    PlayVideoContainerArea,
     FooterArea
+  },
+
+  data(){
+    return {
+      container : ''
+    }
+  },
+
+  methods : {
+
   }
 }
 </script>
 
-<style>
+<style scopped>
 @import url(//fonts.googleapis.com/earlyaccess/notosanskr.css);
 
 body, html{
@@ -34,5 +49,10 @@ body, html{
 .wrap{
   width:100%;
   height:100%
+}
+
+.container{
+    margin:30px auto 0;
+    width:1260px;
 }
 </style>

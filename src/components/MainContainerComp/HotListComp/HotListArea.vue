@@ -49,11 +49,12 @@ export default {
     methods : {
         initHotVideoData : function(response){
             var items = response.data.items;
-            // console.log(items)
+            console.log(items)
             items.forEach(ele => {
                 this.hotLiveContents.push({
                     title : ele.snippet.title,
                     id : ele.id,
+                    // channelId : ele.snippet.channelId,
                     img_src: ele.snippet.thumbnails.medium.url
                 })      
             });
