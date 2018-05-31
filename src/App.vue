@@ -28,10 +28,6 @@ export default {
     return {
       container : ''
     }
-  },
-
-  methods : {
-
   }
 }
 </script>

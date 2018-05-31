@@ -3,7 +3,7 @@
         <slot name="title"></slot>
         <swiper :options="swiperOption">
             <swiper-slide v-for="item in contents" v-bind:key="item.id">
-                <a v-bind:href="item.id" class="link" v-on:click.prevent="changeContainer(item.id)">
+                <a class="link" v-on:click.prevent="changeContainer({videoId:item.id, channelId:item.channelId, title:item.title})">
                     <p class="wrap_img"><img v-bind:src="item.img_src" alt=""></p>
                     <p class="tit">{{item.title}}</p>
                 </a>
@@ -20,7 +20,7 @@ import { swiper, swiperSlide } from 'vue-awesome-swiper'
 
 export default {
     props : ['contents'],
-    data() {
+    data(){
         return {
             swiperOption: {
                 slidesPerView: 6,
@@ -42,9 +42,11 @@ export default {
     },
 
     methods: {
-        changeContainer : function(videoId){
+        changeContainer : function(obj){
             this.$store.commit('changeContainer', {
-                currentVideoId: videoId,
+                currentVideoId: obj.videoId,
+                currentChannelId: obj.channelId,
+                currentVideoTitle: obj.title,
                 containerValue: 'playVideo'
             });
         }
@@ -52,7 +54,7 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
 h2{
     margin-bottom:20px;
     font-size:18px;
@@ -73,6 +75,7 @@ h2{
 }
 .link{
     text-decoration:none;
+    cursor: pointer;
 }
 .link .tit{
     line-height:18px;

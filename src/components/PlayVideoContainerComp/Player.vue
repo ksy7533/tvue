@@ -1,7 +1,7 @@
 <template>
     <div class="areaPlayer">
         <youtube :video-id="videoId" @ready="ready" player-width="720" player-height="405" class="player"></youtube>
-        <PlayList></PlayList>
+        <!-- <PlayList></PlayList> -->
     </div>
 </template>
 
@@ -14,7 +14,8 @@ Vue.use(VueYouTubeEmbed)
 
 export default {
     created(){
-        this.videoId = this.$store.state.currentVideoId;
+        this.videoId = this.$store.state.currentVideo.videoId;
+        console.log(this.videoId, " df")
     },
 
     data(){

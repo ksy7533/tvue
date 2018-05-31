@@ -46,34 +46,7 @@ export default {
         })
     },
 
-    methods : {
-        initHotVideoData : function(response){
-            var items = response.data.items;
-            console.log(items)
-            items.forEach(ele => {
-                this.hotLiveContents.push({
-                    title : ele.snippet.title,
-                    id : ele.id,
-                    // channelId : ele.snippet.channelId,
-                    img_src: ele.snippet.thumbnails.medium.url
-                })      
-            });
-        },
-
-        initFoodVideoData : function(response){
-            var items = response.data.items;
-            // console.log(items)
-            items.forEach(ele => {
-                this.foodVideoContents.push({
-                    title : ele.snippet.title,
-                    id : ele.id.videoId,
-                    img_src: ele.snippet.thumbnails.medium.url
-                })      
-            });
-        }
-    },
-
-    data() {
+    data(){
         return {
             hotLiveContents : [],
             foodVideoContents : []
@@ -82,6 +55,34 @@ export default {
 
     components : {
         HotHorizonList
+    },
+
+    methods : {
+        initHotVideoData : function(response){
+            var items = response.data.items;
+            console.log(items)
+            items.forEach(ele => {
+                this.hotLiveContents.push({
+                    title : ele.snippet.title,
+                    id : ele.id,
+                    channelId : ele.snippet.channelId,
+                    img_src: ele.snippet.thumbnails.medium.url
+                })      
+            });
+        },
+
+        initFoodVideoData : function(response){
+            var items = response.data.items;
+            console.log(items)
+            items.forEach(ele => {
+                this.foodVideoContents.push({
+                    title : ele.snippet.title,
+                    id : ele.id.videoId,
+                    channelId : ele.snippet.channelId,
+                    img_src: ele.snippet.thumbnails.medium.url
+                })      
+            });
+        }
     }
 }
 </script>

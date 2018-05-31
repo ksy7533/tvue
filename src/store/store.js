@@ -5,12 +5,18 @@ Vue.use(Vuex);
 
 export const store = new Vuex.Store({
     state: {
-        currentVideoId: '',
+        currentVideo: {
+            videoId: '',
+            channelId: '',
+            title: ''
+        },
         containerValue: 'main'
     },
     mutations: {
         changeContainer(state, payload) {
-            state.currentVideoId = payload.currentVideoId;
+            state.currentVideo.videoId = payload.currentVideoId;
+            state.currentVideo.channelId = payload.currentChannelId;
+            state.currentVideo.title = payload.currentVideoTitle;
             state.containerValue = payload.containerValue;
         }
     }
