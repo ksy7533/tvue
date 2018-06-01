@@ -2,8 +2,10 @@
   <div id="app" class="wrap">
     <HeaderArea></HeaderArea>
     <div class="container">
-      <MainContainerArea v-if="'main' === this.$store.state.containerValue"></MainContainerArea>
-      <PlayVideoContainerArea v-else-if="'playVideo' ===  this.$store.state.containerValue"></PlayVideoContainerArea>
+      <!-- <MainContainerArea v-if="'main' === this.$store.state.containerValue"></MainContainerArea>
+      <PlayVideoContainerArea v-else-if="'playVideo' ===  this.$store.state.containerValue"></PlayVideoContainerArea> -->
+      <router-view></router-view>
+
     </div>
     <FooterArea></FooterArea>
   </div>
@@ -22,17 +24,11 @@ export default {
     MainContainerArea,
     PlayVideoContainerArea,
     FooterArea
-  },
-
-  data(){
-    return {
-      container : ''
-    }
   }
 }
 </script>
 
-<style scopped>
+<style scoped>
 @import url(//fonts.googleapis.com/earlyaccess/notosanskr.css);
 
 body, html{

@@ -4,7 +4,7 @@
             <slot name="title"></slot>
         </slot>
         <ul class="list">
-            <li v-for="item in contents" v-bind:key="item.id">
+            <li v-for="(item, index) in contents" v-bind:key="index">
                 <a v-bind:href="item.id">
                     <span class="wrapImg"><img v-bind:src="item.img_src" alt=""></span>
                     <span class="tit">{{item.title}}</span>            

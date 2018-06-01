@@ -2,11 +2,17 @@
     <div class="listHot">
         <slot name="title"></slot>
         <swiper :options="swiperOption">
-            <swiper-slide v-for="item in contents" v-bind:key="item.id">
-                <a class="link" v-on:click.prevent="changeContainer({videoId:item.id, channelId:item.channelId, title:item.title})">
+            <swiper-slide v-for="(item, index) in contents" v-bind:key="index">
+                <!-- <a class="link" v-on:click.prevent="changeContainer({videoId:item.id, channelId:item.channelId, title:item.title})">
                     <p class="wrap_img"><img v-bind:src="item.img_src" alt=""></p>
                     <p class="tit">{{item.title}}</p>
-                </a>
+                </a> -->
+
+                <router-link class="link" v-bind:to="{ name: 'playVideo' }" v-on:click.native="changeContainer({videoId:item.id, channelId:item.channelId, title:item.title})">
+                    <p class="wrap_img"><img v-bind:src="item.img_src" alt=""></p>
+                    <p class="tit">{{item.title}}</p>
+                </router-link>
+
             </swiper-slide>
             <div class="swiper-button-prev" slot="button-prev"></div>
             <div class="swiper-button-next" slot="button-next"></div>
@@ -42,7 +48,18 @@ export default {
     },
 
     methods: {
+        // changeContainer : function(obj){
+        //     this.$store.commit('changeContainer', {
+        //         currentVideoId: obj.videoId,
+        //         currentChannelId: obj.channelId,
+        //         currentVideoTitle: obj.title,
+        //         containerValue: 'playVideo'
+        //     });
+        // }
+
         changeContainer : function(obj){
+            this.$router.push({name:'playVideo', params: {videoId: obj.videoId}});
+            
             this.$store.commit('changeContainer', {
                 currentVideoId: obj.videoId,
                 currentChannelId: obj.channelId,

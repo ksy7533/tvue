@@ -87,7 +87,7 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
 .areaHotList{
     padding:20px 0;
     border:1px solid #ccc;

@@ -2,7 +2,7 @@
     <div class="categoryList">
         <h3>{{categoryObj.title}}</h3>
         <ul class="list">
-            <li v-for="item in playList" v-bind:key="item.id">
+            <li v-for="(item, index) in playList" v-bind:key="index">
                 <a>
                     <span class="wrapImg"><img v-bind:src="item.img_src" alt=""></span>
                     <span class="tit">{{item.title}}</span>
@@ -26,6 +26,7 @@ export default {
         this.$axios.get(playList_url, {
         }).then((response) => {
             this.initArrVideoList(response);
+            console.log(response)
         }).catch((ex) => {
             console.log("ERROR !", ex);
         })
@@ -73,7 +74,9 @@ export default {
 
 .categoryList .list li{
     float:left;
+    margin-right:10px;
     width:200px;
+    height:160px;
 }
 
 .categoryList .list li a{
