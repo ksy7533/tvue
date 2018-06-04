@@ -1,5 +1,5 @@
 <template>
-    <youtube :video-id="this.$store.state.currentVideo.videoId" @ready="ready" player-width="720" player-height="405" class="player"></youtube>
+    <youtube :video-id="this.$route.params.videoId" @ready="ready" player-width="720" player-height="405" class="player"></youtube>
 </template>
 
 <script>
@@ -9,7 +9,6 @@ import VueYouTubeEmbed from 'vue-youtube-embed'
 Vue.use(VueYouTubeEmbed)
 
 export default {
-
     data(){
         return {
             videoId : ''

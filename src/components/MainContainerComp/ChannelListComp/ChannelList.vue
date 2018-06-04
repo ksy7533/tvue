@@ -5,10 +5,17 @@
         </slot>
         <ul class="list">
             <li v-for="(item, index) in contents" v-bind:key="index">
-                <a v-bind:href="item.id">
+                <!-- <a v-bind:href="item.id">
                     <span class="wrapImg"><img v-bind:src="item.img_src" alt=""></span>
                     <span class="tit">{{item.title}}</span>            
-                </a>
+                </a> -->
+
+                <router-link class="link" v-bind:to="{ name: 'playVideo' }" v-on:click.native="changeContainer({videoId:item.id, channelId:item.channelId, title:item.title})">
+                    <p class="wrapImg"><img v-bind:src="item.img_src" alt=""></p>
+                    <p class="tit">{{item.title}}</p>
+                </router-link>
+
+
             </li>
         </ul>
     </div>
@@ -16,7 +23,30 @@
 
 <script>
 export default {
-    props : ['contents']
+    props : ['contents'],
+
+    methods: {
+        // changeContainer : function(obj){
+        //     this.$store.commit('changeContainer', {
+        //         currentVideoId: obj.videoId,
+        //         currentChannelId: obj.channelId,
+        //         currentVideoTitle: obj.title,
+        //         containerValue: 'playVideo'
+        //     });
+        // }
+
+        changeContainer : function(obj){
+            // console.log(obj)
+            this.$router.push({name:'playVideo', params: {videoId: obj.videoId, channelId: obj.channelId}});
+            
+            this.$store.commit('changeContainer', {
+                currentVideoId: obj.videoId,
+                currentChannelId: obj.channelId,
+                currentVideoTitle: obj.title,
+                containerValue: 'playVideo'
+            });
+        }
+    }
 }
 </script>
 

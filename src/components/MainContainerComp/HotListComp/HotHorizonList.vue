@@ -58,7 +58,7 @@ export default {
         // }
 
         changeContainer : function(obj){
-            this.$router.push({name:'playVideo', params: {videoId: obj.videoId}});
+            this.$router.push({name:'playVideo', params: {videoId: obj.videoId, channelId: obj.channelId}});
             
             this.$store.commit('changeContainer', {
                 currentVideoId: obj.videoId,

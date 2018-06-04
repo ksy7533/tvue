@@ -4,7 +4,7 @@
     <div class="container">
       <!-- <MainContainerArea v-if="'main' === this.$store.state.containerValue"></MainContainerArea>
       <PlayVideoContainerArea v-else-if="'playVideo' ===  this.$store.state.containerValue"></PlayVideoContainerArea> -->
-      <router-view></router-view>
+      <router-view :key="$route.path"></router-view>
 
     </div>
     <FooterArea></FooterArea>

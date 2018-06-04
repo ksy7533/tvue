@@ -2,12 +2,12 @@ import MainContainerArea from './components/MainContainerComp/MainContainerArea.
 import PlayVideoArea from './components/PlayVideoContainerComp/PlayVideoArea.vue'
 
 export default [{
-        path: '/',
+        path: '/main',
         name: 'main',
         component: MainContainerArea
     },
     {
-        path: '/playVideo/:videoId',
+        path: '/playVideo/:videoId/:channelId',
         name: 'playVideo',
         component: PlayVideoArea
     }

@@ -79,6 +79,7 @@ export default {
                 this.varietyChannelContents.push({
                     title : ele.snippet.title,
                     id : ele.id,
+                    channelId : ele.snippet.channelId,
                     img_src: ele.snippet.thumbnails.medium.url
                 })      
             });
@@ -90,6 +91,7 @@ export default {
                 this.musicChannelContents.push({
                     title : ele.snippet.title,
                     id : ele.id,
+                    channelId : ele.snippet.channelId,
                     img_src: ele.snippet.thumbnails.medium.url
                 })      
             });
@@ -101,6 +103,7 @@ export default {
                 this.gameChannelContents.push({
                     title : ele.snippet.title,
                     id : ele.id,
+                    channelId : ele.snippet.channelId,
                     img_src: ele.snippet.thumbnails.medium.url
                 })      
             });
@@ -112,6 +115,7 @@ export default {
                 this.dramaChannelContents.push({
                     title : ele.snippet.title,
                     id : ele.id,
+                    channelId : ele.snippet.channelId,
                     img_src: ele.snippet.thumbnails.medium.url
                 })      
             });

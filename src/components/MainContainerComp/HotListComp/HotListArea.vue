@@ -60,7 +60,7 @@ export default {
     methods : {
         initHotVideoData : function(response){
             var items = response.data.items;
-            console.log(items)
+            // console.log(items)
             items.forEach(ele => {
                 this.hotLiveContents.push({
                     title : ele.snippet.title,
@@ -73,7 +73,7 @@ export default {
 
         initFoodVideoData : function(response){
             var items = response.data.items;
-            console.log(items)
+            // console.log(items)
             items.forEach(ele => {
                 this.foodVideoContents.push({
                     title : ele.snippet.title,

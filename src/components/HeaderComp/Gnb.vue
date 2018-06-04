@@ -2,7 +2,7 @@
     <div class="wrapGnb">
         <ul class="gnb">
             <li class="on">
-                <a href="#n">전체</a>
+                <router-link class="link" v-bind:to="'/main'">전체</router-link>
             </li>
             <li>
                 <a href="#n">예능</a>

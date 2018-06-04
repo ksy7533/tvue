@@ -14,25 +14,9 @@ export default {
     components : {
         PlayArea,
         VideoCategory
-    },
-    
-    created(){
-        // console.log(this.$store.state.currentVideo.title)
-
-        // console.log("create")
-    },
-
-    updated(){
-        console.log("mount cc")
     }
-
-    // computed: {
-    //     currentVideo(){
-    //         console.log("d")
-    //         return  this.$store.state.currentVideo
-    //     }
-    // }
 }
+
 </script>
 
 <style scoped>

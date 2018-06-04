@@ -17,43 +17,34 @@ export default {
 
     data() {
         return {
-            arrCategory : [],
-            currentVideo : this.$store.state.currentVideo
+            arrCategory : []
         }
     },
-
-    watch : {
-        currentVideo : function(value){
-            console.log(value)
-        }
-    },
-    // computed: {
-    //     currentVideo : function(){
-    //         console.log("1")
-    //         return this.$store.state.currentVideo;
-    //     }
-    // },
 
     methods : {
-        initArrCategory : function(response){
-            var items = response.data.items;
-            items.forEach(ele => {
-                this.arrCategory.push({
-                    id : ele.id,
-                    title : ele.snippet.title
-                })      
-            });
-        },
-
         fetchData(){
-            var categoryList_url = "https://www.googleapis.com/youtube/v3/playlists?key="+YOUTUBE_API+"&part=snippet&channelId="+this.currentVideo.channelId;
-            console.log(this.currentVideo.channelId)
+            // var categoryList_url = "https://www.googleapis.com/youtube/v3/playlists?key="+YOUTUBE_API+"&part=snippet&channelId="+this.currentVideo.channelId;
+
+            var categoryList_url = "https://www.googleapis.com/youtube/v3/playlists?key="+YOUTUBE_API+"&part=snippet&channelId="+this.$route.params.channelId;
+            // console.log(this.currentVideo.channelId)
             this.$axios.get(categoryList_url, {
             }).then((response) => {
                 this.initArrCategory(response);
             }).catch((ex) => {
                 console.log("ERROR !", ex);
             })
+        },
+
+        initArrCategory : function(response){
+            var items = response.data.items;
+            items.forEach(ele => {
+                this.arrCategory.push({
+                    id : ele.id,
+                    title : ele.snippet.title,
+                    channelId : ele.snippet.channelId
+                })      
+            });
+            console.log(this.arrCategory)
         }
     },
 

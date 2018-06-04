@@ -1,6 +1,10 @@
 <template>
     <div class="headerTop">
-        <h1><i class="far fa-play-circle"></i>Tvue</h1>
+        <h1>
+            <router-link class="link" v-bind:to="'/main'">
+                <i class="far fa-play-circle"></i>Tvue
+            </router-link>
+        </h1>
         <div class="searchBox">
             <input type="text" placeholder=" 검색">
             <button><i class="fas fa-search"></i></button>
