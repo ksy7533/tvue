@@ -2,10 +2,7 @@
   <div id="app" class="wrap">
     <HeaderArea></HeaderArea>
     <div class="container">
-      <!-- <MainContainerArea v-if="'main' === this.$store.state.containerValue"></MainContainerArea>
-      <PlayVideoContainerArea v-else-if="'playVideo' ===  this.$store.state.containerValue"></PlayVideoContainerArea> -->
       <router-view :key="$route.path"></router-view>
-
     </div>
     <FooterArea></FooterArea>
   </div>
@@ -38,13 +35,15 @@ body, html{
   font-size:12px;
   font-family: 'Noto Sans KR', sans-serif;
 }
+
 .wrap{
   width:100%;
   height:100%
 }
 
 .container{
-    margin:30px auto 0;
+    margin:92px auto 0;
+    padding-top:30px;
     width:1260px;
 }
 </style>

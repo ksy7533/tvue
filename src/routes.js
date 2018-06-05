@@ -10,9 +10,9 @@ export default [{
         path: '/playVideo/:videoId/:channelId',
         name: 'playVideo',
         component: PlayVideoArea
+    },
+    {
+        path: '*',
+        redirect: '/main'
     }
-    // {
-    //     path: '*',
-    //     redirect: '/'
-    // }
 ]

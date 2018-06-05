@@ -21,6 +21,7 @@
     padding:10px 0;
     border-bottom:1px solid #f2f2f2
 }
+
 h1{
     position:absolute;
     top:15px;
@@ -28,9 +29,17 @@ h1{
     font-size:20px;
     font-weight:600
 }
+
 h1 i{
-    margin-right:5px
+    margin-right:5px;
+    color:#1b52ed;
 }
+
+h1 a{
+    color:#000;
+    text-decoration: none;
+}
+
 .searchBox{
     position: relative;
     margin:0 auto;
@@ -41,6 +50,7 @@ h1 i{
     border:1px solid #f2f2f2;
     border-radius:3px
 }
+
 .searchBox input{
     width:250px;
     height:20px;
@@ -48,6 +58,7 @@ h1 i{
     background-color:#f3f3f5;
     border:0;
 }
+
 .searchBox button{
     position: absolute;
     top:4px;
@@ -55,6 +66,7 @@ h1 i{
     border:0;
     background-color:#f3f3f5;
 }
+
 .searchBox button i{
     color:#dbdbdb;
     font-size:18px
@@ -62,7 +74,7 @@ h1 i{
 
 .areaUtil{
     position: absolute;
-    top:15px;
+    top:10px;
     right:40px;
 }
 

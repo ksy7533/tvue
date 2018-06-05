@@ -18,9 +18,9 @@
                 <span class="sub_name">최신 인기 동영상</span>
             </a>
         </channelList>
-        <channelList v-bind:contents="dramaChannelContents">
+        <channelList v-bind:contents="movieChannelContents">
             <a slot="channelName" href="#n" class="channelName type04">
-                <span slot="title" class="name">드라마</span>
+                <span slot="title" class="name">영화</span>
                 <span class="sub_name">최신 인기 동영상</span>
             </a>
         </channelList>
@@ -30,95 +30,101 @@
 <script>
 import ChannelList from './ChannelList.vue'
 
-var YOUTUBE_API = "AIzaSyBQ1G-JhjIMd0bGr9IeF49NKeQ29roBttY";
+import ytDurationFormat from 'youtube-duration-format'
+import moment from 'moment';
 
-// 예능
-var variety_channel_url = "https://www.googleapis.com/youtube/v3/videos?key="+YOUTUBE_API+"&part=snippet&chart=mostPopular&regionCode=KR&videoCategoryId=23";
-// 음악
-var music_channel_url = "https://www.googleapis.com/youtube/v3/videos?key="+YOUTUBE_API+"&part=snippet&chart=mostPopular&regionCode=KR&videoCategoryId=10";
-// 게임
-var game_channel_url = "https://www.googleapis.com/youtube/v3/videos?key="+YOUTUBE_API+"&part=snippet&chart=mostPopular&regionCode=KR&videoCategoryId=20";
-// 드라마
-var drama_channel_url = "https://www.googleapis.com/youtube/v3/videos?key="+YOUTUBE_API+"&part=snippet&chart=mostPopular&regionCode=KR&videoCategoryId=28";
+var YOUTUBE_API = "AIzaSyBQ1G-JhjIMd0bGr9IeF49NKeQ29roBttY";
+var video_url = "https://www.googleapis.com/youtube/v3/videos";
 
 export default {
     created () {
-        this.$axios.get(variety_channel_url, {
-        }).then((response) => {
-            this.initVarietyChannelData(response);
-        }).catch((ex) => {
-            console.log("ERROR !", ex);
+
+        var getData = (url, params, option) => {
+            this.$axios.get(url, {
+                params
+            }).then((response) => {
+                console.log(response)
+                this.initData(response, option.arrData, option.type);
+            }).catch((ex) => {
+                console.log("ERROR !", ex);
+            })
+        }
+
+        /* 예능동영상 */
+        getData(video_url, {
+            key : YOUTUBE_API,
+            chart : 'mostPopular',
+            regionCode : 'kr',
+            part : 'snippet,contentDetails',
+            videoCategoryId : '23'
+        }, {
+            arrData : this.varietyChannelContents,
+            type : 'video'
         })
 
-        this.$axios.get(music_channel_url, {
-        }).then((response) => {
-            this.initMusicChannelData(response);
-        }).catch((ex) => {
-            console.log("ERROR !", ex);
+        /* 음악동영상 */
+        getData(video_url, {
+            key : YOUTUBE_API,
+            chart : 'mostPopular',
+            regionCode : 'kr',
+            part : 'snippet,contentDetails',
+            videoCategoryId : '10'
+        }, {
+            arrData : this.musicChannelContents,
+            type : 'video'
         })
 
-        this.$axios.get(game_channel_url, {
-        }).then((response) => {
-            this.initGameChannelData(response);
-        }).catch((ex) => {
-            console.log("ERROR !", ex);
+        /* 게임동영상 */
+        getData(video_url, {
+            key : YOUTUBE_API,
+            chart : 'mostPopular',
+            regionCode : 'kr',
+            part : 'snippet,contentDetails',
+            videoCategoryId : '20'
+        }, {
+            arrData : this.gameChannelContents,
+            type : 'video'
         })
 
-        this.$axios.get(drama_channel_url, {
-        }).then((response) => {
-            this.initDramaChannelData(response);
-        }).catch((ex) => {
-            console.log("ERROR !", ex);
+        /* 영화동영상 */
+        getData(video_url, {
+            key : YOUTUBE_API,
+            chart : 'mostPopular',
+            regionCode : 'kr',
+            part : 'snippet,contentDetails',
+            videoCategoryId : '1'
+        }, {
+            arrData : this.movieChannelContents,
+            type : 'video'
         })
     },
 
     methods : {
-        initVarietyChannelData : function(response){
-            var items = response.data.items;
-            items.forEach(ele => {
-                this.varietyChannelContents.push({
-                    title : ele.snippet.title,
-                    id : ele.id,
-                    channelId : ele.snippet.channelId,
-                    img_src: ele.snippet.thumbnails.medium.url
-                })      
-            });
-        },
 
-        initMusicChannelData : function(response){
+        initData : function(response, arrData, type){
             var items = response.data.items;
-            items.forEach(ele => {
-                this.musicChannelContents.push({
-                    title : ele.snippet.title,
-                    id : ele.id,
-                    channelId : ele.snippet.channelId,
-                    img_src: ele.snippet.thumbnails.medium.url
-                })      
-            });
-        },
-
-        initGameChannelData : function(response){
-            var items = response.data.items;
-            items.forEach(ele => {
-                this.gameChannelContents.push({
-                    title : ele.snippet.title,
-                    id : ele.id,
-                    channelId : ele.snippet.channelId,
-                    img_src: ele.snippet.thumbnails.medium.url
-                })      
-            });
-        },
-
-        initDramaChannelData : function(response){
-            var items = response.data.items;
-            items.forEach(ele => {
-                this.dramaChannelContents.push({
-                    title : ele.snippet.title,
-                    id : ele.id,
-                    channelId : ele.snippet.channelId,
-                    img_src: ele.snippet.thumbnails.medium.url
-                })      
-            });
+            if(type === 'video'){
+                items.forEach(ele => {
+                    arrData.push({
+                        title : ele.snippet.title,
+                        id : ele.id,
+                        channelId : ele.snippet.channelId,
+                        channelTitle : ele.snippet.channelTitle,
+                        img_src: ele.snippet.thumbnails.medium.url,
+                        date : moment(ele.snippet.publishedAt).format(moment.HTML5_FMT.DATE),
+                        duration: ytDurationFormat(ele.contentDetails.duration)
+                    })      
+                });
+            }else if(type === 'search'){
+                items.forEach(ele => {
+                    arrData.push({
+                        title : ele.snippet.title,
+                        id : ele.id.videoId,
+                        channelId : ele.snippet.channelId,
+                        img_src: ele.snippet.thumbnails.medium.url
+                    })      
+                });
+            }
         }
     },
 
@@ -127,7 +133,7 @@ export default {
             varietyChannelContents : [],
             musicChannelContents : [],
             gameChannelContents : [],
-            dramaChannelContents : []
+            movieChannelContents : []
         }
     },
 

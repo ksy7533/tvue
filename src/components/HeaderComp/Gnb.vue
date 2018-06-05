@@ -19,6 +19,7 @@
     box-shadow:0 1px 0 0 #D7DBE0;
     background-color:#fff;
 }
+
 .gnb{
     margin:0 auto;
     width:1260px;
@@ -29,14 +30,17 @@
     display: block;
     clear:both;
 }
+
 .gnb li{
     float:left;
     position: relative;
     margin-left:10px;
 }
+
 .gnb li:first-child{
     margin-left:0;
 }
+
 .gnb li.on:after{
     content:'';
     display:block;
@@ -47,6 +51,7 @@
     height:2px;
     background-color:#f7d715;
 }
+
 .gnb li a{
     display: block;
     padding:15px 20px;
@@ -54,5 +59,9 @@
     font-size:13px;
     font-weight:600;
     text-decoration:none
+}
+
+.gnb li.on a{
+    color:#000;
 }
 </style>

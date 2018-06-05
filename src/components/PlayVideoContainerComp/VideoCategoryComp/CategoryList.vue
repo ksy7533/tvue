@@ -40,7 +40,7 @@ export default {
     methods : {
         initArrVideoList : function(response){
             var items = response.data.items;
-            console.log(items)
+            // console.log(items)
             items.forEach(ele => {
                 this.playList.push({
                     title : ele.snippet.title,
@@ -53,16 +53,16 @@ export default {
         },
 
         changeContainer : function(obj){
-            console.log(obj)
+            // console.log(obj)
 
             this.$router.push({name:'playVideo', params: {videoId: obj.videoId, channelId: obj.channelId}});
 
-            this.$store.commit('changeContainer', {
-                currentVideoId: obj.videoId,
-                currentChannelId: obj.channelId,
-                currentVideoTitle: obj.title,
-                containerValue: 'playVideo'
-            });
+            // this.$store.commit('changeContainer', {
+            //     currentVideoId: obj.videoId,
+            //     currentChannelId: obj.channelId,
+            //     currentVideoTitle: obj.title,
+            //     containerValue: 'playVideo'
+            // });
         }
     }
 
