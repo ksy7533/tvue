@@ -42,8 +42,8 @@ body, html{
 }
 
 .container{
-    margin:92px auto 0;
-    padding-top:30px;
-    width:1260px;
+  margin:92px auto 0;
+  padding-top:30px;
+  width:1260px;
 }
 </style>

@@ -2,16 +2,8 @@
     <div class="listHot">
         <slot name="title"></slot>
         <swiper :options="swiperOption">
-            <swiper-slide v-for="(item, index) in contents" v-bind:key="index">
-                <router-link class="link" v-bind:to="{ name: 'playVideo' }" v-on:click.native="changeContainer({videoId:item.id, channelId:item.channelId, title:item.title})">
-                    <p class="wrapImg">
-                        <img v-bind:src="item.img_src" alt="">
-                        <span class="playTime">{{item.duration}}</span>
-                    </p>
-                    <p class="tit">{{item.title}}</p>
-                    <p class="channelTit">{{item.channelTitle}}</p>
-                    <p class="date">{{item.date}}</p>
-                </router-link>
+            <swiper-slide v-for="(item, index) in arrData" v-bind:key="index">
+                <VideoItem v-bind:itemData="item"></VideoItem>
             </swiper-slide>
             <div class="swiper-button-prev" slot="button-prev"><i class="fas fa-angle-left"></i></div>
             <div class="swiper-button-next" slot="button-next"><i class="fas fa-angle-right"></i></div>
@@ -22,9 +14,40 @@
 <script>
 import 'swiper/dist/css/swiper.css'
 import { swiper, swiperSlide } from 'vue-awesome-swiper'
+import { loadData } from '../../../mixins/loadData.js'
+import VideoItem from '../../CommonComp/videoItem.vue'
+
+var YOUTUBE_API = "AIzaSyBQ1G-JhjIMd0bGr9IeF49NKeQ29roBttY";
+var video_url = "https://www.googleapis.com/youtube/v3/videos";
+var search_url = "https://www.googleapis.com/youtube/v3/search";
 
 export default {
     props : ['contents'],
+    mixins: [loadData],
+    created(){
+        if(this.contents.url === "video"){
+            this.getData(video_url, {
+                key : YOUTUBE_API,
+                chart : 'mostPopular',
+                regionCode : 'kr',
+                part : 'snippet,contentDetails,statistics',
+                maxResults : '30'
+            }, this.arrData);
+        }else if(this.contents.url === "search"){
+            this.getSearchData(search_url, {
+                key : YOUTUBE_API,
+                regionCode : 'kr',
+                part : 'snippet',
+                maxResults : '30',
+                type : 'video',
+
+                order : this.contents.order,
+                q : this.contents.q
+
+            }, this.arrData);
+        }
+    },
+
     data(){
         return {
             swiperOption: {
@@ -37,27 +60,16 @@ export default {
                     nextEl: '.swiper-button-next',
                     prevEl: '.swiper-button-prev'
                 }
-            }
+            },
+
+            arrData : []
         }
     },
 
     components: {
         swiper,
-        swiperSlide
-    },
-
-    methods: {
-
-        changeContainer : function(obj){
-            this.$router.push({name:'playVideo', params: {videoId: obj.videoId, channelId: obj.channelId}});
-            
-            // this.$store.commit('changeContainer', {
-            //     currentVideoId: obj.videoId,
-            //     currentChannelId: obj.channelId,
-            //     currentVideoTitle: obj.title,
-            //     containerValue: 'playVideo'
-            // });
-        }
+        swiperSlide,
+        VideoItem
     }
 }
 </script>
@@ -110,91 +122,8 @@ h2{
 .swiper-button-prev{
     left:-20px;
 }
+
 .swiper-button-next{
     right:-20px;
-}
-
-.wrapImg{
-    position: relative;
-}
-
-.wrapImg:after{
-    content:'';
-    display: block;
-    position: absolute;
-    top:0;
-    left:0;
-    width:200px;
-    height:120px;
-    background-color:rgba(0, 0, 0, 0.25);
-    border-radius: 5px;
-}
-
-.wrapImg img{
-    width:200px;
-    height:120px;
-    border-radius: 5px;
-}
-
-.wrapImg .playTime{
-    position: absolute;
-    bottom:10px;
-    right:10px;
-    display: inline-block;
-    padding:3px;
-    color:#fff;
-    font-size:11px;
-    background:rgba(0, 0, 0, 0.6);
-    border-radius:3px;
-}
-
-.link{
-    text-decoration:none;
-    cursor: pointer;
-}
-
-.link .tit{
-    margin-top:5px;
-    line-height:18px;
-    color:#000;
-    font-size:14px;
-    font-weight:bold;
-    max-height:36px;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    display: -webkit-box;
-    -webkit-line-clamp:2;
-    -webkit-box-orient: vertical;
-    word-wrap:break-word; 
-}
-
-.link .channelTit{
-    line-height:18px;
-    margin-top:5px;
-    padding-right:20px;
-    color:#848c9c;
-    font-size:12px;
-    height:18px;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    display: -webkit-box;
-    -webkit-line-clamp:1;
-    -webkit-box-orient: vertical;
-    word-wrap:break-word; 
-}
-
-.link .date{
-    line-height:12px;
-    margin-top:5px;
-    padding-right:20px;
-    color:#848c9c;
-    font-size:12px;
-    height:12px;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    display: -webkit-box;
-    -webkit-line-clamp:1;
-    -webkit-box-orient: vertical;
-    word-wrap:break-word; 
 }
 </style>

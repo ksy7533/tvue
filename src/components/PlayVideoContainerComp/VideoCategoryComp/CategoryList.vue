@@ -1,69 +1,105 @@
 <template>
-    <div class="categoryList">
-        <h3>{{categoryObj.title}}</h3>
+    <div class="categoryList" v-if="!isEmptyPlayList">
+        <h3><i class="fas fa-indent"></i> {{categoryObj.title}}</h3>
         <ul class="list">
             <li v-for="(item, index) in playList" v-bind:key="index">
-                <router-link class="link" v-bind:to="{ name: 'playVideo' }" v-on:click.native="changeContainer({videoId:item.id, channelId:item.channelId, title:item.title})">
-                    <p class="wrapImg"><img v-bind:src="item.img_src" alt=""></p>
-                    <p class="tit">{{item.title}}</p>
-                </router-link>
+               <VideoItem v-bind:itemData="item"></VideoItem>
             </li>
         </ul>
+        <a href="#n" class="btnMore" v-if="isNextPage" v-on:click.prevent="addListData()"><i class="fas fa-angle-down"></i></a>
     </div>
 </template>
 
 <script>
+import { loadData } from '../../../mixins/loadData.js'
+import VideoItem from '../../CommonComp/videoItem.vue'
+
+import ytDurationFormat from 'youtube-duration-format'
+import moment from 'moment';
+
 var YOUTUBE_API = "AIzaSyBQ1G-JhjIMd0bGr9IeF49NKeQ29roBttY";
+var video_url = "https://www.googleapis.com/youtube/v3/videos";
+var playList_url = "https://www.googleapis.com/youtube/v3/playlistItems";
 
 export default {
     props : [
         'categoryObj'
     ],
 
-    created(){
-        var playList_url = "https://www.googleapis.com/youtube/v3/playlistItems?key="+YOUTUBE_API+"&part=snippet&playlistId="+this.categoryObj.id+"&maxResults=10";
+    mixins: [loadData],
 
-        this.$axios.get(playList_url, {
-        }).then((response) => {
-            this.initArrVideoList(response);
-        }).catch((ex) => {
-            console.log("ERROR !", ex);
-        })
+    created(){
+        this.getSearchData(playList_url, {
+            key : YOUTUBE_API,
+            part : "snippet,contentDetails",
+            playlistId : this.categoryObj.id,
+            maxResults : 12
+        }, this.playList)
     },
 
     data() {
         return {
-            playList : []
+            playList : [],
+            isNextPage : false,
+            tokenNextPage : '',
+            isEmptyPlayList : false
         }
     },
 
     methods : {
-        initArrVideoList : function(response){
-            var items = response.data.items;
-            // console.log(items)
-            items.forEach(ele => {
-                this.playList.push({
-                    title : ele.snippet.title,
-                    // id : ele.id,
-                    id : ele.snippet.resourceId.videoId,
-                    channelId : ele.snippet.channelId,
-                    img_src: ele.snippet.thumbnails.medium.url
-                })      
-            });
+        getSearchData : function(url, params, arrData){
+            var that = this;
+            this.$axios.get(url, {
+                params
+            }).then((response) => {
+                if(response.data.nextPageToken){
+                    this.isNextPage = true;
+                    this.tokenNextPage = response.data.nextPageToken;
+                }else{
+                    this.isNextPage = false;
+                    this.tokenNextPage = "";
+                }
+
+                var tempData = [];
+                var items = response.data.items;
+
+                if(items.length === 0){
+                    this.isEmptyPlayList = true;
+                    return;
+                }
+
+                items.forEach(function(item){
+                    tempData.push(item.contentDetails.videoId);
+                });
+
+                tempData.forEach(function(videoId){
+                    that.getData(video_url, {
+                        key : YOUTUBE_API,
+                        regionCode : 'kr',
+                        part : 'snippet,contentDetails,statistics',
+                        id : videoId
+                    }, arrData);
+                });
+
+                
+            }).catch((ex) => {
+                console.log("ERROR !", ex);
+            })
         },
 
-        changeContainer : function(obj){
-            // console.log(obj)
-
-            this.$router.push({name:'playVideo', params: {videoId: obj.videoId, channelId: obj.channelId}});
-
-            // this.$store.commit('changeContainer', {
-            //     currentVideoId: obj.videoId,
-            //     currentChannelId: obj.channelId,
-            //     currentVideoTitle: obj.title,
-            //     containerValue: 'playVideo'
-            // });
+        addListData : function(){
+            this.getSearchData(playList_url, {
+                key : YOUTUBE_API,
+                part : "snippet,contentDetails",
+                playlistId : this.categoryObj.id,
+                maxResults : 12,
+                pageToken : this.tokenNextPage
+            }, this.playList)
         }
+    },
+
+    components: {
+        VideoItem
     }
 
 }
@@ -72,12 +108,17 @@ export default {
 <style scoped>
 .categoryList{
     margin-top:20px;
+    border-bottom:1px solid #d9d9d9
 }
 
 .categoryList h3{
-    margin-bottom:10px;
+    margin-bottom:20px;
     font-size:18px;
     font-weight:bold;
+}
+
+.categoryList .list{
+    padding-bottom:20px;
 }
 
 .categoryList .list:after{
@@ -88,23 +129,21 @@ export default {
 
 .categoryList .list li{
     float:left;
-    margin-right:10px;
+    margin:0 10px 20px 0;
     width:200px;
-    height:160px;
+    height:200px;
 }
 
-.categoryList .list li a{
+.btnMore{
+    text-align: center;
     display: block;
+    padding:15px;
+    font-size:20px;
+    color:#999;
+    font-weight:normal;
 }
 
-.categoryList .list li a .wrapImg{
-    display: block;
-    width:200px;
-    height:120px;
-}
-
-.categoryList .list li a .wrapImg img{
-    width:200px;
-    height:120px;
+.btnMore:hover{
+    color:#2282f2
 }
 </style>

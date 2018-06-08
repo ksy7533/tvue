@@ -29,103 +29,58 @@
 
 <script>
 import ChannelList from './ChannelList.vue'
-
-import ytDurationFormat from 'youtube-duration-format'
-import moment from 'moment';
+import { loadData } from '../../../mixins/loadData.js'
 
 var YOUTUBE_API = "AIzaSyBQ1G-JhjIMd0bGr9IeF49NKeQ29roBttY";
 var video_url = "https://www.googleapis.com/youtube/v3/videos";
 
 export default {
-    created () {
+    mixins: [loadData],
 
-        var getData = (url, params, option) => {
-            this.$axios.get(url, {
-                params
-            }).then((response) => {
-                console.log(response)
-                this.initData(response, option.arrData, option.type);
-            }).catch((ex) => {
-                console.log("ERROR !", ex);
-            })
-        }
-
+    created() {
         /* 예능동영상 */
-        getData(video_url, {
+        this.getData(video_url, {
             key : YOUTUBE_API,
             chart : 'mostPopular',
             regionCode : 'kr',
-            part : 'snippet,contentDetails',
+            part : 'snippet,contentDetails,statistics',
             videoCategoryId : '23'
-        }, {
-            arrData : this.varietyChannelContents,
-            type : 'video'
-        })
+        },
+            this.varietyChannelContents
+        )
 
         /* 음악동영상 */
-        getData(video_url, {
+        this.getData(video_url, {
             key : YOUTUBE_API,
             chart : 'mostPopular',
             regionCode : 'kr',
-            part : 'snippet,contentDetails',
+            part : 'snippet,contentDetails,statistics',
             videoCategoryId : '10'
-        }, {
-            arrData : this.musicChannelContents,
-            type : 'video'
-        })
+        },
+            this.musicChannelContents
+        )
 
         /* 게임동영상 */
-        getData(video_url, {
+        this.getData(video_url, {
             key : YOUTUBE_API,
             chart : 'mostPopular',
             regionCode : 'kr',
-            part : 'snippet,contentDetails',
+            part : 'snippet,contentDetails,statistics',
             videoCategoryId : '20'
-        }, {
-            arrData : this.gameChannelContents,
-            type : 'video'
-        })
+        },
+            this.gameChannelContents
+        )
 
         /* 영화동영상 */
-        getData(video_url, {
+        this.getData(video_url, {
             key : YOUTUBE_API,
             chart : 'mostPopular',
             regionCode : 'kr',
-            part : 'snippet,contentDetails',
+            part : 'snippet,contentDetails,statistics',
             videoCategoryId : '1'
-        }, {
-            arrData : this.movieChannelContents,
-            type : 'video'
-        })
-    },
-
-    methods : {
-
-        initData : function(response, arrData, type){
-            var items = response.data.items;
-            if(type === 'video'){
-                items.forEach(ele => {
-                    arrData.push({
-                        title : ele.snippet.title,
-                        id : ele.id,
-                        channelId : ele.snippet.channelId,
-                        channelTitle : ele.snippet.channelTitle,
-                        img_src: ele.snippet.thumbnails.medium.url,
-                        date : moment(ele.snippet.publishedAt).format(moment.HTML5_FMT.DATE),
-                        duration: ytDurationFormat(ele.contentDetails.duration)
-                    })      
-                });
-            }else if(type === 'search'){
-                items.forEach(ele => {
-                    arrData.push({
-                        title : ele.snippet.title,
-                        id : ele.id.videoId,
-                        channelId : ele.snippet.channelId,
-                        img_src: ele.snippet.thumbnails.medium.url
-                    })      
-                });
-            }
-        }
+        },
+            this.movieChannelContents
+        )
     },
 
     data() {

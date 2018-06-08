@@ -6,18 +6,29 @@ Vue.use(Vuex);
 export const store = new Vuex.Store({
     state: {
         currentVideo: {
-            videoId: '',
-            channelId: '',
-            title: ''
-        },
-        containerValue: 'main'
+            videoTitle: '',
+
+            channelTitle: '',
+            date: '',
+            description: '',
+            viewCount: '',
+            commentCount: '',
+            likeCount: '',
+            dislikeCount: ''
+        }
     },
     mutations: {
         changeContainer(state, payload) {
-            state.currentVideo.videoId = payload.currentVideoId;
-            state.currentVideo.channelId = payload.currentChannelId;
-            state.currentVideo.title = payload.currentVideoTitle;
-            state.containerValue = payload.containerValue;
+            state.currentVideo.videoTitle = payload.currentVideoTitle;
+
+            state.currentVideo.channelTitle = payload.currentChannelTitle;
+            state.currentVideo.date = payload.currentDate;
+            state.currentVideo.description = payload.currentDescription;
+            state.currentVideo.viewCount = payload.currentViewCount;
+            state.currentVideo.commentCount = payload.currentCommentCount;
+            state.currentVideo.likeCount = payload.currentLikeCount;
+            state.currentVideo.dislikeCount = payload.currentDislikeCount;
+            console.log(state)
         }
     }
 });
