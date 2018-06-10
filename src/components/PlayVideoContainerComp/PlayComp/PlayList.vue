@@ -36,7 +36,7 @@ var search_url = "https://www.googleapis.com/youtube/v3/search";
 export default {
     mixins: [loadData],
 
-    created(){
+    mounted(){
         this.getSearchData(search_url, {
             key : YOUTUBE_API,
             regionCode : 'kr',

@@ -37,7 +37,7 @@ var video_url = "https://www.googleapis.com/youtube/v3/videos";
 export default {
     mixins: [loadData],
 
-    created() {
+    mounted() {
         /* 예능동영상 */
         this.getData(video_url, {
             key : YOUTUBE_API,

@@ -1,51 +1,48 @@
 <template>
     <div class="listHot">
         <slot name="title"></slot>
-        <swiper :options="swiperOption">
+        <!-- <swiper :options="swiperOption">
             <swiper-slide v-for="(item, index) in arrData" v-bind:key="index">
                 <VideoItem v-bind:itemData="item"></VideoItem>
             </swiper-slide>
             <div class="swiper-button-prev" slot="button-prev"><i class="fas fa-angle-left"></i></div>
             <div class="swiper-button-next" slot="button-next"><i class="fas fa-angle-right"></i></div>
-        </swiper>
+            <div class="swiper-pagination" slot="pagination"></div>
+        </swiper> -->
+
+        <ul class="list">
+            <li v-for="(item, index) in arrData" v-bind:key="index"><VideoItem v-bind:itemData="item"></VideoItem></li>
+        </ul>
+
+        <a href="#n" class="btnMore">더보기</a>    
     </div>
 </template>
 
 <script>
 import 'swiper/dist/css/swiper.css'
-import { swiper, swiperSlide } from 'vue-awesome-swiper'
+// import { swiper, swiperSlide } from 'vue-awesome-swiper'
 import { loadData } from '../../../mixins/loadData.js'
 import VideoItem from '../../CommonComp/videoItem.vue'
 
 var YOUTUBE_API = "AIzaSyBQ1G-JhjIMd0bGr9IeF49NKeQ29roBttY";
-var video_url = "https://www.googleapis.com/youtube/v3/videos";
+// var video_url = "https://www.googleapis.com/youtube/v3/videos";
 var search_url = "https://www.googleapis.com/youtube/v3/search";
 
 export default {
     props : ['contents'],
     mixins: [loadData],
-    created(){
-        if(this.contents.url === "video"){
-            this.getData(video_url, {
-                key : YOUTUBE_API,
-                chart : 'mostPopular',
-                regionCode : 'kr',
-                part : 'snippet,contentDetails,statistics',
-                maxResults : '30'
-            }, this.arrData);
-        }else if(this.contents.url === "search"){
-            this.getSearchData(search_url, {
-                key : YOUTUBE_API,
-                regionCode : 'kr',
-                part : 'snippet',
-                maxResults : '30',
-                type : 'video',
+    mounted(){
 
-                order : this.contents.order,
-                q : this.contents.q
+        this.getSearchData(search_url, {
+            key : YOUTUBE_API,
+            regionCode : 'KR',
+            part : 'snippet',
+            maxResults : '6',
+            type : 'video',
+            order : this.contents.order,
+            q : this.contents.q
+        }, this.arrData);
 
-            }, this.arrData);
-        }
     },
 
     data(){
@@ -53,13 +50,24 @@ export default {
             swiperOption: {
                 slidesPerView: 6,
                 slidesPerGroup: 6,
+                loopedSlides: 6,
                 loop: true,
                 speed: 500,
+                spaceBetween: 10,
+
+                
                 loopFillGroupWithBlank: true,
                 navigation: {
                     nextEl: '.swiper-button-next',
                     prevEl: '.swiper-button-prev'
-                }
+                },
+                pagination: {
+                    el: '.swiper-pagination',
+                    type: 'bullets'
+                },
+
+                preloadImages: false,
+                lazy: true
             },
 
             arrData : []
@@ -67,8 +75,8 @@ export default {
     },
 
     components: {
-        swiper,
-        swiperSlide,
+        // swiper,
+        // swiperSlide,
         VideoItem
     }
 }
@@ -91,7 +99,37 @@ h2{
     border-top:none;
 }
 
-.swiper-container{
+.list:after{
+    content:'';
+    display:block;
+    clear: both;
+}
+
+.list li{
+    float:left;
+    margin-left:5px;
+    width:198px;
+    height:200px;
+}
+
+.list li:first-child{
+    margin-left:0;
+}
+
+.btnMore{
+    text-decoration: none;
+    position: absolute;
+    top:25px;
+    right:25px;
+    color:#999;
+    font-size:12px;
+}
+
+.btnMore:hover{
+    text-decoration: underline;
+}
+
+/* .swiper-container{
     position: static;
 }
 
@@ -126,4 +164,13 @@ h2{
 .swiper-button-next{
     right:-20px;
 }
+
+.swiper-pagination{
+    position: absolute;
+    top:20px;
+    left:auto;
+    right:10px;
+    width:100px;
+    height:20px;
+} */
 </style>

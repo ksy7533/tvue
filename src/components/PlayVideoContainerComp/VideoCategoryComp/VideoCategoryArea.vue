@@ -12,8 +12,7 @@ var YOUTUBE_API = "AIzaSyBQ1G-JhjIMd0bGr9IeF49NKeQ29roBttY";
 var categoryList_url = "https://www.googleapis.com/youtube/v3/playlists";
 
 export default {
-
-    created(){
+    mounted(){
         this.getData(categoryList_url,{
             key : YOUTUBE_API,
             part : 'snippet',

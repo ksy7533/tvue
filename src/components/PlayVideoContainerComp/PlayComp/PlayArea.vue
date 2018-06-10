@@ -8,7 +8,7 @@
             <h3>{{this.$store.state.currentVideo.videoTitle}}</h3>
             <p class="info">
                 <span class="viewCount"><i class="fas fa-play"></i> 재생수 {{numberWithCommas(this.$store.state.currentVideo.viewCount)}}회</span>
-                <span class="date">{{this.$store.state.currentVideo.date}}</span>
+                <span class="date">등록 {{this.$store.state.currentVideo.date}}</span>
             </p>
             <p class="count">
                 <span class="likeCount"><i class="far fa-thumbs-up"></i> {{numberWithCommas(this.$store.state.currentVideo.likeCount)}}</span>
@@ -67,6 +67,23 @@ export default {
     font-size:14px;
 }
 
+.detail .info .date{
+    position: relative;
+    margin-left:6px;
+    padding-left:10px;
+}
+
+.detail .info .date::before{
+    content: '';
+    display: block;
+    position: absolute;
+    top:4px;
+    left:0;
+    width:1px;
+    height:11px;
+    background-color:#848c9c;
+}
+
 .detail .count{
     position: absolute;
     top:25px;
@@ -84,7 +101,7 @@ export default {
     line-height:18px;
     margin-top:10px;
     padding-right:20px;
-    color:#848c9c;
+    color:#666;
     font-size:12px;
     height:54px;
     overflow: hidden;

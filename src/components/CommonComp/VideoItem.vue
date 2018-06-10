@@ -17,7 +17,10 @@
         </p>
         <p class="tit">{{itemData.videoTitle}}</p>
         <p class="channelTit">{{itemData.channelTitle}}</p>
-        <p class="date">{{itemData.date}}</p>
+        <p class="info">
+            <span class="viewCount"><i class="fas fa-play"></i> {{this.numberWithCommas(itemData.viewCount)}}회</span>
+            <span class="date">{{itemData.date}}</span>
+        </p>
     </a>
 </template>
 
@@ -26,11 +29,19 @@ import { loadData } from '../../mixins/loadData.js'
 
 export default {
     mixins: [loadData],
-    props : ['itemData']
+    props : ['itemData'],
+    methods : {
+        numberWithCommas : function(x) {
+            if(x === undefined){
+                return 0;
+            }
+            return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+        }
+    }
 }
 </script>
 
-<style>
+<style scoped>
 a.link{
     text-decoration:none;
     display: block;
@@ -59,8 +70,8 @@ a.link .wrapImg:after{
 }
 
 a.link .wrapImg img{
-    width:200px;
-    height:120px;
+    width:100%;
+    height:100%;
     border-radius: 5px;
 }
 
@@ -107,7 +118,7 @@ a.link .channelTit{
     word-wrap:break-word; 
 }
 
-a.link .date{
+a.link .info{
     line-height:12px;
     margin-top:5px;
     padding-right:20px;
@@ -120,5 +131,28 @@ a.link .date{
     -webkit-line-clamp:1;
     -webkit-box-orient: vertical;
     word-wrap:break-word; 
+}
+
+a.link .info .viewCount i{
+    position: relative;
+    top:-1px;
+    font-size:10px;
+}
+
+a.link .info .date{
+    position: relative;
+    margin-left:6px;
+    padding-left:10px;
+}
+
+a.link .info .date::before{
+    content: '';
+    display: block;
+    position: absolute;
+    top:4px;
+    left:0;
+    width:1px;
+    height:11px;
+    background-color:#848c9c;
 }
 </style>

@@ -1,7 +1,7 @@
 <template>
     <section class="areaHotList">
-        <HotHorizonList v-bind:contents="hotLive">
-            <h2 slot="title">인기 동영상</h2>
+        <HotHorizonList v-bind:contents="gameVideo">
+            <h2 slot="title">게임 인기동영상</h2>
         </HotHorizonList>
         <HotHorizonList v-bind:contents="foodVideo">
             <h2 slot="title">먹방 최신동영상</h2>
@@ -18,18 +18,17 @@ import HotHorizonList from './HotHorizonList.vue'
 export default {
     data(){
         return {
-            hotLive : {
-                url : 'video'
+            gameVideo : {
+                q : '게임',
+                order : 'viewCount'
             },
 
             foodVideo : {
-                url : 'search',
                 q : '먹방',
                 order : 'date'
             },
 
             hotFoodVideo : {
-                url : 'search',
                 q : '먹방',
                 order : 'viewCount'
             }

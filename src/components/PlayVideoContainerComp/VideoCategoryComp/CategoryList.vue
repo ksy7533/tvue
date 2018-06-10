@@ -28,7 +28,7 @@ export default {
 
     mixins: [loadData],
 
-    created(){
+    mounted(){
         this.getSearchData(playList_url, {
             key : YOUTUBE_API,
             part : "snippet,contentDetails",

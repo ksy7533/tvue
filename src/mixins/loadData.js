@@ -37,7 +37,7 @@ export const loadData = {
                 tempData.forEach(function(videoId) {
                     that.getData(video_url, {
                         key: YOUTUBE_API,
-                        regionCode: 'kr',
+                        regionCode: 'KR',
                         part: 'snippet,contentDetails,statistics',
                         maxResults: '30',
                         id: videoId

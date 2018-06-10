@@ -47,7 +47,7 @@ h1 a{
     width:300px;
     height:20px;
     background-color:#f3f3f5;
-    border:1px solid #f2f2f2;
+    border:1px solid #d9d9d9;
     border-radius:3px
 }
 
