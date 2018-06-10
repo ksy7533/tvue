@@ -8,7 +8,13 @@
                 <a href="#n">예능</a>
             </li>
             <li>
-                <a href="#n">드라마</a>
+                <a href="#n">음악</a>
+            </li>
+            <li>
+                <a href="#n">게임</a>
+            </li>
+            <li>
+                <a href="#n">영화</a>
             </li>
         </ul>
     </div>

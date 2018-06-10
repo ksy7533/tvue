@@ -13,6 +13,7 @@ import reset from 'reset-css'
 import HeaderArea from './components/HeaderComp/HeaderArea.vue'
 import MainContainerArea from './components/MainContainerComp/MainContainerArea.vue'
 import PlayVideoContainerArea from './components/PlayVideoContainerComp/PlayVideoArea.vue'
+import TotalVideoArea from './components/TotalVideoContainerComp/TotalVideoArea.vue'
 import FooterArea from './components/FooterComp/FooterArea.vue'
 
 export default {
@@ -20,6 +21,7 @@ export default {
     HeaderArea,
     MainContainerArea,
     PlayVideoContainerArea,
+    TotalVideoArea,
     FooterArea
   }
 }

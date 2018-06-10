@@ -1,25 +1,25 @@
 <template>
     <section class="areaChannel">
         <channelList v-bind:contents="varietyChannelContents">
-            <a slot="channelName" href="#n" class="channelName type01">
+            <a slot="channelName" class="channelName type01" v-on:click="goPage(COMEDY_CHANNEL_ID)">
                 <span slot="title" class="name">예능</span>
                 <span class="sub_name">최신 인기 동영상</span>
             </a>
         </channelList>
         <channelList v-bind:contents="musicChannelContents">
-            <a slot="channelName" href="#n" class="channelName type02">
+            <a slot="channelName" class="channelName type02" v-on:click="goPage(MUSIC_CHANNEL_ID)">
                 <span slot="title" class="name">음악</span>
                 <span class="sub_name">최신 인기 동영상</span>
             </a>
         </channelList>
         <channelList v-bind:contents="gameChannelContents">
-            <a slot="channelName" href="#n" class="channelName type03">
+            <a slot="channelName" class="channelName type03" v-on:click="goPage(GAME_CHANNEL_ID)">
                 <span slot="title" class="name">게임</span>
                 <span class="sub_name">최신 인기 동영상</span>
             </a>
         </channelList>
         <channelList v-bind:contents="movieChannelContents">
-            <a slot="channelName" href="#n" class="channelName type04">
+            <a slot="channelName" class="channelName type04" v-on:click="goPage(MOVIE_CHANNEL_ID)">
                 <span slot="title" class="name">영화</span>
                 <span class="sub_name">최신 인기 동영상</span>
             </a>
@@ -44,7 +44,7 @@ export default {
             chart : 'mostPopular',
             regionCode : 'kr',
             part : 'snippet,contentDetails,statistics',
-            videoCategoryId : '23'
+            videoCategoryId : this.COMEDY_CHANNEL_ID
         },
             this.varietyChannelContents
         )
@@ -55,7 +55,7 @@ export default {
             chart : 'mostPopular',
             regionCode : 'kr',
             part : 'snippet,contentDetails,statistics',
-            videoCategoryId : '10'
+            videoCategoryId : this.MUSIC_CHANNEL_ID
         },
             this.musicChannelContents
         )
@@ -66,7 +66,7 @@ export default {
             chart : 'mostPopular',
             regionCode : 'kr',
             part : 'snippet,contentDetails,statistics',
-            videoCategoryId : '20'
+            videoCategoryId : this.GAME_CHANNEL_ID
         },
             this.gameChannelContents
         )
@@ -77,7 +77,7 @@ export default {
             chart : 'mostPopular',
             regionCode : 'kr',
             part : 'snippet,contentDetails,statistics',
-            videoCategoryId : '1'
+            videoCategoryId : this.MOVIE_CHANNEL_ID
         },
             this.movieChannelContents
         )
@@ -88,7 +88,18 @@ export default {
             varietyChannelContents : [],
             musicChannelContents : [],
             gameChannelContents : [],
-            movieChannelContents : []
+            movieChannelContents : [],
+
+            COMEDY_CHANNEL_ID : 23,
+            MUSIC_CHANNEL_ID : 10,
+            GAME_CHANNEL_ID : 20,
+            MOVIE_CHANNEL_ID : 1
+        }
+    },
+
+    methods : {
+        goPage : function(channelId) {
+            this.$router.push({ name: 'totalVideo', params: { channelId } });
         }
     },
 
@@ -104,5 +115,9 @@ export default {
     padding:20px 0;
     border:1px solid #ccc;
     border-radius:5px
+}
+
+.channelName{
+    cursor: pointer;
 }
 </style>

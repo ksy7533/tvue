@@ -32,7 +32,6 @@ export default {
     props : ['contents'],
     mixins: [loadData],
     mounted(){
-
         this.getSearchData(search_url, {
             key : YOUTUBE_API,
             regionCode : 'KR',
@@ -42,33 +41,32 @@ export default {
             order : this.contents.order,
             q : this.contents.q
         }, this.arrData);
-
     },
 
     data(){
         return {
-            swiperOption: {
-                slidesPerView: 6,
-                slidesPerGroup: 6,
-                loopedSlides: 6,
-                loop: true,
-                speed: 500,
-                spaceBetween: 10,
+            // swiperOption: {
+            //     slidesPerView: 6,
+            //     slidesPerGroup: 6,
+            //     loopedSlides: 6,
+            //     loop: true,
+            //     speed: 500,
+            //     spaceBetween: 10,
 
                 
-                loopFillGroupWithBlank: true,
-                navigation: {
-                    nextEl: '.swiper-button-next',
-                    prevEl: '.swiper-button-prev'
-                },
-                pagination: {
-                    el: '.swiper-pagination',
-                    type: 'bullets'
-                },
+            //     loopFillGroupWithBlank: true,
+            //     navigation: {
+            //         nextEl: '.swiper-button-next',
+            //         prevEl: '.swiper-button-prev'
+            //     },
+            //     pagination: {
+            //         el: '.swiper-pagination',
+            //         type: 'bullets'
+            //     },
 
-                preloadImages: false,
-                lazy: true
-            },
+            //     preloadImages: false,
+            //     lazy: true
+            // },
 
             arrData : []
         }
