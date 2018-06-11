@@ -4,21 +4,26 @@
             <li class="on">
                 <router-link class="link" v-bind:to="'/main'">전체</router-link>
             </li>
-            <li>
-                <a href="#n">예능</a>
-            </li>
-            <li>
-                <a href="#n">음악</a>
-            </li>
-            <li>
-                <a href="#n">게임</a>
-            </li>
-            <li>
-                <a href="#n">영화</a>
+
+            <li v-for="(item, index) in gnb" v-bind:key="index">
+                <router-link class="link" v-bind:to="'/totalVideo/'+item.id">{{item.name}}</router-link>
             </li>
         </ul>
     </div>
 </template>
+
+<script>
+import HeaderTop from './HeaderTop.vue'
+import Gnb from './Gnb.vue'
+
+export default {
+    data(){
+        return {
+            gnb : this.$store.state.gnb
+        }
+    }
+}
+</script>
 
 <style scoped>
 .wrapGnb{

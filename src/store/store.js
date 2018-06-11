@@ -3,6 +3,24 @@ import Vuex from 'vuex'
 
 Vue.use(Vuex);
 
+var GNB_LIST = [{
+        name: '예능',
+        id: '23'
+    },
+    {
+        name: '음악',
+        id: '10'
+    },
+    {
+        name: '게임',
+        id: '20'
+    },
+    {
+        name: '영화',
+        id: '1'
+    }
+]
+
 export const store = new Vuex.Store({
     state: {
         currentVideo: {
@@ -14,7 +32,9 @@ export const store = new Vuex.Store({
             commentCount: '',
             likeCount: '',
             dislikeCount: ''
-        }
+        },
+
+        gnb: GNB_LIST
     },
     mutations: {
         changeContainer(state, payload) {

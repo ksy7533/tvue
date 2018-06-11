@@ -1,6 +1,6 @@
 <template>
     <div>
-        <h2><strong></strong>의 채널입니다</h2>
+        <h2><strong></strong> 최신 인기 동영상</h2>
         <ul class="list">
             <li v-for="(item, index) in contents" v-bind:key="index">
                 <VideoItem v-bind:itemData="item"></VideoItem>
