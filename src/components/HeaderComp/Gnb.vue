@@ -1,15 +1,15 @@
 <template>
-    <div class="wrapGnb">
+    <nav class="wrapGnb">
         <ul class="gnb">
-            <li class="on">
-                <router-link class="link" v-bind:to="'/main'">전체</router-link>
+            <li>
+                <router-link class="link" v-bind:to="'/main'" v-bind:class="changeClassOn('main')">전체</router-link>
             </li>
 
-            <li v-for="(item, index) in gnb" v-bind:key="index">
+            <li v-for="(item, index) in gnb" v-bind:key="index" v-bind:class="changeClassOn(item.id)">
                 <router-link class="link" v-bind:to="'/totalVideo/'+item.id">{{item.name}}</router-link>
             </li>
         </ul>
-    </div>
+    </nav>
 </template>
 
 <script>
@@ -17,9 +17,41 @@ import HeaderTop from './HeaderTop.vue'
 import Gnb from './Gnb.vue'
 
 export default {
+
+    mounted(){
+        // this.changeClassOn(this.$store.state.currentGnbId);
+    },
+
+    computed: {
+        currentGnbId () {
+            return this.$store.state.currentGnbId
+        }
+    },
+
+    watch:{
+        currentGnbId(value) {
+            
+            // console.log(`My store value for 'doneTodosCount' changed to ${value}`);
+        }
+    },
+
+    methods : {
+        changeClassOn : function(itemId){
+            // console.log(itemId+"  "+this.$store.state.currentGnbId)
+            if(itemId === this.$store.state.currentGnbId){
+                // console.log("ok")
+                return true
+            }else{
+                // console.log("no")
+                return false
+            }
+        }
+    },
+
     data(){
         return {
-            gnb : this.$store.state.gnb
+            gnb : this.$store.state.gnb,
+            on : false
         }
     }
 }

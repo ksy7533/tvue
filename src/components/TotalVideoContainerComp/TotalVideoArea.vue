@@ -29,6 +29,8 @@ export default {
             part : 'snippet,contentDetails,statistics',
             videoCategoryId : this.$route.params.channelId
         }, this.contents)
+
+        this.setCurrentGnbId();
     },
 
     data(){
@@ -70,6 +72,12 @@ export default {
                 console.log("ERROR !", ex);
             })
         },
+
+        setCurrentGnbId : function(){
+             this.$store.commit('setCurrentGnbId', {
+                currentGnbId: this.$route.params.channelId
+            });
+        }
     },
 
     components : {

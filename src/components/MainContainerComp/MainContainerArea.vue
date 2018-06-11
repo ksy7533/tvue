@@ -12,11 +12,24 @@ import HotListArea from './HotListComp/HotListArea.vue'
 import ChannelListArea from './ChannelListComp/ChannelListArea.vue'
 
 export default {
+    mounted(){
+        this.setCurrentGnbId()
+        console.log(this.$store.state.currentGnbId)
+    },
+
     components : {
         MainHotArea,
 
         HotListArea,
         ChannelListArea
+    },
+
+    methods : {
+        setCurrentGnbId : function(){
+             this.$store.commit('setCurrentGnbId', {
+                currentGnbId: 'main'
+            });
+        }
     }
 }
 </script>

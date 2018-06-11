@@ -13,6 +13,10 @@ import PlayArea from './PlayComp/PlayArea.vue'
 import VideoCategory from './VideoCategoryComp/VideoCategoryArea.vue'
 
 export default {
+    mounted(){
+        console.log(this.$route.params.channelId)
+    },
+    
     components : {
         PlayArea,
         VideoCategory

@@ -34,6 +34,8 @@ export const store = new Vuex.Store({
             dislikeCount: ''
         },
 
+        currentGnbId: 'main',
+
         gnb: GNB_LIST
     },
     mutations: {
@@ -46,6 +48,10 @@ export const store = new Vuex.Store({
             state.currentVideo.commentCount = payload.currentCommentCount;
             state.currentVideo.likeCount = payload.currentLikeCount;
             state.currentVideo.dislikeCount = payload.currentDislikeCount;
+        },
+
+        setCurrentGnbId(state, payload) {
+            state.currentGnbId = payload.currentGnbId;
         }
     }
 });
