@@ -1,11 +1,11 @@
 <template>
     <nav class="wrapGnb">
         <ul class="gnb">
-            <li>
-                <router-link class="link" v-bind:to="'/main'" v-bind:class="changeClassOn('main')">전체</router-link>
+            <li v-bind:class="{on : changeClassOn('main')}">
+                <router-link class="link" v-bind:to="'/main'">전체</router-link>
             </li>
 
-            <li v-for="(item, index) in gnb" v-bind:key="index" v-bind:class="changeClassOn(item.id)">
+            <li v-for="(item, index) in gnb" v-bind:key="index" v-bind:class="{on : changeClassOn(item.id)}">
                 <router-link class="link" v-bind:to="'/totalVideo/'+item.id">{{item.name}}</router-link>
             </li>
         </ul>
@@ -17,32 +17,22 @@ import HeaderTop from './HeaderTop.vue'
 import Gnb from './Gnb.vue'
 
 export default {
-
-    mounted(){
-        // this.changeClassOn(this.$store.state.currentGnbId);
-    },
-
     computed: {
         currentGnbId () {
             return this.$store.state.currentGnbId
         }
     },
 
-    watch:{
-        currentGnbId(value) {
-            
-            // console.log(`My store value for 'doneTodosCount' changed to ${value}`);
-        }
-    },
+    // watch:{
+    //     currentGnbId(value) {
+    //     }
+    // },
 
     methods : {
         changeClassOn : function(itemId){
-            // console.log(itemId+"  "+this.$store.state.currentGnbId)
-            if(itemId === this.$store.state.currentGnbId){
-                // console.log("ok")
+            if(itemId === this.$store.state.currentGnbId.toString()){
                 return true
             }else{
-                // console.log("no")
                 return false
             }
         }

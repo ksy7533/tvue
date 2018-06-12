@@ -77,6 +77,7 @@ export default {
              this.$store.commit('setCurrentGnbId', {
                 currentGnbId: this.$route.params.channelId
             });
+            console.log(this.$store.state.currentGnbId)
         }
     },
 

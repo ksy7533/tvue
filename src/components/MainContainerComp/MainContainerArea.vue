@@ -14,7 +14,6 @@ import ChannelListArea from './ChannelListComp/ChannelListArea.vue'
 export default {
     mounted(){
         this.setCurrentGnbId()
-        console.log(this.$store.state.currentGnbId)
     },
 
     components : {
