@@ -3,7 +3,7 @@ import Vuex from 'vuex'
 
 Vue.use(Vuex);
 
-var GNB_LIST = [{
+const GNB_LIST = [{
         name: '예능',
         id: '23'
     },
@@ -38,6 +38,7 @@ export const store = new Vuex.Store({
 
         gnb: GNB_LIST
     },
+
     mutations: {
         changeContainer(state, payload) {
             state.currentVideo.videoTitle = payload.currentVideoTitle;

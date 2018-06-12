@@ -15,7 +15,7 @@ export default [{
     },
 
     {
-        path: '/totalVideo/:channelId',
+        path: '/totalVideo/:channelId?/:query?/:order?',
         name: 'totalVideo',
         component: TotalVideoArea
     },

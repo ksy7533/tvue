@@ -14,7 +14,7 @@
             <li v-for="(item, index) in arrData" v-bind:key="index"><VideoItem v-bind:itemData="item"></VideoItem></li>
         </ul>
 
-        <a href="#n" class="btnMore">더보기</a>    
+        <a href="#n" class="btnMore" v-on:click.prevent="goPage()">더보기</a>    
     </div>
 </template>
 
@@ -72,11 +72,19 @@ export default {
         }
     },
 
+    methods : {
+        goPage : function() {
+            // console.log(this.contents)
+            this.$router.push({ name: 'totalVideo', params: { query : this.contents.q, order : this.contents.order } });
+        }
+    },
+    
     components: {
         // swiper,
         // swiperSlide,
         VideoItem
     }
+    
 }
 </script>
 
