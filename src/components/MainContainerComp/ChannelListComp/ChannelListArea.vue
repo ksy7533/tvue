@@ -99,7 +99,7 @@ export default {
 
     methods : {
         goPage : function(channelId) {
-            this.$router.push({ name: 'totalVideo', params: { channelId } });
+            this.$router.push({ name: 'totalVideoChannel', params: { channelId } });
         }
     },
 

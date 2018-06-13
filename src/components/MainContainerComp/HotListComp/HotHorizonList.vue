@@ -75,7 +75,7 @@ export default {
     methods : {
         goPage : function() {
             // console.log(this.contents)
-            this.$router.push({ name: 'totalVideo', params: { query : this.contents.q, order : this.contents.order } });
+            this.$router.push({ name: 'totalVideoHot', params: { query : this.contents.q, order : this.contents.order } });
         }
     },
     

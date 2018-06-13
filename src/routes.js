@@ -15,10 +15,24 @@ export default [{
     },
 
     {
-        path: '/totalVideo/:channelId?/:query?/:order?',
-        name: 'totalVideo',
+        path: '/totalVideo/hot/:query/:order',
+        name: 'totalVideoHot',
+        component: TotalVideoArea
+
+    },
+
+    {
+        path: '/totalVideo/channel/:channelId',
+        name: 'totalVideoChannel',
         component: TotalVideoArea
     },
+
+
+    // {
+    //     path: '/totalVideo/:channelId?/:query?/:order?',
+    //     name: 'totalVideo',
+    //     component: TotalVideoArea
+    // },
 
     {
         path: '*',

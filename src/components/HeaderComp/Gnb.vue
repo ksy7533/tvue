@@ -6,7 +6,7 @@
             </li>
 
             <li v-for="(item, index) in gnb" v-bind:key="index" v-bind:class="{on : changeClassOn(item.id)}">
-                <router-link class="link" v-bind:to="'/totalVideo/'+item.id">{{item.name}}</router-link>
+                <router-link class="link" v-bind:to="'/totalVideo/channel/'+item.id">{{item.name}}</router-link>
             </li>
         </ul>
     </nav>

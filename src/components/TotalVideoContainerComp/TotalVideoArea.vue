@@ -25,15 +25,20 @@ export default {
 
     mounted(){
         /* 최신 인기동영상 채널 클릭 */
+
+        console.log(this.$route.params.channelId)
+
         if(this.$route.params.channelId){
             const gnb_list = this.$store.state.gnb;
+
+            console.log('cf')
 
             gnb_list.forEach((item) => {
                 if((item.id) === this.$route.params.channelId.toString()){
                     this.title = item.name;
                 }
             })
-            
+
             this.getVideoData(video_url, {
                 key : YOUTUBE_API,
                 chart : 'mostPopular',
@@ -47,6 +52,7 @@ export default {
 
         /* 유저 선택 쿼리 */
         else if(this.$route.params.query){
+            console.log('유저')
 
             this.title = this.$route.params.query;
 
