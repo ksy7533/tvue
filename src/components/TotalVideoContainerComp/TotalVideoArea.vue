@@ -1,6 +1,7 @@
 <template>
     <div>
-        <h2><strong></strong> 최신 인기 동영상</h2>
+        <h2 ><strong>{{title}}</strong> {{orderText}} 동영상</h2>
+
         <ul class="list">
             <li v-for="(item, index) in contents" v-bind:key="index">
                 <VideoItem v-bind:itemData="item"></VideoItem>
@@ -23,10 +24,16 @@ export default {
     mixins: [loadData],
 
     mounted(){
-        /* 유저 선택 쿼리 */
+        /* 최신 인기동영상 채널 클릭 */
         if(this.$route.params.channelId){
-            console.log(this.$route.params.channelId)
-            console.log("fff")
+            const gnb_list = this.$store.state.gnb;
+
+            gnb_list.forEach((item) => {
+                if((item.id) === this.$route.params.channelId.toString()){
+                    this.title = item.name;
+                }
+            })
+            
             this.getVideoData(video_url, {
                 key : YOUTUBE_API,
                 chart : 'mostPopular',
@@ -37,9 +44,18 @@ export default {
             }, this.contents)
             this.setCurrentGnbId();
         }
-        /* 최신 인기동영상 채널 클릭 */
+
+        /* 유저 선택 쿼리 */
         else if(this.$route.params.query){
-            console.log(this.$route.params.query)
+
+            this.title = this.$route.params.query;
+
+            if(this.$route.params.order === 'viewCount'){
+                this.orderText = '인기'
+            }else if(this.$route.params.order === 'date'){
+                this.orderText = '최신'
+            }
+
             this.getSearchData(search_url, {
                 key : YOUTUBE_API,
                 regionCode : 'KR',
@@ -56,7 +72,9 @@ export default {
         return {
             contents : [],
             isNextPage : false,
-            tokenNextPage : ''
+            tokenNextPage : '',
+            title : '',
+            orderText : '인기'
         }
     },
 
@@ -160,6 +178,12 @@ export default {
 <style scoped>
 h2{
     margin-bottom:20px;
+}
+
+h2 strong{
+    color:#2282f2;
+    font-weight: bold;    
+    font-size:24px;
 }
 
 .list:after{
