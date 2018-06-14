@@ -1,16 +1,5 @@
 <template>
-    <a class="link" v-on:click="changeContainer({
-        videoId:itemData.id,
-        channelId:itemData.channelId,
-        title:itemData.videoTitle,
-        channelTitle:itemData.channelTitle,
-        date : itemData.date,
-        description : itemData.description,
-        viewCount: itemData.viewCount,
-        commentCount: itemData.commentCount,
-        likeCount : itemData.likeCount,
-        dislikeCount : itemData.dislikeCount
-    })">
+    <a class="link" v-on:click="goPage(itemData)">
         <p class="wrapImg">
             <img v-bind:src="itemData.img_src" alt="">
             <span class="playTime">{{itemData.duration}}</span>

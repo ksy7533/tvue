@@ -1,7 +1,7 @@
 <template>
     <div class="content">
-        <h2><strong>{{this.$store.state.currentVideo.channelTitle}}</strong>의 채널입니다</h2>
-        <PlayArea></PlayArea>
+        <h2><strong>{{currentVideoData[0].channelTitle}}</strong>의 채널입니다</h2>
+        <PlayArea v-bind:currentVideoData="currentVideoData[0]"></PlayArea>
         <VideoCategory></VideoCategory>
 
         <a href="#top" class="btnGotoTop"><i class="far fa-arrow-alt-circle-up"></i></a>
@@ -11,8 +11,29 @@
 <script>
 import PlayArea from './PlayComp/PlayArea.vue'
 import VideoCategory from './VideoCategoryComp/VideoCategoryArea.vue'
+import { loadData } from '../../mixins/loadData.js'
+
+var YOUTUBE_API = "AIzaSyBQ1G-JhjIMd0bGr9IeF49NKeQ29roBttY";
+var video_url = "https://www.googleapis.com/youtube/v3/videos";
 
 export default {  
+    mixins: [loadData],
+    
+    mounted(){
+        this.getData(video_url, {
+            key : YOUTUBE_API,
+            regionCode : 'kr',
+            part : 'snippet,contentDetails,statistics',
+            id : this.$route.params.videoId
+        }, this.currentVideoData);
+    },
+
+    data(){
+        return {
+            currentVideoData : []
+        }
+    },
+
     components : {
         PlayArea,
         VideoCategory

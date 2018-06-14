@@ -1,20 +1,9 @@
 <template>
-     <div class="listPlay">
+    <div class="listPlay">
         <p class="tit"><i class="fas fa-align-left"></i> 관련 비디오 리스트</p>
         <ul class="list">
             <li v-for="(item, index) in arrData" v-bind:key="index">
-                <a class="link" v-on:click="changeContainer({
-                    videoId:item.id,
-                    channelId:item.channelId,
-                    title:item.videoTitle,
-                    channelTitle:item.channelTitle,
-                    date : item.date,
-                    description : item.description,
-                    viewCount: item.viewCount,
-                    commentCount: item.commentCount,
-                    likeCount : item.likeCount,
-                    dislikeCount : item.dislikeCount
-                })">
+                <a class="link" v-on:click="goPage(item)">
                     <span class="wrapImg"><img v-bind:src="item.img_src" alt=""></span>
                     <span class="txt">
                         <span class="tit">{{item.videoTitle}}</span>

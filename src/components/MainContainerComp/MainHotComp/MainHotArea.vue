@@ -1,18 +1,7 @@
 <template>
     <section class="mainHot" v-if="arrData.length">
         <div class="col type_01">
-            <a class="link" v-on:click="changeContainer({
-                videoId:arrData[0].id,
-                channelId:arrData[0].channelId,
-                title:arrData[0].videoTitle,
-                channelTitle:arrData[0].channelTitle,
-                date : arrData[0].date,
-                description : arrData[0].description,
-                viewCount: arrData[0].viewCount,
-                commentCount: arrData[0].commentCount,
-                likeCount : arrData[0].likeCount,
-                dislikeCount : arrData[0].dislikeCount
-            })">
+            <a class="link" v-on:click="goPage(arrData[0])">
                 <div class="item type_01">
                     <div class="wrapImg"><img v-bind:src="arrData[0].img_src" alt=""></div>
                     <div class="info">
@@ -29,18 +18,7 @@
                     </div>
                 </div>
             </a>
-            <a class="link" v-on:click="changeContainer({
-                videoId:arrData[1].id,
-                channelId:arrData[1].channelId,
-                title:arrData[1].videoTitle,
-                channelTitle:arrData[1].channelTitle,
-                date : arrData[1].date,
-                description : arrData[1].description,
-                viewCount: arrData[1].viewCount,
-                commentCount: arrData[1].commentCount,
-                likeCount : arrData[1].likeCount,
-                dislikeCount : arrData[1].dislikeCount
-            })">
+            <a class="link" v-on:click="goPage(arrData[1])">
                 <div class="item type_02">
                     <div class="info">
                         <p class="titChannel">{{arrData[1].channelTitle}}</p>
@@ -51,18 +29,7 @@
                     <div class="wrapImg"><img v-bind:src="arrData[1].img_src" alt=""></div>
                 </div>
             </a>
-            <a class="link" v-on:click="changeContainer({
-                videoId:arrData[2].id,
-                channelId:arrData[2].channelId,
-                title:arrData[2].videoTitle,
-                channelTitle:arrData[2].channelTitle,
-                date : arrData[2].date,
-                description : arrData[2].description,
-                viewCount: arrData[2].viewCount,
-                commentCount: arrData[2].commentCount,
-                likeCount : arrData[2].likeCount,
-                dislikeCount : arrData[2].dislikeCount
-            })">
+            <a class="link" v-on:click="goPage(arrData[2])">
                 <div class="item type_02">
                     <div class="info">
                         <p class="titChannel">{{arrData[2].channelTitle}}</p>
@@ -75,18 +42,7 @@
             </a>
         </div>
         <div class="col type_02">
-            <a class="link" v-on:click="changeContainer({
-                videoId:arrData[3].id,
-                channelId:arrData[3].channelId,
-                title:arrData[3].videoTitle,
-                channelTitle:arrData[3].channelTitle,
-                date : arrData[3].date,
-                description : arrData[3].description,
-                viewCount: arrData[3].viewCount,
-                commentCount: arrData[3].commentCount,
-                likeCount : arrData[3].likeCount,
-                dislikeCount : arrData[3].dislikeCount
-            })">
+            <a class="link" v-on:click="goPage(arrData[3])">
                 <div class="item type_01">
                     <div class="wrapImg"><img v-bind:src="arrData[3].img_src" alt=""></div>
                     <div class="info">
@@ -103,18 +59,7 @@
                     </div>
                 </div>
             </a>
-            <a class="link" v-on:click="changeContainer({
-                videoId:arrData[4].id,
-                channelId:arrData[4].channelId,
-                title:arrData[4].videoTitle,
-                channelTitle:arrData[4].channelTitle,
-                date : arrData[4].date,
-                description : arrData[4].description,
-                viewCount: arrData[4].viewCount,
-                commentCount: arrData[4].commentCount,
-                likeCount : arrData[4].likeCount,
-                dislikeCount : arrData[4].dislikeCount
-            })">
+            <a class="link" v-on:click="goPage(arrData[4])">
                 <div class="item type_01">
                     <div class="wrapImg"><img v-bind:src="arrData[4].img_src" alt=""></div>
                     <div class="info">
@@ -133,18 +78,7 @@
             </a>
         </div>
         <div class="col type_03">
-            <a class="link" v-on:click="changeContainer({
-                videoId:arrData[5].id,
-                channelId:arrData[5].channelId,
-                title:arrData[5].videoTitle,
-                channelTitle:arrData[5].channelTitle,
-                date : arrData[5].date,
-                description : arrData[5].description,
-                viewCount: arrData[5].viewCount,
-                commentCount: arrData[5].commentCount,
-                likeCount : arrData[5].likeCount,
-                dislikeCount : arrData[5].dislikeCount
-            })">
+            <a class="link" v-on:click="goPage(arrData[5])">
                 <div class="item type_01">
                     <div class="wrapImg"><img v-bind:src="arrData[5].img_src" alt=""></div>
                     <div class="info">
@@ -157,18 +91,7 @@
                     </div>
                 </div>
             </a>
-            <a class="link" v-on:click="changeContainer({
-                videoId:arrData[6].id,
-                channelId:arrData[6].channelId,
-                title:arrData[6].videoTitle,
-                channelTitle:arrData[6].channelTitle,
-                date : arrData[6].date,
-                description : arrData[6].description,
-                viewCount: arrData[6].viewCount,
-                commentCount: arrData[6].commentCount,
-                likeCount : arrData[6].likeCount,
-                dislikeCount : arrData[6].dislikeCount
-            })">
+            <a class="link" v-on:click="goPage(arrData[6])">
                 <div class="item type_01">
                     <div class="wrapImg"><img v-bind:src="arrData[6].img_src" alt=""></div>
                     <div class="info">
@@ -181,18 +104,7 @@
                     </div>
                 </div>
             </a>
-            <a class="link" v-on:click="changeContainer({
-                videoId:arrData[7].id,
-                channelId:arrData[7].channelId,
-                title:arrData[7].videoTitle,
-                channelTitle:arrData[7].channelTitle,
-                date : arrData[7].date,
-                description : arrData[7].description,
-                viewCount: arrData[7].viewCount,
-                commentCount: arrData[7].commentCount,
-                likeCount : arrData[7].likeCount,
-                dislikeCount : arrData[7].dislikeCount
-            })">
+            <a class="link" v-on:click="goPage(arrData[7])">
                 <div class="item type_01">
                     <div class="wrapImg"><img v-bind:src="arrData[7].img_src" alt=""></div>
                     <div class="info">
@@ -205,18 +117,7 @@
                     </div>
                 </div>
             </a>
-            <a class="link" v-on:click="changeContainer({
-                videoId:arrData[8].id,
-                channelId:arrData[8].channelId,
-                title:arrData[8].videoTitle,
-                channelTitle:arrData[8].channelTitle,
-                date : arrData[8].date,
-                description : arrData[8].description,
-                viewCount: arrData[8].viewCount,
-                commentCount: arrData[8].commentCount,
-                likeCount : arrData[8].likeCount,
-                dislikeCount : arrData[8].dislikeCount
-            })">
+            <a class="link" v-on:click="goPage(arrData[8])">
                 <div class="item type_01">
                     <div class="wrapImg"><img v-bind:src="arrData[8].img_src" alt=""></div>
                     <div class="info">
@@ -229,18 +130,7 @@
                     </div>
                 </div>
             </a>
-            <a class="link" v-on:click="changeContainer({
-                videoId:arrData[9].id,
-                channelId:arrData[9].channelId,
-                title:arrData[9].videoTitle,
-                channelTitle:arrData[9].channelTitle,
-                date : arrData[9].date,
-                description : arrData[9].description,
-                viewCount: arrData[9].viewCount,
-                commentCount: arrData[9].commentCount,
-                likeCount : arrData[9].likeCount,
-                dislikeCount : arrData[9].dislikeCount
-            })">
+            <a class="link" v-on:click="goPage(arrData[9])">
                 <div class="item type_01">
                     <div class="wrapImg"><img v-bind:src="arrData[9].img_src" alt=""></div>
                     <div class="info">

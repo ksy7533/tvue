@@ -1,7 +1,6 @@
 <template>
     <div>
         <h2 ><strong>{{title}}</strong> {{orderText}} 동영상</h2>
-
         <ul class="list">
             <li v-for="(item, index) in contents" v-bind:key="index">
                 <VideoItem v-bind:itemData="item"></VideoItem>
@@ -18,7 +17,6 @@ import VideoItem from '../CommonComp/videoItem.vue'
 
 var YOUTUBE_API = "AIzaSyBQ1G-JhjIMd0bGr9IeF49NKeQ29roBttY";
 var video_url = "https://www.googleapis.com/youtube/v3/videos";
-var search_url = "https://www.googleapis.com/youtube/v3/search";
 
 export default {
     mixins: [loadData],

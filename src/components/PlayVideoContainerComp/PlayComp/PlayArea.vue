@@ -5,17 +5,17 @@
             <PlayList></PlayList>
         </div>
         <div class="detail">
-            <h3>{{this.$store.state.currentVideo.videoTitle}}</h3>
+            <h3>{{currentVideoData.videoTitle}}</h3>
             <p class="info">
-                <span class="viewCount"><i class="fas fa-play"></i> 재생수 {{numberWithCommas(this.$store.state.currentVideo.viewCount)}}회</span>
-                <span class="date">등록 {{this.$store.state.currentVideo.date}}</span>
+                <span class="viewCount"><i class="fas fa-play"></i> 재생수 {{numberWithCommas(currentVideoData.viewCount)}}회</span>
+                <span class="date">등록 {{currentVideoData.date}}</span>
             </p>
             <p class="count">
-                <span class="likeCount"><i class="far fa-thumbs-up"></i> {{numberWithCommas(this.$store.state.currentVideo.likeCount)}}</span>
-                <span class="dislikeCount"><i class="far fa-thumbs-down"></i> {{numberWithCommas(this.$store.state.currentVideo.dislikeCount)}}</span>
-                <span class="commentCount"><i class="far fa-comments"></i> {{numberWithCommas(this.$store.state.currentVideo.commentCount)}}</span>
+                <span class="likeCount"><i class="far fa-thumbs-up"></i> {{numberWithCommas(currentVideoData.likeCount)}}</span>
+                <span class="dislikeCount"><i class="far fa-thumbs-down"></i> {{numberWithCommas(currentVideoData.dislikeCount)}}</span>
+                <span class="commentCount"><i class="far fa-comments"></i> {{numberWithCommas(currentVideoData.commentCount)}}</span>
             </p>
-            <p class="txt">{{this.$store.state.currentVideo.description}}</p>
+            <p class="txt">{{currentVideoData.description}}</p>
         </div>
     </section>
 </template>
@@ -25,6 +25,8 @@ import Player from './Player.vue'
 import PlayList from './PlayList.vue'
 
 export default {
+    props:['currentVideoData'],
+
     components : {
         Player,
         PlayList
