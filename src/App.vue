@@ -30,17 +30,12 @@ export default {
 <style scoped>
 @import url(//fonts.googleapis.com/earlyaccess/notosanskr.css);
 
-body, html{
-  width:100%;
-  height:100%;
-  line-height:1;
-  font-size:12px;
-  font-family: 'Noto Sans KR', sans-serif;
-}
-
 .wrap{
   width:100%;
-  height:100%
+  height:100%;
+  line-height: 1;
+  font-size: 12px;
+  font-family: 'Noto Sans KR', sans-serif;
 }
 
 .container{

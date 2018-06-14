@@ -130,10 +130,17 @@ export default {
 }
 
 .listPlay .list li .link .txt .tit{
+    max-height:36px;
     display: block;
     line-height:18px;
     font-size:14px;
     font-weight:bold;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp:2;
+    -webkit-box-orient: vertical;
+    word-wrap:break-word; 
 }
 
 .listPlay .list li .link .txt .date{

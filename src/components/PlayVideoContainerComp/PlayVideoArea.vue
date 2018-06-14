@@ -1,5 +1,5 @@
 <template>
-    <div class="content">
+    <div class="content" v-if="currentVideoData.length">
         <h2><strong>{{currentVideoData[0].channelTitle}}</strong>의 채널입니다</h2>
         <PlayArea v-bind:currentVideoData="currentVideoData[0]"></PlayArea>
         <VideoCategory></VideoCategory>

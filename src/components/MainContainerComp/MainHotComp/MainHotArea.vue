@@ -259,8 +259,7 @@ export default {
 
 .mainHot .col.type_01 .item.type_01 .info .wrapInfo, .mainHot .col.type_02 .item.type_01 .info .wrapInfo{
     z-index: 50;
-    position: absolute;
-    bottom:20px;
+    position: relative;
 }
 
 .mainHot .col.type_01 .item.type_01 .info:after, .mainHot .col.type_02 .item.type_01 .info:after{
