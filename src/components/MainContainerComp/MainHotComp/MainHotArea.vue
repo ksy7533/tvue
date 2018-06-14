@@ -1,5 +1,5 @@
 <template>
-    <section class="mainHot">
+    <section class="mainHot" v-if="arrData.length">
         <div class="col type_01">
             <a class="link" v-on:click="changeContainer({
                 videoId:arrData[0].id,
@@ -280,10 +280,6 @@ export default {
         return {
             arrData : []
         }
-    },
-
-    methods : {
-
     }
 }
 </script>

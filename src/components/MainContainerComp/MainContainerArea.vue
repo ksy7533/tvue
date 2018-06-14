@@ -18,7 +18,6 @@ export default {
 
     components : {
         MainHotArea,
-
         HotListArea,
         ChannelListArea
     },
