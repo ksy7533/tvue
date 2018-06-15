@@ -30,118 +30,102 @@ export default {
 }
 </script>
 
-<style scoped>
-a.link{
+<style lang="scss" scoped>
+@import "../../styles/variables";
+@import "../../styles/mixin";
+
+.link{
     text-decoration:none;
     display: block;
     cursor: pointer;
-}
 
-a.link:hover .tit{
-    text-decoration:underline
-}
+    &:hover .tit{
+        text-decoration:underline
+    }
+    
+    .wrapImg{
+        display: block;
+        position: relative;
 
-a.link .wrapImg{
-    display: block;
-    position: relative;
-}
+        &:after{
+            content:'';
+            display: block;
+            position: absolute;
+            top:0;
+            left:0;
+            width:100%;
+            height:100%;
+            background-color:rgba(0, 0, 0, 0.25);
+            border-radius: 5px;
+        }
 
-a.link .wrapImg:after{
-    content:'';
-    display: block;
-    position: absolute;
-    top:0;
-    left:0;
-    width:100%;
-    height:100%;
-    background-color:rgba(0, 0, 0, 0.25);
-    border-radius: 5px;
-}
+        img{
+            width:100%;
+            height:100%;
+            border-radius: 5px;
+        }
 
-a.link .wrapImg img{
-    width:100%;
-    height:100%;
-    border-radius: 5px;
-}
+        .playTime{
+            z-index: 10;
+            position: absolute;
+            bottom:10px;
+            right:10px;
+            display: inline-block;
+            padding:3px;
+            color:$white-color;
+            font-size:11px;
+            background:rgba(0, 0, 0, 0.6);
+            border-radius:3px;
+        }
+    }
+    
+    .tit{
+        margin-top:5px;
+        color:#000;
+        font-size:14px;
+        font-weight:bold;
+        @include txt_ellipse(18px, 2);
+    }
 
-a.link .wrapImg .playTime{
-    z-index: 10;
-    position: absolute;
-    bottom:10px;
-    right:10px;
-    display: inline-block;
-    padding:3px;
-    color:#fff;
-    font-size:11px;
-    background:rgba(0, 0, 0, 0.6);
-    border-radius:3px;
-}
+    .channelTit{
+        margin-top:5px;
+        padding-right:20px;
+        color:#848c9c;
+        font-size:12px;
+        @include txt_ellipse(18px, 1);
+    }
 
-a.link .tit{
-    margin-top:5px;
-    line-height:18px;
-    color:#000;
-    font-size:14px;
-    font-weight:bold;
-    max-height:36px;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    display: -webkit-box;
-    -webkit-line-clamp:2;
-    -webkit-box-orient: vertical;
-    word-wrap:break-word; 
-}
+    .info{
+        margin-top:5px;
+        padding-right:20px;
+        color:#848c9c;
+        font-size:12px;
+        @include txt_ellipse(12px, 1);
 
-a.link .channelTit{
-    line-height:18px;
-    margin-top:5px;
-    padding-right:20px;
-    color:#848c9c;
-    font-size:12px;
-    height:18px;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    display: -webkit-box;
-    -webkit-line-clamp:1;
-    -webkit-box-orient: vertical;
-    word-wrap:break-word; 
-}
+        .date{
+            position: relative;
+            margin-left:6px;
+            padding-left:10px;
 
-a.link .info{
-    line-height:12px;
-    margin-top:5px;
-    padding-right:20px;
-    color:#848c9c;
-    font-size:12px;
-    height:12px;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    display: -webkit-box;
-    -webkit-line-clamp:1;
-    -webkit-box-orient: vertical;
-    word-wrap:break-word; 
-}
+            &:before{
+                content: '';
+                display: block;
+                position: absolute;
+                top:4px;
+                left:0;
+                width:1px;
+                height:11px;
+                background-color:#848c9c;
+            }
+        }
+    }
 
-a.link .info .viewCount i{
-    position: relative;
-    top:-1px;
-    font-size:10px;
-}
-
-a.link .info .date{
-    position: relative;
-    margin-left:6px;
-    padding-left:10px;
-}
-
-a.link .info .date::before{
-    content: '';
-    display: block;
-    position: absolute;
-    top:4px;
-    left:0;
-    width:1px;
-    height:11px;
-    background-color:#848c9c;
+    .viewCount{
+        i{
+            position: relative;
+            top:-1px;
+            font-size:10px;
+        }
+    }
 }
 </style>

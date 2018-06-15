@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="content">
         <h2 ><strong>{{title}}</strong> {{orderText}} 동영상</h2>
         <ul class="list">
             <li v-for="(item, index) in contents" v-bind:key="index">
@@ -17,6 +17,7 @@ import VideoItem from '../CommonComp/videoItem.vue'
 
 var YOUTUBE_API = "AIzaSyBQ1G-JhjIMd0bGr9IeF49NKeQ29roBttY";
 var video_url = "https://www.googleapis.com/youtube/v3/videos";
+var search_url = "https://www.googleapis.com/youtube/v3/search";
 
 export default {
     mixins: [loadData],
@@ -172,52 +173,58 @@ export default {
 }
 </script>
 
-<style scoped>
-h2{
-    margin-bottom:20px;
-}
+<style lang="scss" scoped>
+@import "../../styles/variables";
+@import "../../styles/mixin";
+@import "../../styles/extend";
 
-h2 strong{
-    color:#2282f2;
-    font-weight: bold;    
-    font-size:24px;
-}
+.content{
+    h2{
+        margin-bottom:20px;
 
-.list:after{
-    content:'';
-    display:block;
-    clear: both;
-}
+        strong{
+            color:#2282f2;
+            font-weight: bold;    
+            font-size:24px;
+        }
+    }
 
-.list li{
-    float:left;
-    margin:0 5px 20px 0;
-    width:198px;
-    height:200px;
-}
+    .list{
+        &:after{
+            @extend .clear;
+        }
 
-.list li:first-child{
-    margin-left:0;
-}
+        li{
+            float:left;
+            margin:0 5px 20px 0;
+            width:198px;
+            height:200px;
 
-.btnMore{
-    text-align: center;
-    text-decoration: none;
-    display: block;
-    margin-top:40px;
-    padding:15px;
-    font-size:20px;
-    color:#fff;
-    font-weight:bold;
-    background-color:#2282f2;
-}
+            &:first-child{
+                margin-left:0;
+            }
+        }
+    }
 
-.btnGotoTop{
-    position: fixed;
-    bottom:100px;
-    right:100px;
-    font-size:40px;
-    color:#666;
-    cursor: pointer;
+    .btnMore{
+        text-align: center;
+        text-decoration: none;
+        display: block;
+        margin-top:40px;
+        padding:15px;
+        font-size:20px;
+        color:#fff;
+        font-weight:bold;
+        background-color:#2282f2;
+    }
+
+    .btnGotoTop{
+        position: fixed;
+        bottom:100px;
+        right:100px;
+        font-size:40px;
+        color:#666;
+        cursor: pointer;
+    }
 }
 </style>

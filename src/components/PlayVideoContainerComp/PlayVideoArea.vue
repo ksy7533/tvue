@@ -42,26 +42,31 @@ export default {
 
 </script>
 
-<style scoped>
-.btnGotoTop{
-    position: fixed;
-    bottom:100px;
-    right:100px;
-    font-size:40px;
-    color:#666;
-    cursor: pointer;
-}
+<style lang="scss" scoped>
+@import "../../styles/variables";
+@import "../../styles/mixin";
+@import "../../styles/extend";
 
-h2{
-    margin-bottom:20px;
-    font-weight: normal;
-    font-size: 14px;
-}
+.content{
+    h2{
+        margin-bottom:20px;
+        font-weight: normal;
+        font-size: 14px;
 
-h2 strong{
-    color:#2282f2;
-    font-weight: bold;
-    font-size: 20px;
+        strong{
+            color:#2282f2;
+            font-weight: bold;
+            font-size: 20px;
+        }
+    }
+
+    .btnGotoTop{
+        position: fixed;
+        bottom:100px;
+        right:100px;
+        font-size:40px;
+        color:#666;
+        cursor: pointer;
+    }
 }
 </style>
-

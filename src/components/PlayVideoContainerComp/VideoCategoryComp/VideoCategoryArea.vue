@@ -1,7 +1,7 @@
 <template>
     <section class="areaVideoCategory">
         <CategoryList v-for="(item, index) in arrCategory" v-bind:key="index" v-bind:categoryObj="item"></CategoryList>
-        <a href="#n" class="btnMore" v-if="isNextPage" v-on:click.prevent="addListData()">채널 더보기</a>
+        <a href="#n" class="btnMore" v-if="isNextPage" v-on:click.prevent="addListData()">재생목록 더보기</a>
     </section>
 </template>
 
@@ -74,20 +74,24 @@ export default {
 }
 </script>
 
-<style scoped>
-.areaVideoCategory{
-    margin-top:30px
-}
+<style lang="scss" scoped>
+@import "../../../styles/variables";
+@import "../../../styles/mixin";
+@import "../../../styles/extend";
 
-.btnMore{
-    text-align: center;
-    text-decoration: none;
-    display: block;
-    margin-top:40px;
-    padding:15px;
-    font-size:20px;
-    color:#fff;
-    font-weight:bold;
-    background-color:#2282f2;
+.areaVideoCategory{
+    margin-top:30px;
+
+    .btnMore{
+        text-align: center;
+        text-decoration: none;
+        display: block;
+        margin-top:40px;
+        padding:15px;
+        font-size:20px;
+        color:#fff;
+        font-weight:bold;
+        background-color:#2282f2;
+    }
 }
 </style>

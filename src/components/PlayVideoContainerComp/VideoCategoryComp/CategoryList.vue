@@ -105,45 +105,47 @@ export default {
 }
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
+@import "../../../styles/variables";
+@import "../../../styles/mixin";
+@import "../../../styles/extend";
+
 .categoryList{
     margin-top:20px;
-    border-bottom:1px solid #d9d9d9
-}
+    border-bottom:1px solid #d9d9d9;
 
-.categoryList h3{
-    margin-bottom:20px;
-    font-size:18px;
-    font-weight:bold;
-}
+    h3{
+        margin-bottom:20px;
+        font-size:18px;
+        font-weight:bold;
+    }
 
-.categoryList .list{
-    padding-bottom:20px;
-}
+    .list{
+        padding-bottom:20px;
 
-.categoryList .list:after{
-    content: '';
-    display: block;
-    clear:both;
-}
+        &:after{
+            @extend .clear;
+        }
 
-.categoryList .list li{
-    float:left;
-    margin:0 10px 20px 0;
-    width:200px;
-    height:200px;
-}
+        li{
+            float:left;
+            margin:0 10px 20px 0;
+            width:200px;
+            height:200px;
+        }
+    }
 
-.btnMore{
-    text-align: center;
-    display: block;
-    padding:15px;
-    font-size:20px;
-    color:#999;
-    font-weight:normal;
-}
+    .btnMore{
+        text-align: center;
+        display: block;
+        padding:15px;
+        font-size:20px;
+        color:#999;
+        font-weight:normal;
 
-.btnMore:hover{
-    color:#2282f2
+        &:hover{
+            color:#2282f2;
+        }
+    }
 }
 </style>

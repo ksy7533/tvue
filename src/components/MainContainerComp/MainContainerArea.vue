@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="content">
         <MainHotArea></MainHotArea>
         <HotListArea></HotListArea>
         <ChannelListArea></ChannelListArea>

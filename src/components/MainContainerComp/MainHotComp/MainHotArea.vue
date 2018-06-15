@@ -174,228 +174,251 @@ export default {
 }
 </script>
 
-<style scoped>
-.link{
-    cursor: pointer;
-}
+<style lang="scss" scoped>
+@import "../../../styles/variables";
+@import "../../../styles/mixin";
+@import "../../../styles/extend";
 
 .mainHot{
     margin-bottom:40px;
     width:1260px;
     height:500px;
     background-color:#2b2b2b;
-}
 
-.mainHot:after{
-    content: '';
-    display: block;
-    clear:both;
-}
+    &:after{
+        @extend .clear;
+    }
 
-.mainHot .col{
-    float:left;
-}
+    .col{
+        float:left;
 
-.mainHot .col.type_01{
-    width:520px;
-}
+        .item{
+             &.type_01{
+                 .info {
+                    .titChannel{
+                        margin-bottom:10px;
+                        color:#fff;
+                        font-size:14px;
+                    }
 
-.mainHot .col.type_02{
-    width:520px;
-}
+                    .tit{
+                        color:#fff;
+                        font-size:20px;
+                        font-weight:bold;
+                        @include txt_ellipse(24px, 2);
+                    }
 
-.mainHot .col.type_03{
-    width:220px;
-}
+                    .count{
+                        margin-top:10px;
+                        color:#fff;
+                        font-size:14px;
+                    }
+                }
+             }
+        }
 
-.mainHot .item{
-    position: relative;
-    box-sizing: border-box;
-    border:1px solid #000;
-}
+        &.type_01{
+            width:520px;
 
-.mainHot .item.type_01:after{
-    content: '';
-    display: block;
-    position: absolute;
-    top:0;
-    left:0;
-    width:100%;
-    height:100%;
-    background: url('../../../assets/images/bg_tile_mask.png') no-repeat 0 0;
-}
+            .item{
+                &.type_01{
+                    width:520px;
+                    height:300px;
 
-.mainHot .item.type_02 .wrapImg:after{
-    content: '';
-    display: block;
-    position: absolute;
-    top:0;
-    left:0;
-    width:100%;
-    height:100%;
-    background: url('../../../assets/images/bg_tile_mask.png') no-repeat 0 0;
-}
+                    .info{
+                        z-index: 100;
+                        position: absolute;
+                        bottom:0;
+                        left:0;
+                        box-sizing: border-box;
+                        padding:20px;
+                        width:100%;
 
-.mainHot .item .wrapImg{
-    width:100%;
-    height:100%;
-}
+                        &:after{
+                            content: '';
+                            display: block;
+                            position: absolute;
+                            top:0;
+                            left:0;
+                            width:100%;
+                            height:100%;
+                            background: url('../../../assets/images/bg_tile_large.png') repeat-x 0 0;
+                        }
 
-.mainHot .item .wrapImg img{
-    width:100%;
-    height:100%;
-}
+                        .wrapInfo{
+                            z-index: 50;
+                            position: relative;
+                        }
 
-.mainHot .col.type_01 .item.type_01 .info, .mainHot .col.type_02 .item.type_01 .info{
-    z-index: 100;
-    position: absolute;
-    bottom:0;
-    left:0;
-    box-sizing: border-box;
-    padding:20px;
-    width:100%;
-    height:140px;
-}
+                        .info{
+                            .wrapInfo{
+                                .titChannel{
+                                    margin-bottom:10px;
+                                    color:#fff;
+                                    font-size:14px;
+                                }
+                            }
 
-.mainHot .col.type_01 .item.type_01 .info .wrapInfo, .mainHot .col.type_02 .item.type_01 .info .wrapInfo{
-    z-index: 50;
-    position: relative;
-}
+                            .tit{
+                                color:#fff;
+                                font-size:20px;
+                                font-weight:bold;
+                                @include txt_ellipse(24px, 2);
+                            }
+                        }
+                    }
+                }
 
-.mainHot .col.type_01 .item.type_01 .info:after, .mainHot .col.type_02 .item.type_01 .info:after{
-    content: '';
-    display: block;
-    position: absolute;
-    top:0;
-    left:0;
-    width:100%;
-    height:100%;
-    background: url('../../../assets/images/bg_tile_large.png') repeat-x 0 0;
-}
+                &.type_02{
+                    .wrapImg{
+                        float:left;
+                        position: relative;
+                        width:180px;
+                        height:98px;
+                    }
 
-.mainHot .item.type_01 .info .titChannel{
-    margin-bottom:10px;
-    color:#fff;
-    font-size:14px;
-}
+                    .info{
+                        float:left;
+                        box-sizing: border-box;
+                        padding:20px;
+                        width:338px;
+                        height:100px;
 
-.mainHot .item.type_01 .info .tit{
-    color:#fff;
-    line-height:24px;
-    font-size:20px;
-    font-weight:bold;
-    max-height:48px;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    display: -webkit-box;
-    -webkit-line-clamp:2;
-    -webkit-box-orient: vertical;
-    word-wrap:break-word; 
-}
+                        .tit{
+                            color:#fff;
+                            font-size:16px;
+                            font-weight:bold;
+                            @include txt_ellipse(20px, 2);
+                            
+                        }
 
-.mainHot .item.type_01 .info .count{
-    margin-top:10px;
-    color:#fff;
-    font-size:14px;
-}
+                        .titChannel{
+                            margin-bottom:5px;
+                            color:#2282f2;
+                            font-size:12px;
+                        }
+                    }
+                }
+            }
+        }
 
-.mainHot .col.type_01 .item.type_01{
-    width:520px;
-    height:300px;
-}
+        &.type_02{
+            width:520px;
 
-.mainHot .col.type_01 .item.type_02{
-    width:520px;
-    height:100px;
-}
+            .item{
+                width:520px;
+                height:100px;
 
-.mainHot .col.type_01 .item.type_02:after{
-    content: '';
-    display: block;
-    clear:both;
-}
+                &:after{
+                    @extend .clear;
+                }
 
-.mainHot .col.type_01 .item.type_02 .info{
-    float:left;
-    box-sizing: border-box;
-    padding:20px;
-    width:338px;
-    height:100px;
-}
+                &.type_01{
+                    width:520px;
+                    height:250px;
 
-.mainHot .col.type_01 .item.type_02 .info .tit{
-    color:#fff;
-    line-height:20px;
-    font-size:16px;
-    font-weight:bold;
-    max-height:40px;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    display: -webkit-box;
-    -webkit-line-clamp:2;
-    -webkit-box-orient: vertical;
-    word-wrap:break-word; 
-}
+                    .info{
+                        z-index: 100;
+                        position: absolute;
+                        bottom:0;
+                        left:0;
+                        box-sizing: border-box;
+                        padding:20px;
+                        width:100%;
 
-.mainHot .col.type_01 .item.type_02 .info .titChannel{
-    margin-bottom:5px;
-    color:#2282f2;
-    font-size:12px;
-}
+                        &:after{
+                            content: '';
+                            display: block;
+                            position: absolute;
+                            top:0;
+                            left:0;
+                            width:100%;
+                            height:100%;
+                            background: url('../../../assets/images/bg_tile_large.png') repeat-x 0 0;
+                        }
 
-.mainHot .col.type_01 .item.type_02 .wrapImg{
-    float:left;
-    position: relative;
-    width:180px;
-    height:98px;
-}
+                        .wrapInfo{
+                            z-index: 50;
+                            position: relative;
+                        }
+                    }
+                }
+            }
+        }
 
+        &.type_03{
+            width:220px;
 
-.mainHot .col.type_03 .item.type_01 .info .titChannel{
-    margin-bottom:5px;
-    font-size:12px;
-}
+            .item{
+                &.type_01{
+                    width:220px;
+                    height:100px;
 
-.mainHot .col.type_03 .item.type_01 .info .tit{
-    font-size:14px;
-}
+                    .info{
+                        position: absolute;
+                        bottom:0;
+                        left:0;
+                        width:100%;
+                        height:55px;    
 
-.mainHot .col.type_02 .item.type_01{
-    width:520px;
-    height:250px;
-}
+                        .titChannel{
+                            margin-bottom:5px;
+                            font-size:12px;
+                        }
 
-.mainHot .col.type_03 .item.type_01{
-    width:220px;
-    height:100px;
-}
+                        .tit{
+                            font-size:14px;
+                        }
 
-.mainHot .col.type_03 .item.type_01 .info{
-    position: absolute;
-    bottom:0;
-    left:0;
-    width:100%;
-    height:55px;    
-}
+                        .wrapInfo{
+                            z-index: 50;
+                            position: relative;
+                            padding:10px;
 
-.mainHot .col.type_03 .item.type_01 .info .wrapInfo{
-    z-index: 50;
-    position: relative;
-    padding:10px;
-}
+                            .tit{
+                                color:#fff;
+                                font-size:16px;
+                                font-weight:bold;
+                                @include txt_ellipse(20px, 1);
+                            }
+                        }
+                    }
+                }
+            }
+        }
 
-.mainHot .col.type_03 .item.type_01 .info .wrapInfo .tit{
-    color:#fff;
-    line-height:20px;
-    font-size:16px;
-    font-weight:bold;
-    max-height:20px;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    display: -webkit-box;
-    -webkit-line-clamp:1;
-    -webkit-box-orient: vertical;
-    word-wrap:break-word; 
+        .link{
+            cursor: pointer;
+
+            .item{
+                position: relative;
+                box-sizing: border-box;
+                border:1px solid #000;
+                
+                .wrapImg{
+                    &:after{
+                        content: '';
+                        display: block;
+                        position: absolute;
+                        top:0;
+                        left:0;
+                        width:100%;
+                        height:100%;
+                        background: url('../../../assets/images/bg_tile_mask.png') no-repeat 0 0;
+                    }
+                }
+                
+                .wrapImg{
+                    width:100%;
+                    height:100%;
+
+                    img{
+                        width:100%;
+                        height:100%;
+                    }
+                }
+            }
+        }
+    }
 }
 </style>
-
