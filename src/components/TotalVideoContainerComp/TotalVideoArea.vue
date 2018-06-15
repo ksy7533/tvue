@@ -1,5 +1,5 @@
 <template>
-    <div class="content">
+    <div class="content" v-if="!loading">
         <h2 ><strong>{{title}}</strong> {{orderText}} 동영상</h2>
         <ul class="list">
             <li v-for="(item, index) in contents" v-bind:key="index">
@@ -8,6 +8,9 @@
         </ul>
         <a href="#n" class="btnMore" v-if="isNextPage" v-on:click.prevent="addListData()">비디오 더보기</a>
         <a href="#top" class="btnGotoTop"><i class="far fa-arrow-alt-circle-up"></i></a>
+    </div>
+    <div class="content" v-else>
+        <i class="fas fa-spinner"></i>
     </div>
 </template>
 
@@ -72,7 +75,8 @@ export default {
             isNextPage : false,
             tokenNextPage : '',
             title : '',
-            orderText : '인기'
+            orderText : '인기',
+            loading : true
         }
     },
 
