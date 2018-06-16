@@ -54,6 +54,6 @@ header{
 }
 
 header.fixed{
-    box-shadow: 0px 5px 5px 0px rgba(217,217,217,1);
+    box-shadow: 0px 2px 2px 0px rgba(217,217,217,1);
 }
 </style>
