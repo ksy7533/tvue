@@ -1,7 +1,6 @@
 <template>
-    <div>
+    <div class="totalContent" v-if="!loading">
         <h2 ><strong>{{title}}</strong> {{orderText}} 동영상</h2>
-
         <ul class="list">
             <li v-for="(item, index) in contents" v-bind:key="index">
                 <VideoItem v-bind:itemData="item"></VideoItem>
@@ -9,6 +8,9 @@
         </ul>
         <a href="#n" class="btnMore" v-if="isNextPage" v-on:click.prevent="addListData()">비디오 더보기</a>
         <a href="#top" class="btnGotoTop"><i class="far fa-arrow-alt-circle-up"></i></a>
+    </div>
+    <div class="totalContent loading" v-else>
+        <i class="fas fa-spinner"></i>
     </div>
 </template>
 
@@ -25,13 +27,8 @@ export default {
 
     mounted(){
         /* 최신 인기동영상 채널 클릭 */
-
-        console.log(this.$route.params.channelId)
-
         if(this.$route.params.channelId){
             const gnb_list = this.$store.state.gnb;
-
-            console.log('cf')
 
             gnb_list.forEach((item) => {
                 if((item.id) === this.$route.params.channelId.toString()){
@@ -52,8 +49,6 @@ export default {
 
         /* 유저 선택 쿼리 */
         else if(this.$route.params.query){
-            console.log('유저')
-
             this.title = this.$route.params.query;
 
             if(this.$route.params.order === 'viewCount'){
@@ -80,7 +75,8 @@ export default {
             isNextPage : false,
             tokenNextPage : '',
             title : '',
-            orderText : '인기'
+            orderText : '인기',
+            loading : true
         }
     },
 
@@ -115,6 +111,8 @@ export default {
             this.$axios.get(url, {
                 params
             }).then((response) => {
+                this.loading = false;
+
                 if(response.data.nextPageToken){
                     this.isNextPage = true;
                     this.tokenNextPage = response.data.nextPageToken;
@@ -134,6 +132,8 @@ export default {
             this.$axios.get(url, {
                 params
             }).then((response) => {
+                this.loading = false;
+
                 if(response.data.nextPageToken){
                     this.isNextPage = true;
                     this.tokenNextPage = response.data.nextPageToken;
@@ -181,52 +181,69 @@ export default {
 }
 </script>
 
-<style scoped>
-h2{
-    margin-bottom:20px;
-}
+<style lang="scss" scoped>
+@import "../../styles/variables";
+@import "../../styles/mixin";
+@import "../../styles/extend";
 
-h2 strong{
-    color:#2282f2;
-    font-weight: bold;    
-    font-size:24px;
-}
+.totalContent{
+    h2{
+        margin-bottom:20px;
 
-.list:after{
-    content:'';
-    display:block;
-    clear: both;
-}
+        strong{
+            color:#2282f2;
+            font-weight: bold;    
+            font-size:24px;
+        }
+    }
 
-.list li{
-    float:left;
-    margin:0 5px 20px 0;
-    width:198px;
-    height:200px;
-}
+    .list{
+        &:after{
+            @extend .clear;
+        }
 
-.list li:first-child{
-    margin-left:0;
-}
+        li{
+            float:left;
+            margin:0 5px 20px 0;
+            width:198px;
+            height:200px;
 
-.btnMore{
-    text-align: center;
-    text-decoration: none;
-    display: block;
-    margin-top:40px;
-    padding:15px;
-    font-size:20px;
-    color:#fff;
-    font-weight:bold;
-    background-color:#2282f2;
-}
+            &:first-child{
+                margin-left:0;
+            }
+        }
+    }
 
-.btnGotoTop{
-    position: fixed;
-    bottom:100px;
-    right:100px;
-    font-size:40px;
-    color:#666;
-    cursor: pointer;
+    .btnMore{
+        text-align: center;
+        text-decoration: none;
+        display: block;
+        margin-top:40px;
+        padding:15px;
+        font-size:20px;
+        color:#fff;
+        font-weight:bold;
+        background-color:#2282f2;
+    }
+
+    .btnGotoTop{
+        position: fixed;
+        bottom:100px;
+        right:100px;
+        font-size:40px;
+        color:#666;
+        cursor: pointer;
+    }
+
+    &.loading{
+        text-align: center;
+        padding-top:300px;
+        .fa-spinner{
+            color:$blue-color;
+            font-size:50px;
+            animation: a 2s infinite linear;
+        }
+    }
+
 }
 </style>

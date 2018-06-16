@@ -23,11 +23,6 @@ export default {
         }
     },
 
-    // watch:{
-    //     currentGnbId(value) {
-    //     }
-    // },
-
     methods : {
         changeClassOn : function(itemId){
             if(itemId === this.$store.state.currentGnbId.toString()){
@@ -47,54 +42,58 @@ export default {
 }
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
+@import "../../styles/variables";
+@import "../../styles/mixin";
+@import "../../styles/extend";
+
 .wrapGnb{
     box-shadow:0 1px 0 0 #D7DBE0;
     background-color:#fff;
-}
 
-.gnb{
-    margin:0 auto;
-    width:1260px;
-}
+    .gnb{
+        margin:0 auto;
+        width:1260px;
 
-.gnb:after{
-    content: '';
-    display: block;
-    clear:both;
-}
+        &:after{
+            @extend .clear;
+        }
 
-.gnb li{
-    float:left;
-    position: relative;
-    margin-left:10px;
-}
+        li{
+            float:left;
+            position: relative;
+            margin-left:10px;
 
-.gnb li:first-child{
-    margin-left:0;
-}
+            &:first-child{
+                margin-left:0; 
+            }
 
-.gnb li.on:after{
-    content:'';
-    display:block;
-    position: absolute;
-    bottom:0;
-    left:0;
-    width:100%;
-    height:2px;
-    background-color:#f7d715;
-}
+            &.on{
+                a{
+                    color:#000;
+                }
 
-.gnb li a{
-    display: block;
-    padding:15px 20px;
-    color:#6c7280;
-    font-size:13px;
-    font-weight:600;
-    text-decoration:none
-}
+                &:after{
+                    content:'';
+                    display:block;
+                    position: absolute;
+                    bottom:0;
+                    left:0;
+                    width:100%;
+                    height:2px;
+                    background-color:#f7d715;
+                }
+            }
 
-.gnb li.on a{
-    color:#000;
+            a{
+                display: block;
+                padding:15px 20px;
+                color:#6c7280;
+                font-size:13px;
+                font-weight:600;
+                text-decoration:none
+            }
+        }
+    }
 }
 </style>

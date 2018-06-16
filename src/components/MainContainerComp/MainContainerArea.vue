@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="mainContent">
         <MainHotArea></MainHotArea>
         <HotListArea></HotListArea>
         <ChannelListArea></ChannelListArea>
@@ -18,7 +18,6 @@ export default {
 
     components : {
         MainHotArea,
-
         HotListArea,
         ChannelListArea
     },

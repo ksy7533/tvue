@@ -27,13 +27,6 @@ export default [{
         component: TotalVideoArea
     },
 
-
-    // {
-    //     path: '/totalVideo/:channelId?/:query?/:order?',
-    //     name: 'totalVideo',
-    //     component: TotalVideoArea
-    // },
-
     {
         path: '*',
         redirect: '/main'

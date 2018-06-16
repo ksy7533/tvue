@@ -88,51 +88,56 @@ export default {
 }
 </script>
 
-<style scoped>
-h2{
-    margin-bottom:20px;
-    font-size:18px;
-    font-weight:600
-}
+<style lang="scss" scoped>
+@import "../../../styles/variables";
+@import "../../../styles/mixin";
+@import "../../../styles/extend";
 
 .listHot{
     position: relative;
     padding:20px;
     border-top:1px solid #d9d9d9;
-}
 
-.listHot:first-child{
-    border-top:none;
-}
+    &:first-child{
+        border-top:none;    
+    }
 
-.list:after{
-    content:'';
-    display:block;
-    clear: both;
-}
+    h2{
+        margin-bottom:10px;
+        font-size:20px;
+        font-weight:bold;
+    }
 
-.list li{
-    float:left;
-    margin-left:5px;
-    width:198px;
-    height:200px;
-}
+    .list{
+        &:after{
+            @extend .clear;
+        }
 
-.list li:first-child{
-    margin-left:0;
-}
+        li{
+            float:left;
+            margin-left:10px;
+            width:194px;
+            height:200px;
 
-.btnMore{
-    text-decoration: none;
-    position: absolute;
-    top:25px;
-    right:25px;
-    color:#999;
-    font-size:12px;
-}
+            &:first-child{
+                margin-left:0;
+            }
+        }
+    }
 
-.btnMore:hover{
-    text-decoration: underline;
+    .btnMore{
+        text-decoration: none;
+        position: absolute;
+        top:25px;
+        right:25px;
+        color:#999;
+        font-size:12px;
+
+        &:hover{
+            text-decoration: underline;
+        }
+    }
+
 }
 
 /* .swiper-container{

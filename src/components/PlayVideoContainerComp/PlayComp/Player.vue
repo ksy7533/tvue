@@ -23,7 +23,11 @@ export default {
 }
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
+@import "../../../styles/variables";
+@import "../../../styles/mixin";
+@import "../../../styles/extend";
+
 .player{
     float:left;
     width:720px;

@@ -6,12 +6,6 @@ var video_url = "https://www.googleapis.com/youtube/v3/videos";
 var search_url = "https://www.googleapis.com/youtube/v3/search";
 
 export const loadData = {
-    data() {
-        return {
-
-        }
-    },
-
     methods: {
         getData: function(url, params, arrData) {
             this.$axios.get(url, {
@@ -68,18 +62,8 @@ export const loadData = {
             });
         },
 
-        changeContainer: function(obj) {
-            this.$router.push({ name: 'playVideo', params: { videoId: obj.videoId, channelId: obj.channelId } });
-            this.$store.commit('changeContainer', {
-                currentVideoTitle: obj.title,
-                currentChannelTitle: obj.channelTitle,
-                currentDate: obj.date,
-                currentDescription: obj.description,
-                currentViewCount: obj.viewCount,
-                currentCommentCount: obj.commentCount,
-                currentLikeCount: obj.likeCount,
-                currentDislikeCount: obj.dislikeCount
-            });
+        goPage: function(itemData) {
+            this.$router.push({ name: 'playVideo', params: { videoId: itemData.id, channelId: itemData.channelId } });
         }
     }
 }

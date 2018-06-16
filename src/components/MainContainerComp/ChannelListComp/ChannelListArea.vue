@@ -109,15 +109,19 @@ export default {
 }
 </script>
 
-<style scopped>
+<style lang="scss" scoped>
+@import "../../../styles/variables";
+@import "../../../styles/mixin";
+@import "../../../styles/extend";
+
 .areaChannel{
     margin-top:20px;
     padding:20px 0;
     border:1px solid #ccc;
-    border-radius:5px
-}
+    border-radius:5px;
 
-.channelName{
-    cursor: pointer;
+    .channelName{
+        cursor: pointer;    
+    }
 }
 </style>

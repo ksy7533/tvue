@@ -1,0 +1,10 @@
+@mixin txt_ellipse($line_height, $line_number) {
+    max-height: $line_height*2;
+    line-height: $line_height;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: $line_number;
+    -webkit-box-orient: vertical;
+    word-wrap: break-word;
+}

@@ -42,7 +42,11 @@ export default {
 }
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
+@import "../../styles/variables";
+@import "../../styles/mixin";
+@import "../../styles/extend";
+
 header{
     z-index:1000;
     position: fixed;
@@ -51,9 +55,9 @@ header{
     width:100%;
     background-color:#fff;
     transition: box-shadow 0.2s;
-}
 
-header.fixed{
-    box-shadow: 0px 2px 2px 0px rgba(217,217,217,1);
+    &.fixed{
+        box-shadow: 0px 5px 5px 0px rgba(217,217,217,1);
+    }
 }
 </style>

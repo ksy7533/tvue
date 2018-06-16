@@ -2,7 +2,9 @@
   <div id="app" class="wrap">
     <HeaderArea></HeaderArea>
     <div class="container">
-      <router-view :key="$route.path"></router-view>
+      <div class="content">
+        <router-view :key="$route.path"></router-view>
+      </div>
     </div>
     <FooterArea></FooterArea>
   </div>
@@ -30,22 +32,22 @@ export default {
 <style scoped>
 @import url(//fonts.googleapis.com/earlyaccess/notosanskr.css);
 
-body, html{
+.wrap{
   width:100%;
   height:100%;
-  line-height:1;
-  font-size:12px;
+  line-height: 1;
+  font-size: 12px;
   font-family: 'Noto Sans KR', sans-serif;
 }
 
-.wrap{
-  width:100%;
-  height:100%
+.container{
+  min-height:100%;
+  margin:0 0 -113px 0; 
 }
 
-.container{
-  margin:92px auto 0;
-  padding-top:30px;
+.content{
+  margin:0 auto;
+  padding:121px 0 183px 0;
   width:1260px;
 }
 </style>

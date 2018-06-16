@@ -24,79 +24,80 @@ export default {
 }
 </script>
 
-<style>
+<style lang="scss" scoped>
+@import "../../../styles/variables";
+@import "../../../styles/mixin";
+@import "../../../styles/extend";
+
 .listChannel{
     padding:20px;
     border-top:1px solid #d9d9d9;
-}
 
-.listChannel:first-child{
-    padding-top:0;
-    border-top:none
-}
+    &:first-child{
+        padding-top:0;
+        border-top:none;
+    }
 
-.listChannel:after{
-    content:'';
-    display:block;
-    clear:both
-}
+    &:after{
+        @extend .clear;
+    }
 
-.listChannel .channelName{
-    text-decoration:none;
-    float:left;
-    box-sizing:border-box;
-    padding:20px;
-    width:185px;
-    height:200px;
-    border-radius:5px;
-}
+    .channelName{
+        text-decoration:none;
+        float:left;
+        box-sizing:border-box;
+        padding:20px;
+        width:185px;
+        height:200px;
+        border-radius:5px;
 
-.listChannel .channelName.type01{
-    background-color:#22B478;
-}
+        &.type01{
+            background-color:#22B478;        
+        }
 
-.listChannel .channelName.type02{
-    background-color:#D8186B;
-}
+        &.type02{
+            background-color:#D8186B;
+        }
 
-.listChannel .channelName.type03{
-    background-color:#EEA802;
-}
+        &.type03{
+            background-color:#EEA802;
+        }
 
-.listChannel .channelName.type04{
-    background-color:#1984CE;
-}
+        &.type04{
+            background-color:#1984CE;     
+        }
 
-.listChannel .channelName .name{
-    display:block;
-    color:#fff;
-    font-weight:bold;
-    font-size:22px
-}
+        .name{
+            display:block;
+            color:$white-color;
+            font-weight:bold;
+            font-size:22px
+        }
+        
+        .sub_name{
+            display:block;
+            margin-top:10px;
+            color:$white-color;
+            font-size:12px
+        }
+    }
 
-.listChannel .channelName .sub_name{
-    display:block;
-    margin-top:10px;
-    color:#fff;
-    font-size:12px
-}
+    .list{
+        float:left;
 
-.listChannel .list{
-    float:left;
-}
-.listChannel .list:after{
-    content:'';
-    display:block;
-    clear:both
-}
+        &:after{
+            @extend .clear;
+        }
 
-.listChannel .list li{
-    float:left;
-    margin-left:5px;
-    width:200px;
-}
+        li{
+            float:left;
+            margin-left:10px;
+            width:195px;
 
-.listChannel .list li:first-child{
-    margin-left:10px;
+            &:first-child{
+                margin-left:10px;
+            }
+        }
+    }
 }
 </style>
