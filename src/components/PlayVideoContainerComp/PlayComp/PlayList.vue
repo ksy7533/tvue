@@ -127,7 +127,6 @@ export default {
                     .tit{
                         display: block;
                         font-size:14px;
-                        font-weight:bold;
                         @include txt_ellipse(18px, 2);
                     }
 

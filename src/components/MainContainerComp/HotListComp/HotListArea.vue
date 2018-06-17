@@ -20,17 +20,20 @@ export default {
         return {
             gameVideo : {
                 q : '게임',
-                order : 'viewCount'
+                order : 'viewCount',
+                id : 'hotList_01'
             },
 
             foodVideo : {
                 q : '먹방',
-                order : 'date'
+                order : 'date',
+                id : 'hotList_02'
             },
 
             hotFoodVideo : {
                 q : '먹방',
-                order : 'viewCount'
+                order : 'viewCount',
+                id : 'hotList_03'
             }
         }
     },

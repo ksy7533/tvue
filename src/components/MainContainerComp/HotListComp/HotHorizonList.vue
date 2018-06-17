@@ -1,87 +1,79 @@
 <template>
-    <div class="listHot">
-        <slot name="title"></slot>
-        <!-- <swiper :options="swiperOption">
-            <swiper-slide v-for="(item, index) in arrData" v-bind:key="index">
-                <VideoItem v-bind:itemData="item"></VideoItem>
-            </swiper-slide>
-            <div class="swiper-button-prev" slot="button-prev"><i class="fas fa-angle-left"></i></div>
-            <div class="swiper-button-next" slot="button-next"><i class="fas fa-angle-right"></i></div>
-            <div class="swiper-pagination" slot="pagination"></div>
-        </swiper> -->
+    <div class="listHot" v-bind:id="contents.id">
+        <div>
+            <slot name="title"></slot>
+            <a href="#n" class="btnMore" v-on:click.prevent="goPage()">더보기</a>    
+        </div>
 
-        <ul class="list">
-            <li v-for="(item, index) in arrData" v-bind:key="index"><VideoItem v-bind:itemData="item"></VideoItem></li>
-        </ul>
+        <div class="wrapList">
+            <ul class="list" v-for="(item, index) in ulOfNum" v-bind:key="index">
+                <li v-for="(item, index) in arrData.slice((6 * index), (6 * (index + 1)))" v-bind:key="index"><VideoItem v-bind:itemData="item"></VideoItem></li>
+            </ul>
+        </div>
 
-        <a href="#n" class="btnMore" v-on:click.prevent="goPage()">더보기</a>    
+        <div class="pages">
+        </div>
+
+        <div class="arrows">
+        </div>
     </div>
 </template>
 
 <script>
-import 'swiper/dist/css/swiper.css'
-// import { swiper, swiperSlide } from 'vue-awesome-swiper'
 import { loadData } from '../../../mixins/loadData.js'
 import VideoItem from '../../CommonComp/videoItem.vue'
 
+import $ from 'jquery'
+import Zumslide from '../../../assets/js/zumSlide.js'
+
 var YOUTUBE_API = "AIzaSyBQ1G-JhjIMd0bGr9IeF49NKeQ29roBttY";
-// var video_url = "https://www.googleapis.com/youtube/v3/videos";
 var search_url = "https://www.googleapis.com/youtube/v3/search";
 
 export default {
     props : ['contents'],
     mixins: [loadData],
+
     mounted(){
+        $('#'+ this.contents.id + ' .wrapList').zumSlide({
+            appendArrows: $('#'+ this.contents.id +' .arrows'),
+            pageNum: true,
+            appendPageNum: $('#'+ this.contents.id +' .pages'),
+            infinite: true
+        });
+
         this.getSearchData(search_url, {
             key : YOUTUBE_API,
             regionCode : 'KR',
             part : 'snippet',
-            maxResults : '6',
+            maxResults : this.maxResults,
             type : 'video',
             order : this.contents.order,
             q : this.contents.q
         }, this.arrData);
     },
 
+
     data(){
         return {
-            // swiperOption: {
-            //     slidesPerView: 6,
-            //     slidesPerGroup: 6,
-            //     loopedSlides: 6,
-            //     loop: true,
-            //     speed: 500,
-            //     spaceBetween: 10,
-
-                
-            //     loopFillGroupWithBlank: true,
-            //     navigation: {
-            //         nextEl: '.swiper-button-next',
-            //         prevEl: '.swiper-button-prev'
-            //     },
-            //     pagination: {
-            //         el: '.swiper-pagination',
-            //         type: 'bullets'
-            //     },
-
-            //     preloadImages: false,
-            //     lazy: true
-            // },
-
+            ulOfNum : 3,
+            liOfNum : 6,
             arrData : []
+        }
+    },
+
+    computed : {
+        maxResults : function(){
+            return this.ulOfNum * this.liOfNum;
         }
     },
 
     methods : {
         goPage : function() {
-            // console.log(this.contents)
             this.$router.push({ name: 'totalVideoHot', params: { query : this.contents.q, order : this.contents.order } });
         }
     },
     
     components: {
-        // swiper,
-        // swiperSlide,
         VideoItem
     }
     
@@ -103,12 +95,14 @@ export default {
     }
 
     h2{
+        display: inline-block;
         margin-bottom:10px;
         font-size:20px;
         font-weight:bold;
     }
 
     .list{
+        display: none;
         &:after{
             @extend .clear;
         }
@@ -125,11 +119,23 @@ export default {
         }
     }
 
-    .btnMore{
-        text-decoration: none;
+    .pages{
         position: absolute;
         top:25px;
+        right:125px;
+    }
+    
+    .arrows{
+        position: absolute;
+        top:20px;
         right:25px;
+    }
+
+    .btnMore{
+        text-decoration: none;
+        // position: absolute;
+        // top:25px;
+        // left:25px;
         color:#999;
         font-size:12px;
 
@@ -137,51 +143,5 @@ export default {
             text-decoration: underline;
         }
     }
-
 }
-
-/* .swiper-container{
-    position: static;
-}
-
-.listHot:hover .swiper-button-prev, .listHot:hover .swiper-button-next{
-    display: block;
-    width:50px;
-    height:80px;
-    transition: all 0.2s;
-}
-
-.swiper-button-prev, .swiper-button-next{
-    z-index:100;
-    display: none;
-    top:115px;
-    text-align:center;
-    width:0px;
-    height:0px;
-    line-height:80px;
-    font-size:50px;
-    font-weight:normal;
-    background-color:#fff;
-    background-image: none;
-    border:1px solid #d9d9d9;
-    border-radius: 5px;
-    box-shadow: 0px 5px 10px 0px rgba(217,217,217,1);
-}
-
-.swiper-button-prev{
-    left:-20px;
-}
-
-.swiper-button-next{
-    right:-20px;
-}
-
-.swiper-pagination{
-    position: absolute;
-    top:20px;
-    left:auto;
-    right:10px;
-    width:100px;
-    height:20px;
-} */
 </style>
