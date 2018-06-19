@@ -24,12 +24,36 @@ const GNB_LIST = [{
 export const store = new Vuex.Store({
     state: {
         currentGnbId: 'main',
-        gnb: GNB_LIST
+        gnb: GNB_LIST,
+
+        customListData: [{
+                q: '배틀그라운드',
+                id: 'hotList_0'
+            },
+
+            {
+                q: '참치회',
+                id: 'hotList_1'
+            },
+
+            {
+                q: '성시경',
+                id: 'hotList_2'
+            }
+        ]
     },
 
     mutations: {
         setCurrentGnbId(state, payload) {
             state.currentGnbId = payload.currentGnbId;
+        },
+
+        addCustomListData(state, payload) {
+            state.customListData.push({
+                q: payload.query,
+                id: 'hotList_' + (state.customListData.length - 1)
+            })
         }
+
     }
 });
