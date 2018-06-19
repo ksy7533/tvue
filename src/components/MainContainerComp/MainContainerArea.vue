@@ -1,7 +1,9 @@
 <template>
     <div class="mainContent">
         <MainHotArea></MainHotArea>
+        <h2><i class="fas fa-align-justify"></i> 커스텀 리스트</h2>
         <HotListArea></HotListArea>
+        <h2><i class="fas fa-align-justify"></i> 채널 리스트</h2>
         <ChannelListArea></ChannelListArea>
     </div>
 </template>
@@ -31,3 +33,14 @@ export default {
     }
 }
 </script>
+
+<style lang="scss" scoped>
+@import "../../styles/variables";
+
+h2{
+    margin:30px 0 20px;
+    font-size:26px;
+    font-weight:bold;
+}
+</style>
+

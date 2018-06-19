@@ -19,8 +19,8 @@
             </a>
         </channelList>
         <channelList v-bind:contents="movieChannelContents">
-            <a slot="channelName" class="channelName type04" v-on:click="goPage(MOVIE_CHANNEL_ID)">
-                <span slot="title" class="name">영화</span>
+            <a slot="channelName" class="channelName type04" v-on:click="goPage(FET_CHANNEL_ID)">
+                <span slot="title" class="name">동물</span>
                 <span class="sub_name">최신 인기 동영상</span>
             </a>
         </channelList>
@@ -77,7 +77,7 @@ export default {
             chart : 'mostPopular',
             regionCode : 'kr',
             part : 'snippet,contentDetails,statistics',
-            videoCategoryId : this.MOVIE_CHANNEL_ID
+            videoCategoryId : this.FET_CHANNEL_ID
         },
             this.movieChannelContents
         )
@@ -90,10 +90,10 @@ export default {
             gameChannelContents : [],
             movieChannelContents : [],
 
-            COMEDY_CHANNEL_ID : 23,
+            COMEDY_CHANNEL_ID : 24,
             MUSIC_CHANNEL_ID : 10,
             GAME_CHANNEL_ID : 20,
-            MOVIE_CHANNEL_ID : 1
+            FET_CHANNEL_ID : 15
         }
     },
 
@@ -115,7 +115,6 @@ export default {
 @import "../../../styles/extend";
 
 .areaChannel{
-    margin-top:20px;
     padding:20px 0;
     border:1px solid #ccc;
     border-radius:5px;

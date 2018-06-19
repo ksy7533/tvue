@@ -1,22 +1,37 @@
 <template>
-    <div class="totalContent" v-if="!loading">
-        <h2 ><strong>{{title}}</strong> {{orderText}} 동영상</h2>
-        <ul class="list">
-            <li v-for="(item, index) in contents" v-bind:key="index">
-                <VideoItem v-bind:itemData="item"></VideoItem>
-            </li>
-        </ul>
-        <a href="#n" class="btnMore" v-if="isNextPage" v-on:click.prevent="addListData()">비디오 더보기</a>
-        <a href="#top" class="btnGotoTop"><i class="far fa-arrow-alt-circle-up"></i></a>
-    </div>
-    <div class="totalContent loading" v-else>
-        <i class="fas fa-spinner"></i>
+    <div class="totalContent">
+        <div class="areaTop">
+            <h2 >
+                <strong>{{title}}</strong>
+                <span v-if="this.$route.params.channelId">채널</span>
+                <span v-else-if="this.$route.params.query"> 관련동영상</span>
+            </h2>
+            <!-- <div class="rightBox">
+                <a href="#n" id="order_hot" v-on:click.prevent="sortList('viewcount')">조회순</a>
+                <a href="#n" id="order_date" v-on:click.prevent="sortList('date')">최신순</a>
+            </div> -->
+        </div>
+        <div class="" v-if="!loading">
+            <ul class="list">
+                <li v-for="(item, index) in contents" v-bind:key="index">
+                    <VideoItem v-bind:itemData="item"></VideoItem>
+                </li>
+            </ul>
+            <a href="#n" class="btnMore" v-if="isNextPage" v-on:click.prevent="addListData()">비디오 더보기</a>
+            <a href="#top" class="btnGotoTop"><i class="far fa-arrow-alt-circle-up"></i></a>
+        </div>
+        <div class="totalContent loading" v-else>
+            <i class="fas fa-spinner"></i>
+        </div>
     </div>
 </template>
 
 <script>
 import { loadData } from '../../mixins/loadData.js'
 import VideoItem from '../CommonComp/videoItem.vue'
+
+import ytDurationFormat from 'youtube-duration-format'
+import moment from 'moment';
 
 var YOUTUBE_API = "AIzaSyBQ1G-JhjIMd0bGr9IeF49NKeQ29roBttY";
 var video_url = "https://www.googleapis.com/youtube/v3/videos";
@@ -26,7 +41,7 @@ export default {
     mixins: [loadData],
 
     mounted(){
-        /* 최신 인기동영상 채널 클릭 */
+        /* 채널리스트 */
         if(this.$route.params.channelId){
             const gnb_list = this.$store.state.gnb;
 
@@ -44,26 +59,21 @@ export default {
                 part : 'snippet,contentDetails,statistics',
                 videoCategoryId : this.$route.params.channelId
             }, this.contents)
+            
             this.setCurrentGnbId();
         }
 
-        /* 유저 선택 쿼리 */
+        /* 커스텀 리스트 */
         else if(this.$route.params.query){
             this.title = this.$route.params.query;
 
-            if(this.$route.params.order === 'viewCount'){
-                this.orderText = '인기'
-            }else if(this.$route.params.order === 'date'){
-                this.orderText = '최신'
-            }
-
             this.getSearchData(search_url, {
                 key : YOUTUBE_API,
-                regionCode : 'KR',
+                regionCode : 'kr',
                 part : 'snippet',
                 maxResults : '30',
                 type : 'video',
-                order : this.$route.params.order,
+                order : this.sort,
                 q : this.$route.params.query
             }, this.contents);
         }
@@ -83,7 +93,7 @@ export default {
     methods : {
         addListData : function(){
             if(this.$route.params.channelId){
-                this.getVideoData(video_url, {
+                 this.getVideoData(video_url, {
                     key : YOUTUBE_API,
                     chart : 'mostPopular',
                     regionCode : 'kr',
@@ -96,11 +106,11 @@ export default {
             else if(this.$route.params.query){
                 this.getSearchData(search_url, {
                     key : YOUTUBE_API,
-                    regionCode : 'KR',
+                    regionCode : 'Kr',
                     part : 'snippet',
                     maxResults : '30',
                     type : 'video',
-                    order : this.$route.params.order,
+                    order : this.sort,
                     q : this.$route.params.query,
                     pageToken : this.tokenNextPage
                 }, this.contents);
@@ -132,8 +142,7 @@ export default {
             this.$axios.get(url, {
                 params
             }).then((response) => {
-                this.loading = false;
-
+                that.loading = false;
                 if(response.data.nextPageToken){
                     this.isNextPage = true;
                     this.tokenNextPage = response.data.nextPageToken;
@@ -157,14 +166,12 @@ export default {
                 tempData.forEach(function(videoId) {
                     that.getData(video_url, {
                         key: YOUTUBE_API,
-                        regionCode: 'KR',
+                        regionCode: 'Kr',
                         part: 'snippet,contentDetails,statistics',
                         maxResults: '30',
                         id: videoId
                     }, arrData);
-                });                
-            }).catch((ex) => {
-                console.log("ERROR !", ex);
+                });
             })
         },
 
@@ -187,13 +194,22 @@ export default {
 @import "../../styles/extend";
 
 .totalContent{
-    h2{
-        margin-bottom:20px;
+    .areaTop{
+        position: relative;
+        h2{
+            margin-bottom:20px;
 
-        strong{
-            color:#2282f2;
-            font-weight: bold;    
-            font-size:24px;
+            strong{
+                color:#2282f2;
+                font-weight: bold;    
+                font-size:24px;
+            }
+        }
+
+        .rightBox{
+            position: absolute;
+            top:5px;
+            right:10px;
         }
     }
 

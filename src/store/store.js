@@ -5,7 +5,7 @@ Vue.use(Vuex);
 
 const GNB_LIST = [{
         name: '예능',
-        id: '23'
+        id: '24'
     },
     {
         name: '음악',
@@ -16,8 +16,8 @@ const GNB_LIST = [{
         id: '20'
     },
     {
-        name: '영화',
-        id: '1'
+        name: '동물',
+        id: '15'
     }
 ]
 

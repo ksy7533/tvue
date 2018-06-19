@@ -1,13 +1,13 @@
 <template>
     <section class="areaHotList">
         <HotHorizonList v-bind:contents="gameVideo">
-            <h2 slot="title">게임 인기동영상</h2>
+            <h2 slot="title">{{gameVideo.q}} 관련동영상</h2>
         </HotHorizonList>
         <HotHorizonList v-bind:contents="foodVideo">
-            <h2 slot="title">먹방 최신동영상</h2>
+            <h2 slot="title">{{foodVideo.q}} 관련동영상</h2>
         </HotHorizonList>
         <HotHorizonList v-bind:contents="hotFoodVideo">
-            <h2 slot="title">먹방 인기동영상</h2>
+            <h2 slot="title">{{hotFoodVideo.q}} 관련동영상</h2>
         </HotHorizonList>
     </section>
 </template>
@@ -19,20 +19,23 @@ export default {
     data(){
         return {
             gameVideo : {
-                q : '게임',
-                order : 'viewCount',
+                q : '배틀그라운드',
+                // order : 'viewCount',
+                // order : 'relevance',
                 id : 'hotList_01'
             },
 
             foodVideo : {
-                q : '먹방',
-                order : 'date',
+                q : '참치회',
+                // order : 'date',
+                // order : 'relevance',
                 id : 'hotList_02'
             },
 
             hotFoodVideo : {
-                q : '먹방',
-                order : 'viewCount',
+                q : '성시경',
+                // order : 'viewCount',
+                // order : 'relevance',
                 id : 'hotList_03'
             }
         }

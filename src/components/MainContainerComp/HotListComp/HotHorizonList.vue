@@ -129,6 +129,10 @@ export default {
         position: absolute;
         top:20px;
         right:25px;
+
+        button{
+            color:red
+        }
     }
 
     .btnMore{

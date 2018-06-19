@@ -15,7 +15,8 @@ export default [{
     },
 
     {
-        path: '/totalVideo/hot/:query/:order',
+        // path: '/totalVideo/hot/:query/:order',
+        path: '/totalVideo/hot/:query',
         name: 'totalVideoHot',
         component: TotalVideoArea
 

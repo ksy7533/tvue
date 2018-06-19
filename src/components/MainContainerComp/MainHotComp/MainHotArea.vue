@@ -180,7 +180,6 @@ export default {
 @import "../../../styles/extend";
 
 .mainHot{
-    margin-bottom:40px;
     width:1260px;
     height:500px;
     background-color:#2b2b2b;
