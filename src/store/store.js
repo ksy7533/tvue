@@ -53,7 +53,22 @@ export const store = new Vuex.Store({
                 q: payload.query,
                 id: 'hotList_' + (state.customListData.length)
             })
+        },
 
+        removeCustomListData(state, payload) {
+            // console.log(state.customListData)
+            let tempIndex = 0;
+            // state.customListData.forEach(function(item, index) {
+            //     if (item.id === payload.contentsId) {
+            //         tempIndex = index;
+            //         console.log(tempIndex)
+            //         return;
+            //     }
+            // });
+
+            tempIndex = state.customListData.map(item => item.id).indexOf(payload.contentsId);
+
+            state.customListData.splice(tempIndex, 1);
             console.log(state.customListData)
         }
 

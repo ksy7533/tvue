@@ -42,7 +42,7 @@ export default {
         },
 
         addCustomListData : function(query){
-             this.$store.commit('addCustomListData', {
+            this.$store.commit('addCustomListData', {
                 query
             });
         }
@@ -96,6 +96,10 @@ export default {
                     width:100%;
                     font-size:20px;
                     border:0;
+
+                    &:focus{
+                        outline: 0;
+                    }
                 }
             }
         }

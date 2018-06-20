@@ -15,8 +15,8 @@
                 <h2 slot="title">{{hotFoodVideo.q}} 관련동영상</h2>
             </HotHorizonList> -->
 
-            <HotHorizonList v-for="(item, index) in arrData" v-bind:key="index"  v-bind:contents="item">
-                <h2 slot="title">{{item.q}} 관련동영상</h2>
+            <HotHorizonList v-for="(item, index) in arrData" v-bind:key="index" v-bind:contents="item">
+                <h2 slot="title"><span class="keyword">{{item.q}}</span> 관련동영상</h2>
             </HotHorizonList>
         </div>
 
@@ -31,6 +31,7 @@ import HotHorizonList from './HotHorizonList.vue'
 import ModalCustomList from '../../ModalComp/CustomList.vue'
 
 export default {
+
     data(){
         return {
             // gameVideo : {
@@ -53,6 +54,17 @@ export default {
             isModalVisible: false
         }
     },
+
+    // created(){
+    //     this.arrData = this.$store.state.customListData
+    // },
+
+    // computed : {
+    //     arrData : function(){
+    //         // console.log(this.$store.state.customListData)
+    //         return this.$store.state.customListData;
+    //     }
+    // },
 
     methods : {
         toggleModal : function(){
@@ -92,7 +104,6 @@ export default {
     }
 
     .lists{
-        padding:20px 0;
         border:1px solid #ccc;
         border-radius:5px;
         background-color:#F5F5F8;
