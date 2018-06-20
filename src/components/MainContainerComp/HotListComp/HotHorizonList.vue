@@ -32,13 +32,6 @@ export default {
     mixins: [loadData],
 
     mounted(){
-        $('#'+ this.contents.id + ' .wrapList').zumSlide({
-            appendArrows: $('#'+ this.contents.id +' .arrows'),
-            pageNum: true,
-            appendPageNum: $('#'+ this.contents.id +' .pages'),
-            infinite: true
-        });
-
         this.getSearchData(search_url, {
             key : YOUTUBE_API,
             regionCode : 'KR',
@@ -48,6 +41,13 @@ export default {
             order : this.contents.order,
             q : this.contents.q
         }, this.arrData);
+
+        $('#'+ this.contents.id + ' .wrapList').zumSlide({
+            appendArrows: $('#'+ this.contents.id +' .arrows'),
+            pageNum: true,
+            appendPageNum: $('#'+ this.contents.id +' .pages'),
+            infinite: true
+        });
     },
 
     data(){
@@ -159,6 +159,10 @@ export default {
         width:30px;
         font-size:14px;
         transform: translateX(50%);
+
+        .zum_total_num{
+            color:blue;
+        }
     }
     
     .arrows{
@@ -169,15 +173,16 @@ export default {
         button{
             color:red
         }
+
+        .zum_prev_btn{
+            color:yellow !important;
+        }
     }
 
     .btnMore{
         display:block;
         text-decoration: none;
         text-align: center;
-        // position: absolute;
-        // top:25px;
-        // left:25px;
         margin-top:10px;
         padding:15px 0;
         color:#999;
