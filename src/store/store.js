@@ -51,8 +51,10 @@ export const store = new Vuex.Store({
         addCustomListData(state, payload) {
             state.customListData.push({
                 q: payload.query,
-                id: 'hotList_' + (state.customListData.length - 1)
+                id: 'hotList_' + (state.customListData.length)
             })
+
+            console.log(state.customListData)
         }
 
     }

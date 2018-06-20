@@ -20,7 +20,7 @@
             </HotHorizonList>
         </div>
 
-        <ModalCustomList v-show="isModalVisible" v-bind:toggleModal="toggleModal"></ModalCustomList>
+        <ModalCustomList v-if="isModalVisible" v-bind:toggleModal="toggleModal"></ModalCustomList>
         
     </section>
 </template>

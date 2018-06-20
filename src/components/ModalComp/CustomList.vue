@@ -6,7 +6,7 @@
             </header>
             <div class="body">
                 <div class="search">
-                    <input type="text" v-model="query" placeholder="리스트를 만들고자 하는 쿼리를 입력해주세요.">
+                    <input type="text" v-focus v-model="query" v-on:keyup.enter="addList" placeholder="리스트를 만들고자 하는 쿼리를 입력해주세요.">
                 </div>
             </div>
             <footer>
@@ -27,9 +27,18 @@ export default {
         }
     },
 
+    directives: {
+        focus: {
+            inserted: function (el) {
+                el.focus()
+            }
+        }
+    },
+
     methods: {
         addList(){
             this.addCustomListData(this.query);
+            this.toggleModal();
         },
 
         addCustomListData : function(query){

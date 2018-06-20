@@ -31,6 +31,7 @@ ZumSlide = (function() {
 ZumSlide.prototype.initRender = function() {
     this.$slideChildren.hide();
     this.$currentPage.show();
+    console.log(this.$currentPage)
     if (this.settings.arrows) {
         this.renderArrows();
     }

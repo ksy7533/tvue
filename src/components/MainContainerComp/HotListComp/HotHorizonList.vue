@@ -34,12 +34,14 @@ export default {
     mixins: [loadData],
 
     mounted(){
+        console.log(this.contents.id)
         $('#'+ this.contents.id + ' .wrapList').zumSlide({
             appendArrows: $('#'+ this.contents.id +' .arrows'),
             pageNum: true,
             appendPageNum: $('#'+ this.contents.id +' .pages'),
             infinite: true
         });
+        console.log("after")
 
         this.getSearchData(search_url, {
             key : YOUTUBE_API,
