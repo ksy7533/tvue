@@ -27,7 +27,6 @@
 
 <script>
 import HotHorizonList from './HotHorizonList.vue'
-
 import ModalCustomList from '../../ModalComp/CustomList.vue'
 
 export default {
@@ -49,22 +48,16 @@ export default {
             //     id : 'hotList_03'
             // },
 
-            arrData : this.$store.state.customListData,
-
+            // arrData : this.$store.state.customListData,
             isModalVisible: false
         }
     },
 
-    // created(){
-    //     this.arrData = this.$store.state.customListData
-    // },
-
-    // computed : {
-    //     arrData : function(){
-    //         // console.log(this.$store.state.customListData)
-    //         return this.$store.state.customListData;
-    //     }
-    // },
+    computed : {
+        arrData(){
+            return this.$store.state.customListData
+        }
+    },
 
     methods : {
         toggleModal : function(){

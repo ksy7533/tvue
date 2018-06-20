@@ -32,7 +32,6 @@ export default {
     mixins: [loadData],
 
     mounted(){
-
         $('#'+ this.contents.id + ' .wrapList').zumSlide({
             appendArrows: $('#'+ this.contents.id +' .arrows'),
             pageNum: true,
@@ -51,26 +50,6 @@ export default {
         }, this.arrData);
     },
 
-    // updated(){
-    //     $('#'+ this.contents.id + ' .wrapList').zumSlide({
-    //         appendArrows: $('#'+ this.contents.id +' .arrows'),
-    //         pageNum: true,
-    //         appendPageNum: $('#'+ this.contents.id +' .pages'),
-    //         infinite: true
-    //     });
-
-    //     this.getSearchData(search_url, {
-    //         key : YOUTUBE_API,
-    //         regionCode : 'KR',
-    //         part : 'snippet',
-    //         maxResults : this.maxResults,
-    //         type : 'video',
-    //         order : this.contents.order,
-    //         q : this.contents.q
-    //     }, this.arrData);
-    // },
-
-
     data(){
         return {
             ulOfNum : 3,
@@ -85,22 +64,20 @@ export default {
         }
     },
 
-    // watch : {
-    //     contents : function(val){
-    //         console.log(val)
-
-    //         this.getSearchData(search_url, {
-    //             key : YOUTUBE_API,
-    //             regionCode : 'KR',
-    //             part : 'snippet',
-    //             maxResults : this.maxResults,
-    //             type : 'video',
-    //             order : val.order,
-    //             q : val.q
-    //         }, this.arrData);
-
-    //     }
-    // },
+    watch: {
+        contents : function(val){
+            this.arrData = [];
+            this.getSearchData(search_url, {
+                key : YOUTUBE_API,
+                regionCode : 'KR',
+                part : 'snippet',
+                maxResults : this.maxResults,
+                type : 'video',
+                order : val.order,
+                q : val.q
+            }, this.arrData);
+        }
+    },
 
     methods : {
         goPage : function() {
