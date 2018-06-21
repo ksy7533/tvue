@@ -1,5 +1,5 @@
 <template>
-    <div class="listHot" v-bind:id="contents.id">
+    <div class="listHot" v-bind:id="contents.id" v-bind:class="{on : isOver}" v-on:mouseover="isOver = !isOver" v-on:mouseout="isOver = !isOver">
         <div>
             <slot name="title"></slot>
         </div>
@@ -54,7 +54,8 @@ export default {
         return {
             ulOfNum : 3,
             liOfNum : 6,
-            arrData : []
+            arrData : [],
+            isOver : false
         }
     },
 
@@ -167,6 +168,7 @@ export default {
     
     .arrows{
         z-index:50;
+        display: none;
         position: absolute;
         top:100px;
         width:100%;
@@ -184,29 +186,42 @@ export default {
 
             &.zum_prev_btn{
                 position: relative;
-                left:-70px;
+                left:-25px;
 
                 &:before{
-                    content:'';
+                    content:'\f104';
+                    font-family: "Font Awesome 5 Free";
+                    font-weight: 900;
                     position:absolute;
-                    top:0;
-                    left:0;
-                    font-size:20px;
+                    top:10px;
+                    left:12px;
+                    font-size:40px;
                 }
             }
 
             &.zum_next_btn{
-                right:-70px;
+                right:-25px;
 
                 &:after{
-                    content:'';
-                    display: inline-block;
+                    content:'\f105';
+                    font-family: "Font Awesome 5 Free";
+                    font-weight: 900;
+                    position:absolute;
+                    top:10px;
+                    left:12px;
+                    font-size:40px;
                 }
             }
 
             &:focus{
                 outline:0;
             }
+        }
+    }
+
+    &.on{
+        .arrows{
+            display: block;
         }
     }
 
