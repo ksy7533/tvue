@@ -5,15 +5,60 @@
                 <i class="far fa-play-circle"></i>Tvue
             </router-link>
         </h1>
-        <div class="searchBox">
-            <input type="text" placeholder=" 검색">
-            <button><i class="fas fa-search"></i></button>
+        <div class="searchBox" v-bind:class="{ on : isSearch}">
+            <input type="text" v-model="keyword" v-on:focus="focusSearch" v-on:blur="blurSearch" v-on:keyup.enter="searchVideo">
+            <button v-on:click="searchVideo"><i class="fas fa-search"></i></button>
         </div>
         <div class="areaUtil">
             <a href="#n" class="btnLogin">로그인</a>
         </div>
     </div>
 </template>
+
+<script>
+export default {
+    data(){
+        return {
+            isSearch : false,
+            keyword : ''
+        }
+    },
+
+    computed : {
+        stateKeyword(){
+            return this.$store.state.keyword;
+        }
+    },
+
+    watch : {
+        stateKeyword : function(val){
+            this.keyword = val;
+        }
+    },
+
+    methods : {
+        searchVideo : function(){
+            if(this.keyword === ''){
+                return;
+            }
+
+            this.$store.commit('setKeyword', {
+                keyword : this.keyword
+            });
+            this.$router.push({ name: 'totalVideoHot', params: { query : this.keyword} });
+        },
+
+        focusSearch : function(){
+            this.isSearch = !this.isSearch;
+        },
+
+        blurSearch : function(){
+            this.isSearch = !this.isSearch;
+        }
+    }
+}
+</script>
+
 
 <style lang="scss" scoped>
 @import "../../styles/variables";
@@ -46,19 +91,41 @@
     .searchBox{
         position: relative;
         margin:0 auto;
-        padding:3px 10px;
+        padding:4px 10px;
         width:300px;
         height:20px;
         background-color:#f3f3f5;
         border:1px solid #d9d9d9;
         border-radius:3px;
 
+        &.on{
+            background-color:$white-color;
+            box-shadow:0 0 0 1px rgba(0,20,61,.08);
+
+            input{
+                background-color:$white-color;
+            }
+
+            button{
+                background-color:$white-color;
+                i{
+                    color:$blue-color;
+                }
+            }
+        }
+
         input{
             width:250px;
             height:20px;
             line-height:24px;
+            color:#6c727f;
             background-color:#f3f3f5;
             border:0;
+
+            &:focus{
+                color:#000;
+                outline: none;
+            }
         }
 
         button{

@@ -81,7 +81,7 @@ export default {
 
     methods : {
         goPage : function() {
-            this.$router.push({ name: 'totalVideoHot', params: { query : this.contents.q, order : this.contents.order } });
+            this.$router.push({ name: 'totalVideoHot', params: { query : this.contents.q} });
         },
 
         removeList : function(contentsId){
@@ -166,16 +166,47 @@ export default {
     }
     
     .arrows{
+        z-index:50;
         position: absolute;
-        top:20px;
-        right:75px;
+        top:100px;
+        width:100%;
 
-        button{
-            color:red
-        }
+        /deep/ button{
+            cursor: pointer;
+            display: inline-block;
+            position: absolute;
+            width:50px;
+            height:60px;
+            font-size:0;
+            border:1px solid #d9d9d9;
+            background-color:$white-color;
+            border-radius:5px;
 
-        .zum_prev_btn{
-            color:yellow !important;
+            &.zum_prev_btn{
+                position: relative;
+                left:-70px;
+
+                &:before{
+                    content:'';
+                    position:absolute;
+                    top:0;
+                    left:0;
+                    font-size:20px;
+                }
+            }
+
+            &.zum_next_btn{
+                right:-70px;
+
+                &:after{
+                    content:'';
+                    display: inline-block;
+                }
+            }
+
+            &:focus{
+                outline:0;
+            }
         }
     }
 
@@ -200,7 +231,7 @@ export default {
     .btnRemove{
         cursor: pointer;
         position: absolute;
-        top:25px;
+        top:20px;
         right:25px;
         font-size:20px;
 

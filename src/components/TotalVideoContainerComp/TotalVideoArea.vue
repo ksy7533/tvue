@@ -45,6 +45,10 @@ export default {
         if(this.$route.params.channelId){
             const gnb_list = this.$store.state.gnb;
 
+            this.$store.commit('setKeyword', {
+                keyword : ''
+            });
+
             gnb_list.forEach((item) => {
                 if((item.id) === this.$route.params.channelId.toString()){
                     this.title = item.name;
@@ -66,6 +70,10 @@ export default {
         /* 커스텀 리스트 */
         else if(this.$route.params.query){
             this.title = this.$route.params.query;
+
+            this.$store.commit('setKeyword', {
+                keyword : this.$route.params.query
+            });
 
             this.getSearchData(search_url, {
                 key : YOUTUBE_API,
@@ -176,7 +184,7 @@ export default {
         },
 
         setCurrentGnbId : function(){
-             this.$store.commit('setCurrentGnbId', {
+            this.$store.commit('setCurrentGnbId', {
                 currentGnbId: this.$route.params.channelId
             });
         }

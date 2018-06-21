@@ -40,7 +40,9 @@ export const store = new Vuex.Store({
                 q: '성시경',
                 id: 'hotList_2'
             }
-        ]
+        ],
+
+        keyword: ''
     },
 
     mutations: {
@@ -70,6 +72,11 @@ export const store = new Vuex.Store({
 
             state.customListData.splice(tempIndex, 1);
             console.log(state.customListData)
+        },
+
+        setKeyword(state, payload) {
+            state.keyword = payload.keyword;
+            console.log(state.keyword)
         }
 
     }
