@@ -93,14 +93,14 @@ ZumSlide.prototype.initEventNextArrows = function() {
 
 ZumSlide.prototype.renderArrows = function() {
     this.$arrows = this.settings.appendArrows;
-    this.$arrows.html('<button class="zum_prev_btn" id="zum_prev_btn">이전</button><button class="zum_next_btn" id="zum_next_btn">다음</button>');
+    this.$arrows.append('<button class="zum_prev_btn" id="zum_prev_btn">이전</button><button class="zum_next_btn" id="zum_next_btn">다음</button>');
     this.$prevBtn = this.$arrows.find('#zum_prev_btn');
     this.$nextBtn = this.$arrows.find('#zum_next_btn');
 }
 
 ZumSlide.prototype.renderPageNum = function() {
     this.$pageNum = this.settings.appendPageNum;
-    this.$pageNum.html('<span class="zum_current_num" id="zum_current_num""></span>/<span class="zum_total_num" id="zum_total_num"></span>')
+    this.$pageNum.append('<span class="zum_current_num" id="zum_current_num""></span>/<span class="zum_total_num" id="zum_total_num"></span>')
     this.$currentNum = this.$pageNum.find('#zum_current_num');
     this.$totalNum = this.$pageNum.find('#zum_total_num');
     this.setCurrentPageNum();

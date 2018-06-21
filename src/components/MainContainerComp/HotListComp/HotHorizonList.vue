@@ -12,7 +12,7 @@
 
         <a href="#n" class="btnMore" v-on:click.prevent="goPage()">더보기</a>
         <div class="pages"></div>
-        <div class="arrows"></div>
+        <!-- <div class="arrows"></div> -->
         <a class="btnRemove" v-on:click="removeList(contents.id)"><i class="fas fa-times"></i></a>
     </div>
 </template>
@@ -43,7 +43,7 @@ export default {
         }, this.arrData);
 
         $('#'+ this.contents.id + ' .wrapList').zumSlide({
-            appendArrows: $('#'+ this.contents.id +' .arrows'),
+            appendArrows: $('#'+ this.contents.id),
             pageNum: true,
             appendPageNum: $('#'+ this.contents.id +' .pages'),
             infinite: true
@@ -165,62 +165,55 @@ export default {
             color:blue;
         }
     }
-    
-    .arrows{
+
+    /deep/ button{
+        cursor: pointer;
         z-index:50;
         display: none;
         position: absolute;
         top:100px;
-        width:100%;
+        width:50px;
+        height:60px;
+        font-size:0;
+        border:1px solid #d9d9d9;
+        background-color:$white-color;
+        border-radius:5px;
 
-        /deep/ button{
-            cursor: pointer;
-            display: inline-block;
-            position: absolute;
-            width:50px;
-            height:60px;
-            font-size:0;
-            border:1px solid #d9d9d9;
-            background-color:$white-color;
-            border-radius:5px;
+        &.zum_prev_btn{
+            left:-25px;
 
-            &.zum_prev_btn{
-                position: relative;
-                left:-25px;
-
-                &:before{
-                    content:'\f104';
-                    font-family: "Font Awesome 5 Free";
-                    font-weight: 900;
-                    position:absolute;
-                    top:10px;
-                    left:12px;
-                    font-size:40px;
-                }
+            &:before{
+                content:'\f104';
+                font-family: "Font Awesome 5 Free";
+                font-weight: 900;
+                position:absolute;
+                top:10px;
+                left:12px;
+                font-size:40px;
             }
+        }
 
-            &.zum_next_btn{
-                right:-25px;
+        &.zum_next_btn{
+            right:-25px;
 
-                &:after{
-                    content:'\f105';
-                    font-family: "Font Awesome 5 Free";
-                    font-weight: 900;
-                    position:absolute;
-                    top:10px;
-                    left:12px;
-                    font-size:40px;
-                }
+            &:after{
+                content:'\f105';
+                font-family: "Font Awesome 5 Free";
+                font-weight: 900;
+                position:absolute;
+                top:10px;
+                left:12px;
+                font-size:40px;
             }
+        }
 
-            &:focus{
-                outline:0;
-            }
+        &:focus{
+            outline:0;
         }
     }
 
     &.on{
-        .arrows{
+        /deep/ .zum_prev_btn, /deep/ .zum_next_btn{
             display: block;
         }
     }
