@@ -42,7 +42,7 @@ export default {
 
 .container{
   min-height:100%;
-  margin:0 0 -113px 0; 
+  margin:0 0 -113px 0;
 }
 
 .content{

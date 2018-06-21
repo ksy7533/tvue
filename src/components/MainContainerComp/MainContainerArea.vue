@@ -17,8 +17,6 @@ export default {
     mounted(){
         this.setCurrentGnbId()
 
-        console.log("main")
-
         this.$store.commit('setKeyword', {
             keyword: ''
         });
@@ -42,11 +40,12 @@ export default {
 
 <style lang="scss" scoped>
 @import "../../styles/variables";
-
-h2{
-    margin:30px 0 20px;
-    font-size:26px;
-    font-weight:bold;
+.mainContent{
+    h2{
+        margin:30px 0 20px;
+        font-size:26px;
+        font-weight:bold;
+    }
 }
 </style>
 

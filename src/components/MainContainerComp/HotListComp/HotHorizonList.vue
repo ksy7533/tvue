@@ -52,7 +52,7 @@ export default {
 
     data(){
         return {
-            ulOfNum : 3,
+            ulOfNum : 5,
             liOfNum : 6,
             arrData : [],
             isOver : false

@@ -1,5 +1,5 @@
 <template>
-    <div class="listPlay">
+    <div class="listPlay" ref="listPlay">
         <p class="tit"><i class="fas fa-align-left"></i> 관련 비디오 리스트</p>
         <ul class="list">
             <li v-for="(item, index) in arrData" v-bind:key="index">
@@ -21,11 +21,17 @@ import moment from 'moment';
 
 var YOUTUBE_API = "AIzaSyBQ1G-JhjIMd0bGr9IeF49NKeQ29roBttY";
 var search_url = "https://www.googleapis.com/youtube/v3/search";
+var video_url = "https://www.googleapis.com/youtube/v3/videos";
 
 export default {
     mixins: [loadData],
 
     mounted(){
+        const eleList = document.querySelector('.listPlay .list')
+        eleList.addEventListener('scroll', (e) => {
+            this.isBottom = this.goBottom(e.target);
+        });
+
         this.getSearchData(search_url, {
             key : YOUTUBE_API,
             regionCode : 'kr',
@@ -36,9 +42,84 @@ export default {
         }, this.arrData);
     },
 
+    methods : {
+        goBottom : function(target){
+            const eleList = document.querySelector('.listPlay .list')
+            let isBottom = false;
+            let scrollY = target.scrollTop;
+            let visibleHeight = eleList.clientHeight;
+            let totalHeight = eleList.scrollHeight;
+
+            if(totalHeight === scrollY + visibleHeight){
+                isBottom = true;
+                return isBottom;
+            }
+
+            return isBottom;
+        },
+
+         getSearchData : function(url, params, arrData){
+            var that = this;
+            this.$axios.get(url, {
+                params
+            }).then((response) => {
+                if(response.data.nextPageToken){
+                    this.isNextPage = true;
+                    this.tokenNextPage = response.data.nextPageToken;
+                }else{
+                    this.isNextPage = false;
+                    this.tokenNextPage = "";
+                }
+
+                var tempData = [];
+                var items = response.data.items;
+
+                if(items.length === 0){
+                    this.isEmptyPlayList = true;
+                    return;
+                }
+
+                items.forEach(function(item){
+                    tempData.push(item.id.videoId);
+                });
+
+                tempData.forEach(function(videoId){
+                    that.getData(video_url, {
+                        key : YOUTUBE_API,
+                        regionCode : 'kr',
+                        part : 'snippet,contentDetails,statistics',
+                        id : videoId
+                    }, arrData);
+                });
+
+            }).catch((ex) => {
+                console.log("ERROR !", ex);
+            })
+        }
+    },
+
     data(){
         return {
-            arrData : []
+            arrData : [],
+            isBottom : false,
+            tokenNextPage : '',
+            isEmptyPlayList : false
+        }
+    },
+
+    watch :{
+        isBottom : function(val){
+            if(val === true){
+                this.getSearchData(search_url, {
+                    key : YOUTUBE_API,
+                    regionCode : 'kr',
+                    part : 'snippet',
+                    maxResults : '30',
+                    type : 'video',
+                    relatedToVideoId : this.$route.params.videoId,
+                    pageToken : this.tokenNextPage
+                }, this.arrData)
+            }
         }
     }
 }
