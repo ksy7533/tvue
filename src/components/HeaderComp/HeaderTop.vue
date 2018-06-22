@@ -10,12 +10,16 @@
             <button v-on:click="searchVideo"><i class="fas fa-search"></i></button>
         </div>
         <div class="areaUtil">
-            <a href="#n" class="btnLogin">로그인</a>
+            <!-- <a href="#n" class="btnLogin">로그인</a> -->
+            <router-link to="/login" class="btnLogin">로그인</router-link>
+            <button v-on:click="signOut">로그아웃</button>
         </div>
     </div>
 </template>
 
 <script>
+import firebase from 'firebase';
+
 export default {
     data(){
         return {
@@ -54,6 +58,10 @@ export default {
 
         blurSearch : function(){
             this.isSearch = !this.isSearch;
+        },
+        
+        signOut(){
+            firebase.auth().signOut();
         }
     }
 }

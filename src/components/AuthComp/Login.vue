@@ -3,21 +3,41 @@
     <h2>Tvue</h2>
     <p class="tit">로그인</p>
     <p class="inputTxt">
-        <input type="text" placeholder="아이디를 입력하세요">
+        <input type="text" v-model="email" placeholder="아이디를 입력하세요">
     </p>
     <p class="inputTxt">
-        <input type="password" placeholder="비밀번호를 입력하세요">
+        <input type="password" v-model="password" placeholder="비밀번호를 입력하세요">
     </p>
     <div class="btns">
-        <button>로그인</button>
-        <button>회원가입</button>
+        <button v-on:click="signIn">로그인</button>
+        <router-link to="/signUp">회원가입</router-link>
     </div>
 </section>
 </template>
 
 <script>
-export default {
+import firebase from 'firebase';
 
+export default {
+    data(){
+        return {
+            email:'',
+            password:''
+        }
+    },
+    methods: {
+        signIn: function(){
+            firebase.auth().signInWithEmailAndPassword(this.email, this.password).then(
+                (user) => {
+                    alert('wellcome');
+                    this.$router.replace('main');
+                },
+                (err) => {
+                    alert(err.message);
+                }
+            )
+        }
+    }
 }
 </script>
 

@@ -18,6 +18,11 @@
 </template>
 
 <script>
+
+import firebase from 'firebase'
+import { db } from '../../config/db.js'
+
+
 export default {
     props : ['toggleModal'],
 
@@ -35,6 +40,10 @@ export default {
         }
     },
 
+    firebase:{
+        items: db.ref('itemsf')
+    },
+
     methods: {
         addList(){
             this.addCustomListData(this.query);
@@ -42,6 +51,13 @@ export default {
         },
 
         addCustomListData : function(query){
+
+            console.log(this.$firebaseRefs.items)
+
+            this.$firebaseRefs.items.push({
+                query : query
+            });
+
             this.$store.commit('addCustomListData', {
                 query
             });
