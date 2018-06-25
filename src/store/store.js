@@ -49,11 +49,11 @@ export const store = new Vuex.Store({
         //     console.log(state.customListData)
         // },
 
-        removeCustomListData(state, payload) {
-            let tempIndex = 0;
-            tempIndex = state.customListData.map(item => item.id).indexOf(payload.contentsId);
-            state.customListData.splice(tempIndex, 1);
-        },
+        // removeCustomListData(state, payload) {
+        //     let tempIndex = 0;
+        //     tempIndex = state.customListData.map(item => item.id).indexOf(payload.contentsId);
+        //     state.customListData.splice(tempIndex, 1);
+        // },
 
         setKeyword(state, payload) {
             state.keyword = payload.keyword;

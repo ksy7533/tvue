@@ -24,6 +24,9 @@ import VideoItem from '../../CommonComp/videoItem.vue'
 import $ from 'jquery'
 import Zumslide from '../../../assets/js/zumSlide.js'
 
+import firebase from 'firebase'
+import { db } from '../../../config/db.js'
+
 var YOUTUBE_API = "AIzaSyBQ1G-JhjIMd0bGr9IeF49NKeQ29roBttY";
 var search_url = "https://www.googleapis.com/youtube/v3/search";
 
@@ -86,9 +89,12 @@ export default {
         },
 
         removeList : function(contentsId){
-            this.$store.commit('removeCustomListData', {
-                contentsId
-            });
+            let currentUser = firebase.auth().currentUser;
+            let listsRef = db.ref('lists/' + currentUser.uid + '/' + contentsId);
+            listsRef.remove();
+            // this.$store.commit('removeCustomListData', {
+            //     contentsId
+            // });
         }
     },
     

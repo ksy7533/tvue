@@ -27,10 +27,11 @@ export default {
 mounted(){
     firebase.auth().onAuthStateChanged((user) => {
         if (user) {
-              let user = firebase.auth().currentUser;
-              let listsRef = db.ref('lists/' + user.uid);
+              let currentUser = firebase.auth().currentUser;
+              let listsRef = db.ref('lists/' + currentUser.uid);
 
               listsRef.on('value', (data) => {
+                console.log(data)
                   let dataVal = data.val()
                   let customListData = [];
 
@@ -47,6 +48,11 @@ mounted(){
               });
         } else {
             console.log("없음")
+
+            this.$store.commit('setCustomListData', {
+              customListData : []
+            });
+
         }
     })
   },
