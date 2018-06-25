@@ -8,7 +8,8 @@ import firebase from 'firebase';
 
 import VueFire from 'vuefire'
 
-// import { db } from './config/db.js'
+import { db } from './config/db.js'
+
 
 let app;
 
@@ -22,16 +23,17 @@ const router = new Router({
     routes
 })
 
-firebase.auth().onAuthStateChanged(function(user) {
-    if (user) {
-        console.log(user)
-        app = new Vue({
-            el: '#app',
-            router,
-            store,
-            render: h => h(App)
-        })
-    } else {
-        console.log("없음")
-    }
+app = new Vue({
+    el: '#app',
+    router,
+    store,
+    render: h => h(App)
 })
+
+// firebase.auth().onAuthStateChanged(function(user) {
+//     if (user) {
+//         console.log(user)
+//     } else {
+//         console.log("없음")
+//     }
+// })

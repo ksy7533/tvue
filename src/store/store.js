@@ -25,24 +25,9 @@ export const store = new Vuex.Store({
     state: {
         currentGnbId: 'main',
         gnb: GNB_LIST,
-
-        customListData: [{
-                q: '배틀그라운드',
-                id: 'hotList_0'
-            },
-
-            {
-                q: '참치회',
-                id: 'hotList_1'
-            },
-
-            {
-                q: '성시경',
-                id: 'hotList_2'
-            }
-        ],
-
-        keyword: ''
+        customListData: [],
+        keyword: '',
+        userInfo: {}
     },
 
     mutations: {
@@ -50,12 +35,19 @@ export const store = new Vuex.Store({
             state.currentGnbId = payload.currentGnbId;
         },
 
-        addCustomListData(state, payload) {
-            state.customListData.push({
-                q: payload.query,
-                id: 'hotList_' + (state.customListData.length)
-            })
+        setCustomListData(state, payload) {
+            state.customListData = payload.customListData;
         },
+
+        // addCustomListData(state, payload) {
+        //     console.log(state.customListData)
+        //     state.customListData.push({
+        //         q: payload.query,
+        //         // id: 'hotList_' + (state.customListData.length)
+        //         id: payload.id
+        //     })
+        //     console.log(state.customListData)
+        // },
 
         removeCustomListData(state, payload) {
             let tempIndex = 0;

@@ -4,17 +4,7 @@
             <i class="fas fa-plus-circle"></i>
         </a>
 
-        <div class="lists">
-            <!-- <HotHorizonList v-bind:contents="gameVideo">
-                <h2 slot="title">{{gameVideo.q}} 관련동영상</h2>
-            </HotHorizonList>
-            <HotHorizonList v-bind:contents="foodVideo">
-                <h2 slot="title">{{foodVideo.q}} 관련동영상</h2>
-            </HotHorizonList>
-            <HotHorizonList v-bind:contents="hotFoodVideo">
-                <h2 slot="title">{{hotFoodVideo.q}} 관련동영상</h2>
-            </HotHorizonList> -->
-
+        <div class="lists" v-if="arrData.length !== 0">
             <HotHorizonList v-for="(item, index) in arrData" v-bind:key="index" v-bind:contents="item">
                 <h2 slot="title"><span class="keyword">{{item.q}}</span> 관련동영상</h2>
             </HotHorizonList>
@@ -33,22 +23,6 @@ export default {
 
     data(){
         return {
-            // gameVideo : {
-            //     q : '배틀그라운드',
-            //     id : 'hotList_01'
-            // },
-
-            // foodVideo : {
-            //     q : '참치회',
-            //     id : 'hotList_02'
-            // },
-
-            // hotFoodVideo : {
-            //     q : '성시경',
-            //     id : 'hotList_03'
-            // },
-
-            // arrData : this.$store.state.customListData,
             isModalVisible: false
         }
     },

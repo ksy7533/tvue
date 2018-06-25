@@ -18,7 +18,6 @@
 </template>
 
 <script>
-
 import firebase from 'firebase'
 import { db } from '../../config/db.js'
 
@@ -40,10 +39,6 @@ export default {
         }
     },
 
-    firebase:{
-        items: db.ref('itemsf')
-    },
-
     methods: {
         addList(){
             this.addCustomListData(this.query);
@@ -51,14 +46,10 @@ export default {
         },
 
         addCustomListData : function(query){
+            let user = firebase.auth().currentUser;
+            let listsRef  = db.ref('lists/' + user.uid);
 
-            console.log(this.$firebaseRefs.items)
-
-            this.$firebaseRefs.items.push({
-                query : query
-            });
-
-            this.$store.commit('addCustomListData', {
+            listsRef.push({
                 query
             });
         }
