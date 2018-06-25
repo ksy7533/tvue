@@ -48,7 +48,6 @@ mounted(){
               });
         } else {
             console.log("없음")
-
             this.$store.commit('setCustomListData', {
               customListData : []
             });

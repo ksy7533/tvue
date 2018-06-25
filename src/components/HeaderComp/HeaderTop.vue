@@ -11,8 +11,12 @@
         </div>
         <div class="areaUtil">
             <!-- <a href="#n" class="btnLogin">로그인</a> -->
-            <router-link to="/login" class="btnLogin">로그인</router-link>
-            <button v-on:click="signOut">로그아웃</button>
+            <div v-if="!isLogin">
+                <router-link to="/login" class="btnLogin">로그인</router-link>
+            </div>
+            <div v-else>
+                <button v-on:click="signOut">로그아웃</button>
+            </div>
         </div>
     </div>
 </template>
@@ -24,7 +28,8 @@ export default {
     data(){
         return {
             isSearch : false,
-            keyword : ''
+            keyword : '',
+            isLogin: false
         }
     },
 
@@ -32,6 +37,18 @@ export default {
         stateKeyword(){
             return this.$store.state.keyword;
         }
+    },
+
+    mounted(){
+        firebase.auth().onAuthStateChanged((user) => {  
+            if(user){
+                this.isLogin = true;
+                console.log('login')
+            }else{
+                this.isLogin = false;
+                console.log('login no')
+            }
+        })
     },
 
     watch : {
