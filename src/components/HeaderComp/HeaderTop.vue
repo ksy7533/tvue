@@ -10,11 +10,11 @@
             <button v-on:click="searchVideo"><i class="fas fa-search"></i></button>
         </div>
         <div class="areaUtil">
-            <!-- <a href="#n" class="btnLogin">로그인</a> -->
             <div v-if="!isLogin">
-                <router-link to="/login" class="btnLogin">로그인</router-link>
+                <button v-on:click="login">로그인</button>
             </div>
             <div v-else>
+                <span class="displayName">{{displayName}}</span>
                 <button v-on:click="signOut">로그아웃</button>
             </div>
         </div>
@@ -29,7 +29,8 @@ export default {
         return {
             isSearch : false,
             keyword : '',
-            isLogin: false
+            isLogin: false,
+            displayName: ''
         }
     },
 
@@ -78,7 +79,28 @@ export default {
         },
         
         signOut(){
-            firebase.auth().signOut();
+            firebase.auth().signOut().then(function() {
+            }).catch(function(error) {
+            });
+        },
+
+        login(){
+            let authProvider = new firebase.auth.GoogleAuthProvider();
+            firebase.auth().signInWithPopup(authProvider).then((result) => {
+                var token = result.credential.accessToken;
+                var user = result.user;
+
+                this.displayName = user.displayName;
+                
+                console.log(user)
+                // ...
+            }).catch(function(error) {
+                var errorCode = error.code;
+                var errorMessage = error.message;
+                var email = error.email;
+                var credential = error.credential;
+            });
+
         }
     }
 }
@@ -172,13 +194,21 @@ export default {
         top:10px;
         right:40px;
 
-        .btnLogin{
+        
+        .displayName{
+            margin-right:10px;
+            font-size:14px;
+            font-weight:bold;
+        }
+
+        button{
             display: inline-block;
-            padding:6px 15px;
+            padding:5px 10px;
             color:$white-color;
             font-weight:600;
             text-decoration:none;
             background-color:#2282f2;
+            border:0;
             border-radius:3px;
         }
     }
