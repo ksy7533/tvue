@@ -32,6 +32,16 @@ export default {
         PlayList
     },
 
+    mounted(){
+        // console.log(this.currentVideoData)
+
+        this.$store.commit('setCurrentVideo', {
+              currentVideoData : this.currentVideoData
+        });
+
+        // console.log(this.$store.state.currentVideoData)
+    },
+
     methods : {
         numberWithCommas : function(x) {
             if(x === undefined){

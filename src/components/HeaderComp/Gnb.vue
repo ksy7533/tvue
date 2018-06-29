@@ -1,14 +1,22 @@
 <template>
     <nav class="wrapGnb">
-        <ul class="gnb">
-            <li v-bind:class="{on : changeClassOn('main')}">
-                <router-link class="link" v-bind:to="'/main'">전체</router-link>
-            </li>
+        <div class="content">
+            <ul class="gnb">
+                <li v-bind:class="{on : changeClassOn('main')}">
+                    <router-link class="link" v-bind:to="'/main'">전체</router-link>
+                </li>
 
-            <li v-for="(item, index) in gnb" v-bind:key="index" v-bind:class="{on : changeClassOn(item.id)}">
-                <router-link class="link" v-bind:to="'/totalVideo/channel/'+item.id">{{item.name}}</router-link>
-            </li>
-        </ul>
+                <li v-for="(item, index) in gnb" v-bind:key="index" v-bind:class="{on : changeClassOn(item.id)}">
+                    <router-link class="link" v-bind:to="'/totalVideo/channel/'+item.id">{{item.name}}</router-link>
+                </li>
+            </ul>
+
+            <div class="sideMenu" v-if="this.$route.name === 'playVideo' && this.isLogin">
+                <button v-on:click="likeVideo" v-if="!this.$store.state.isLikeVideo">동영상 찜하기</button>
+                <!-- <button v-on:click="likeVideo" >동영상 찜하기</button> -->
+                <button v-on:click="unLikeVideo" v-else>찜하기 해제</button>
+            </div>
+        </div>
     </nav>
 </template>
 
@@ -16,11 +24,25 @@
 import HeaderTop from './HeaderTop.vue'
 import Gnb from './Gnb.vue'
 
+import firebase from 'firebase'
+import { db } from '../../config/db.js'
+
+
 export default {
-    computed: {
-        currentGnbId () {
-            return this.$store.state.currentGnbId
-        }
+    // computed: {
+    //     currentGnbId () {
+    //         return this.$store.state.currentGnbId
+    //     }
+    // },
+
+    mounted(){
+        firebase.auth().onAuthStateChanged((user) => {
+            if (user) {
+                this.isLogin = true
+            } else {
+                this.isLogin = false
+            }
+        })
     },
 
     methods : {
@@ -30,13 +52,60 @@ export default {
             }else{
                 return false
             }
+        },
+
+        likeVideo(){
+            if(this.isProcessing){
+                return;
+            }
+            this.isProcessing = true;
+            let currentVideoData = this.$store.state.currentVideoData;
+            let user = firebase.auth().currentUser;
+
+            let pushedRef = db.ref('lists/' + user.uid).child('like_video').push(currentVideoData).then((data)=>{
+                this.$store.commit('setIsLikeVideo', {
+                    isLikeVideo : true
+                });
+                this.isProcessing = false;
+            });
+        },
+
+        unLikeVideo(){
+            if(this.isProcessing_02){
+                return;
+            }
+
+            this.isProcessing_02 = true;
+            let currentVideoId = this.$route.params.videoId;
+            let user = firebase.auth().currentUser;
+
+            let listsRef = db.ref('lists/' + user.uid).child('like_video/').orderByChild('id').equalTo(currentVideoId).once('value', (snapshot) =>{
+                snapshot.forEach((childSnapshot) => {
+                    console.log(childSnapshot.ref)
+                    childSnapshot.ref.remove()
+
+                });
+            })
+
+            this.$store.commit('setIsLikeVideo', {
+                isLikeVideo : false
+            });
+            this.isProcessing_02 = false;
         }
     },
 
     data(){
         return {
             gnb : this.$store.state.gnb,
-            on : false
+            on : false,
+            isLike : false,
+            
+            currentVideoKey: '',
+            isLogin :false,
+
+            isProcessing: false,
+
+            isProcessing_02: false
         }
     }
 }
@@ -51,48 +120,59 @@ export default {
     box-shadow:0 1px 0 0 #D7DBE0;
     background-color:#fff;
 
-    .gnb{
+    .content{
         margin:0 auto;
         width:1260px;
 
         &:after{
             @extend .clear;
         }
-
-        li{
+        .gnb{
             float:left;
-            position: relative;
-            margin-left:10px;
 
-            &:first-child{
-                margin-left:0; 
+            &:after{
+                @extend .clear;
             }
 
-            &.on{
+            li{
+                float:left;
+                position: relative;
+                margin-left:10px;
+
+                &:first-child{
+                    margin-left:0; 
+                }
+
+                &.on{
+                    a{
+                        color:#000;
+                    }
+
+                    &:after{
+                        content:'';
+                        display:block;
+                        position: absolute;
+                        bottom:0;
+                        left:0;
+                        width:100%;
+                        height:2px;
+                        background-color:#f7d715;
+                    }
+                }
+
                 a{
-                    color:#000;
-                }
-
-                &:after{
-                    content:'';
-                    display:block;
-                    position: absolute;
-                    bottom:0;
-                    left:0;
-                    width:100%;
-                    height:2px;
-                    background-color:#f7d715;
+                    display: block;
+                    padding:15px 20px;
+                    color:#6c7280;
+                    font-size:13px;
+                    font-weight:600;
+                    text-decoration:none
                 }
             }
+        }
 
-            a{
-                display: block;
-                padding:15px 20px;
-                color:#6c7280;
-                font-size:13px;
-                font-weight:600;
-                text-decoration:none
-            }
+        .sideMenu{
+            float:right;
         }
     }
 }

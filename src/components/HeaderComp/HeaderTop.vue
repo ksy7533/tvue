@@ -16,6 +16,7 @@
             <div v-else>
                 <span class="displayName">{{displayName}}</span>
                 <button v-on:click="signOut">로그아웃</button>
+                <button v-on:click="goLikeList">나의 찜목록</button>
             </div>
         </div>
     </div>
@@ -29,14 +30,17 @@ export default {
         return {
             isSearch : false,
             keyword : '',
-            isLogin: false,
-            displayName: ''
+            isLogin: false
         }
     },
 
     computed : {
         stateKeyword(){
             return this.$store.state.keyword;
+        },
+        displayName(){
+            let user = firebase.auth().currentUser;
+            return user.displayName;
         }
     },
 
@@ -87,20 +91,15 @@ export default {
         login(){
             let authProvider = new firebase.auth.GoogleAuthProvider();
             firebase.auth().signInWithPopup(authProvider).then((result) => {
-                var token = result.credential.accessToken;
                 var user = result.user;
-
-                this.displayName = user.displayName;
-                
-                console.log(user)
-                // ...
+                firebase.auth().setPersistence(firebase.auth.Auth.Persistence.SESSION)
             }).catch(function(error) {
-                var errorCode = error.code;
-                var errorMessage = error.message;
-                var email = error.email;
-                var credential = error.credential;
+                
             });
+        },
 
+        goLikeList(){
+            this.$router.push({ name: 'totalVideoMylist'});
         }
     }
 }

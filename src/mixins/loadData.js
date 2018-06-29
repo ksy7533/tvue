@@ -63,6 +63,10 @@ export const loadData = {
         },
 
         goPage: function(itemData) {
+
+            this.$store.commit('setCurrentGnbId', {
+                currentGnbId: 'player'
+            });
             this.$router.push({ name: 'playVideo', params: { videoId: itemData.id, channelId: itemData.channelId } });
         }
     }

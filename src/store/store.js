@@ -27,7 +27,11 @@ export const store = new Vuex.Store({
         gnb: GNB_LIST,
         customListData: [],
         keyword: '',
-        userInfo: {}
+        userInfo: {},
+
+        currentVideoData: {},
+
+        isLikeVideo: false
     },
 
     mutations: {
@@ -57,7 +61,14 @@ export const store = new Vuex.Store({
 
         setKeyword(state, payload) {
             state.keyword = payload.keyword;
-        }
+        },
 
+        setCurrentVideo(state, payload) {
+            state.currentVideoData = payload.currentVideoData;
+        },
+
+        setIsLikeVideo(state, payload) {
+            state.isLikeVideo = payload.isLikeVideo
+        }
     }
 });

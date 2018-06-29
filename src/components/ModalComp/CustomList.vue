@@ -49,9 +49,7 @@ export default {
             let user = firebase.auth().currentUser;
             let listsRef  = db.ref('lists/' + user.uid);
 
-            listsRef.push({
-                query
-            });
+            listsRef.child('custom_query').push(query);
         }
     }
 }

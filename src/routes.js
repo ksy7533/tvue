@@ -31,6 +31,12 @@ export default [{
     },
 
     {
+        path: '/totalVideo/mylist',
+        name: 'totalVideoMylist',
+        component: TotalVideoArea
+    },
+
+    {
         path: '/login',
         name: 'login',
         component: LoginArea

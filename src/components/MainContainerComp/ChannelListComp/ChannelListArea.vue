@@ -118,6 +118,8 @@ export default {
     padding:20px 0;
     border:1px solid #ccc;
     border-radius:5px;
+    background-color:$white-color;
+    box-shadow: 0 0 0 1px rgba(0,0,0,.03), 0 1px 2px 0 rgba(0,0,0,.19);
 
     .channelName{
         cursor: pointer;    

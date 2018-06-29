@@ -18,44 +18,7 @@ import PlayVideoContainerArea from './components/PlayVideoContainerComp/PlayVide
 import TotalVideoArea from './components/TotalVideoContainerComp/TotalVideoArea.vue'
 import FooterArea from './components/FooterComp/FooterArea.vue'
 
-import firebase from 'firebase';
-import { db } from './config/db.js'
-
-
 export default {
-
-mounted(){
-    firebase.auth().onAuthStateChanged((user) => {
-        if (user) {
-              let currentUser = firebase.auth().currentUser;
-              let listsRef = db.ref('lists/' + currentUser.uid);
-
-              listsRef.on('value', (data) => {
-                console.log(data)
-                  let dataVal = data.val()
-                  let customListData = [];
-
-                  data.forEach(function(item, index){
-                    customListData.push({
-                      id : item.key,
-                      q : item.val().query
-                    });
-                  })
-
-                  this.$store.commit('setCustomListData', {
-                    customListData
-                  });
-              });
-        } else {
-            console.log("없음")
-            this.$store.commit('setCustomListData', {
-              customListData : []
-            });
-
-        }
-    })
-  },
-
   components : {
     HeaderArea,
     MainContainerArea,

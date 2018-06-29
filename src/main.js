@@ -4,11 +4,11 @@ import axios from 'axios'
 import { store } from './store/store.js'
 import Router from 'vue-router'
 import routes from './routes.js'
-import firebase from 'firebase';
+// import firebase from 'firebase';
 
 import VueFire from 'vuefire'
 
-import { db } from './config/db.js'
+// import { db } from './config/db.js'
 
 
 let app;

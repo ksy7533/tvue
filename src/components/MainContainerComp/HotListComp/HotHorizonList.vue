@@ -90,11 +90,8 @@ export default {
 
         removeList : function(contentsId){
             let currentUser = firebase.auth().currentUser;
-            let listsRef = db.ref('lists/' + currentUser.uid + '/' + contentsId);
+            let listsRef = db.ref('lists/' + currentUser.uid).child('custom_query/' + contentsId);
             listsRef.remove();
-            // this.$store.commit('removeCustomListData', {
-            //     contentsId
-            // });
         }
     },
     
@@ -230,10 +227,10 @@ export default {
         text-align: center;
         margin-top:10px;
         padding:15px 0;
-        color:#999;
+        color:#000;
         font-size:14px;
         font-weight:bold;
-        background-color:$white-color;
+        background-color:#ededed;
         border-top:1px solid #d9d9d9;
 
         &:hover{

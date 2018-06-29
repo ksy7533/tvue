@@ -13,6 +13,9 @@ import PlayArea from './PlayComp/PlayArea.vue'
 import VideoCategory from './VideoCategoryComp/VideoCategoryArea.vue'
 import { loadData } from '../../mixins/loadData.js'
 
+import firebase from 'firebase'
+import { db } from '../../config/db.js'
+
 var YOUTUBE_API = "AIzaSyBQ1G-JhjIMd0bGr9IeF49NKeQ29roBttY";
 var video_url = "https://www.googleapis.com/youtube/v3/videos";
 
@@ -20,6 +23,27 @@ export default {
     mixins: [loadData],
     
     mounted(){
+        this.$store.commit('setIsLikeVideo', {
+            isLikeVideo : false
+        });
+
+        firebase.auth().onAuthStateChanged((user) => {
+            let currentVideoId = this.$route.params.videoId;
+            if (user) {
+                 let listsRef = db.ref('lists/' + user.uid).child('like_video/').on("value", (snapshot) => {
+                    snapshot.forEach((item)=>{
+                        if(item.val().id === currentVideoId){
+                            this.$store.commit('setIsLikeVideo', {
+                                isLikeVideo : true
+                            });
+                        }
+                    })
+                });
+            } else {
+                console.log("no")
+            }
+        });
+
         this.getData(video_url, {
             key : YOUTUBE_API,
             regionCode : 'kr',

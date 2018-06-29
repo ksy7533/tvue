@@ -12,7 +12,7 @@
 @import "../../styles/extend";
 footer{
     border-top:1px solid #d9d9d9;
-    background-color:#f3f3f5;
+    background-color:#ebedee;
 
     .areaFooter{
         text-align: center;

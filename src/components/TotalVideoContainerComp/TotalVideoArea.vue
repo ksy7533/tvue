@@ -33,6 +33,9 @@ import VideoItem from '../CommonComp/videoItem.vue'
 import ytDurationFormat from 'youtube-duration-format'
 import moment from 'moment';
 
+import firebase from 'firebase'
+import { db } from '../../config/db.js'
+
 var YOUTUBE_API = "AIzaSyBQ1G-JhjIMd0bGr9IeF49NKeQ29roBttY";
 var video_url = "https://www.googleapis.com/youtube/v3/videos";
 var search_url = "https://www.googleapis.com/youtube/v3/search";
@@ -84,6 +87,18 @@ export default {
                 order : this.sort,
                 q : this.$route.params.query
             }, this.contents);
+        }
+
+        else if(this.$route.name === 'totalVideoMylist'){
+            this.title = '나의 찜목록'
+            let user = firebase.auth().currentUser;
+            let listsRef = db.ref('lists/' + user.uid).child('like_video/').once('value', (snapshot)=>{
+                snapshot.forEach((item, index)=>{
+                    this.contents.push(item.val());
+                })
+                this.loading = false;
+            })
+
         }
     },
 
