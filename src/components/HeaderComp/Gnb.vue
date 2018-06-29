@@ -12,9 +12,8 @@
             </ul>
 
             <div class="sideMenu" v-if="this.$route.name === 'playVideo' && this.isLogin">
-                <button v-on:click="likeVideo" v-if="!this.$store.state.isLikeVideo">동영상 찜하기</button>
-                <!-- <button v-on:click="likeVideo" >동영상 찜하기</button> -->
-                <button v-on:click="unLikeVideo" v-else>찜하기 해제</button>
+                <button class="like" v-on:click="likeVideo" v-if="!this.$store.state.isLikeVideo">동영상 찜하기 <i class="fas fa-hand-holding-heart"></i></button>
+                <button class="like un" v-on:click="unLikeVideo" v-else>찜하기 해제 <i class="fas fa-hand-holding-heart"></i></button>
             </div>
         </div>
     </nav>
@@ -81,9 +80,7 @@ export default {
 
             let listsRef = db.ref('lists/' + user.uid).child('like_video/').orderByChild('id').equalTo(currentVideoId).once('value', (snapshot) =>{
                 snapshot.forEach((childSnapshot) => {
-                    console.log(childSnapshot.ref)
                     childSnapshot.ref.remove()
-
                 });
             })
 
@@ -99,12 +96,9 @@ export default {
             gnb : this.$store.state.gnb,
             on : false,
             isLike : false,
-            
             currentVideoKey: '',
             isLogin :false,
-
             isProcessing: false,
-
             isProcessing_02: false
         }
     }
@@ -173,6 +167,25 @@ export default {
 
         .sideMenu{
             float:right;
+            padding-top:8px;
+
+            .like{
+                cursor: pointer;
+                padding:5px 10px;
+                color:#000;
+                font-weight:bold;
+                background-color:#f7d715;
+                border:0;
+                border-radius: 5px;
+
+                i{
+                    font-size:14px;
+                }
+
+                &.un i{
+                    color:red
+                }
+            }
         }
     }
 }

@@ -1,7 +1,7 @@
 <template>
   <div id="app" class="wrap">
     <HeaderArea></HeaderArea>
-    <div class="container">
+    <div class="container" v-bind:class="{main : containerName}">
       <div class="content">
         <router-view :key="$route.path"></router-view>
       </div>
@@ -19,6 +19,16 @@ import TotalVideoArea from './components/TotalVideoContainerComp/TotalVideoArea.
 import FooterArea from './components/FooterComp/FooterArea.vue'
 
 export default {
+  computed:{
+    containerName(){
+      if(this.$route.name === 'main'){
+        return true;
+      }else{
+        return false;
+      }
+    }
+  },
+
   components : {
     HeaderArea,
     MainContainerArea,
@@ -29,7 +39,10 @@ export default {
 }
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
+@import "./styles/variables";
+@import "./styles/mixin";
+@import "./styles/extend";
 @import url(//fonts.googleapis.com/earlyaccess/notosanskr.css);
 
 .wrap{
@@ -43,6 +56,10 @@ export default {
 .container{
   min-height:100%;
   margin:0 0 -113px 0;
+
+  &.main{
+    background-color:#f3f3f5;
+  }
 }
 
 .content{

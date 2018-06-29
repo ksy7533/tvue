@@ -15,8 +15,8 @@
             </div>
             <div v-else>
                 <span class="displayName">{{displayName}}</span>
-                <button v-on:click="signOut">로그아웃</button>
-                <button v-on:click="goLikeList">나의 찜목록</button>
+                <button class="like" v-on:click="goLikeList">나의 찜목록</button>
+                <button class="logout" v-on:click="signOut">로그아웃</button>
             </div>
         </div>
     </div>
@@ -201,7 +201,9 @@ export default {
         }
 
         button{
+            cursor: pointer;
             display: inline-block;
+            margin-left:5px;
             padding:5px 10px;
             color:$white-color;
             font-weight:600;
@@ -209,6 +211,12 @@ export default {
             background-color:#2282f2;
             border:0;
             border-radius:3px;
+
+            &.like{
+                color:#2282f2;
+                background-color:#fff;
+                border:1px solid #2282f2;
+            }
         }
     }
 }

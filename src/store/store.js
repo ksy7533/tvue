@@ -28,9 +28,7 @@ export const store = new Vuex.Store({
         customListData: [],
         keyword: '',
         userInfo: {},
-
         currentVideoData: {},
-
         isLikeVideo: false
     },
 
@@ -42,22 +40,6 @@ export const store = new Vuex.Store({
         setCustomListData(state, payload) {
             state.customListData = payload.customListData;
         },
-
-        // addCustomListData(state, payload) {
-        //     console.log(state.customListData)
-        //     state.customListData.push({
-        //         q: payload.query,
-        //         // id: 'hotList_' + (state.customListData.length)
-        //         id: payload.id
-        //     })
-        //     console.log(state.customListData)
-        // },
-
-        // removeCustomListData(state, payload) {
-        //     let tempIndex = 0;
-        //     tempIndex = state.customListData.map(item => item.id).indexOf(payload.contentsId);
-        //     state.customListData.splice(tempIndex, 1);
-        // },
 
         setKeyword(state, payload) {
             state.keyword = payload.keyword;
