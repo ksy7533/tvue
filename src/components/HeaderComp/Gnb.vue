@@ -25,6 +25,9 @@ import Gnb from './Gnb.vue'
 import firebase from 'firebase/app'
 import { db } from 'config/db.js'
 
+import {mapState} from 'vuex'
+
+
 export default {
     mounted(){
         firebase.auth().onAuthStateChanged((user) => {
@@ -36,9 +39,11 @@ export default {
         })
     },
 
+    computed:mapState(['currentGnbId', 'currentVideoData', 'gnb']),
+
     methods : {
         changeClassOn : function(itemId){
-            if(itemId === this.$store.state.currentGnbId.toString()){
+            if(itemId === this.currentGnbId.toString()){
                 return true
             }else{
                 return false
@@ -50,10 +55,9 @@ export default {
                 return;
             }
             this.isProcessing = true;
-            let currentVideoData = this.$store.state.currentVideoData;
             let user = firebase.auth().currentUser;
 
-            let pushedRef = db.ref('lists/' + user.uid).child('like_video').push(currentVideoData).then((data)=>{
+            let pushedRef = db.ref('lists/' + user.uid).child('like_video').push(this.currentVideoData).then((data)=>{
                 this.$store.commit('setIsLikeVideo', {
                     isLikeVideo : true
                 });
@@ -85,7 +89,6 @@ export default {
 
     data(){
         return {
-            gnb : this.$store.state.gnb,
             on : false,
             isLike : false,
             currentVideoKey: '',

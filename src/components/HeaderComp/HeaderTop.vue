@@ -6,7 +6,7 @@
             </router-link>
         </h1>
         <div class="searchBox" v-bind:class="{ on : isSearch}">
-            <input type="text" v-model="keyword" v-on:focus="focusSearch" v-on:blur="blurSearch" v-on:keyup.enter="searchVideo">
+            <input type="text" v-model="inputKeyword" v-on:focus="focusSearch" v-on:blur="blurSearch" v-on:keyup.enter="searchVideo">
             <button v-on:click="searchVideo"><i class="fas fa-search"></i></button>
         </div>
         <div class="areaUtil">
@@ -23,55 +23,53 @@
 </template>
 
 <script>
-import firebase from 'firebase/app';
+import firebase from 'firebase/app'
+import {mapState} from 'vuex'
+import _ from 'lodash'
 
 export default {
     data(){
         return {
             isSearch : false,
-            keyword : '',
+            inputKeyword : '',
             isLogin: false
         }
     },
 
-    computed : {
-        stateKeyword(){
-            return this.$store.state.keyword;
-        },
-        displayName(){
-            let user = firebase.auth().currentUser;
-            return user.displayName;
-        }
-    },
+    computed : _.extend({
+            displayName : function(){
+                let user = firebase.auth().currentUser;
+                return user.displayName;
+            }
+        }, mapState(['keyword'])
+    ),
 
     mounted(){
         firebase.auth().onAuthStateChanged((user) => {  
             if(user){
                 this.isLogin = true;
-                console.log('login')
             }else{
                 this.isLogin = false;
-                console.log('login no')
             }
         })
     },
 
     watch : {
-        stateKeyword : function(val){
-            this.keyword = val;
+        keyword : function(val){
+            this.inputKeyword = val;
         }
     },
 
     methods : {
         searchVideo : function(){
-            if(this.keyword === ''){
+            if(this.inputKeyword === ''){
                 return;
             }
 
             this.$store.commit('setKeyword', {
-                keyword : this.keyword
+                keyword : this.inputKeyword
             });
-            this.$router.push({ name: 'totalVideoHot', params: { query : this.keyword} });
+            this.$router.push({ name: 'totalVideoHot', params: { query : this.inputKeyword} });
         },
 
         focusSearch : function(){
@@ -84,8 +82,7 @@ export default {
         
         signOut(){
             firebase.auth().signOut().then(function() {
-            }).catch(function(error) {
-            });
+            }).catch(function(error) {});
         },
 
         login(){
