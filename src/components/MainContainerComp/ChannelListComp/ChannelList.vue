@@ -43,6 +43,30 @@ export default {
         @extend .clear;
     }
 
+    &:nth-of-type(n){
+        .channelName{
+            background-color:#22B478;        
+        }
+    }
+
+    &:nth-of-type(2n){
+        .channelName{
+            background-color:#D8186B;
+        }
+    }
+
+    &:nth-of-type(3n){
+        .channelName{
+            background-color:#EEA802;
+        }
+    }
+
+    &:nth-of-type(4n){
+        .channelName{
+            background-color:#1984CE;     
+        }
+    }
+    
     .channelName{
         text-decoration:none;
         float:left;
@@ -51,23 +75,6 @@ export default {
         width:185px;
         height:200px;
         border-radius:5px;
-
-        &.type01{
-            background-color:#22B478;        
-        }
-
-        &.type02{
-            background-color:#D8186B;
-        }
-
-        &.type03{
-            background-color:#EEA802;
-        }
-
-        &.type04{
-            background-color:#1984CE;     
-        }
-
         .name{
             display:block;
             color:$white-color;

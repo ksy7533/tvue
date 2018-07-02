@@ -12,7 +12,6 @@
 
         <a href="#n" class="btnMore" v-on:click.prevent="goPage()">더보기</a>
         <div class="pages"></div>
-        <!-- <div class="arrows"></div> -->
         <a class="btnRemove" v-on:click="removeList(contents.id)"><i class="fas fa-times"></i></a>
     </div>
 </template>
@@ -32,8 +31,8 @@ export default {
     mixins: [loadData],
 
     mounted(){
-        this.getSearchData(Constant_SEARCH_URL, {
-            key : Constant_YOUTUBE_API_KEY,
+        this.getSearchData(Constant.SEARCH_URL, {
+            key : Constant.YOUTUBE_API_KEY,
             regionCode : 'KR',
             part : 'snippet',
             maxResults : this.maxResults,
@@ -68,8 +67,8 @@ export default {
     watch: {
         contents : function(val){
             this.arrData = [];
-            this.getSearchData(Constant_SEARCH_URL, {
-                key : Constant_YOUTUBE_API_KEY,
+            this.getSearchData(Constant.SEARCH_URL, {
+                key : Constant.YOUTUBE_API_KEY,
                 regionCode : 'KR',
                 part : 'snippet',
                 maxResults : this.maxResults,

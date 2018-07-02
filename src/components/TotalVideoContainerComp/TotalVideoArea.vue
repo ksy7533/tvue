@@ -38,13 +38,11 @@ export default {
     mounted(){
         /* 채널리스트 */
         if(this.$route.params.channelId){
-            const gnb_list = this.$store.state.gnb;
-
             this.$store.commit('setKeyword', {
                 keyword : ''
             });
 
-            gnb_list.forEach((item) => {
+            this.gnb.forEach((item) => {
                 if((item.id) === this.$route.params.channelId.toString()){
                     this.title = item.name;
                 }
@@ -70,7 +68,7 @@ export default {
                 keyword : this.$route.params.query
             });
 
-            this.getSearchData(search_url, {
+            this.getSearchData(Constant.SEARCH_URL, {
                 key : Constant.YOUTUBE_API_KEY,
                 regionCode : 'kr',
                 part : 'snippet',
@@ -101,7 +99,8 @@ export default {
             tokenNextPage : '',
             title : '',
             orderText : '인기',
-            loading : true
+            loading : true,
+            gnb: this.$store.state.gnb
         }
     },
 
@@ -119,7 +118,7 @@ export default {
                 }, this.contents)
             }
             else if(this.$route.params.query){
-                this.getSearchData(search_url, {
+                this.getSearchData(Constant.SEARCH_URL, {
                     key : Constant.YOUTUBE_API_KEY,
                     regionCode : 'Kr',
                     part : 'snippet',

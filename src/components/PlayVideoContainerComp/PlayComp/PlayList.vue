@@ -81,7 +81,7 @@ export default {
                 });
 
                 tempData.forEach(function(videoId){
-                    that.getData(Constant.VIDEO_url, {
+                    that.getData(Constant.VIDEO_URL, {
                         key : Constant.YOUTUBE_API_KEY,
                         regionCode : 'kr',
                         part : 'snippet,contentDetails,statistics',

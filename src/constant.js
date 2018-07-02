@@ -20,6 +20,10 @@ export default {
         {
             name: '동물',
             id: '15'
+        },
+        {
+            name: '스포츠',
+            id: '17'
         }
     ],
 

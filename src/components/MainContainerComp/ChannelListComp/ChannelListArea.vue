@@ -1,29 +1,12 @@
 <template>
     <section class="areaChannel">
-        <channelList v-bind:contents="varietyChannelContents">
-            <a slot="channelName" class="channelName type01" v-on:click="goPage(COMEDY_CHANNEL_ID)">
-                <span slot="title" class="name">예능</span>
+        <channelList v-for="(item, index) in gnb" v-bind:contents="channelData[index]" v-bind:key="index">
+            <a slot="channelName" class="channelName" v-on:click="goPage(item.id)">
+                <span slot="title" class="name">{{item.name}}</span>
                 <span class="sub_name">최신 인기 동영상</span>
             </a>
         </channelList>
-        <channelList v-bind:contents="musicChannelContents">
-            <a slot="channelName" class="channelName type02" v-on:click="goPage(MUSIC_CHANNEL_ID)">
-                <span slot="title" class="name">음악</span>
-                <span class="sub_name">최신 인기 동영상</span>
-            </a>
-        </channelList>
-        <channelList v-bind:contents="gameChannelContents">
-            <a slot="channelName" class="channelName type03" v-on:click="goPage(GAME_CHANNEL_ID)">
-                <span slot="title" class="name">게임</span>
-                <span class="sub_name">최신 인기 동영상</span>
-            </a>
-        </channelList>
-        <channelList v-bind:contents="movieChannelContents">
-            <a slot="channelName" class="channelName type04" v-on:click="goPage(FET_CHANNEL_ID)">
-                <span slot="title" class="name">동물</span>
-                <span class="sub_name">최신 인기 동영상</span>
-            </a>
-        </channelList>
+
     </section>
 </template>
 
@@ -37,62 +20,28 @@ export default {
     mixins: [loadData],
 
     mounted() {
-        /* 예능동영상 */
-        this.getData(Constant.VIDEO_URL, {
-            key : Constant.YOUTUBE_API_KEY,
-            chart : 'mostPopular',
-            regionCode : 'kr',
-            part : 'snippet,contentDetails,statistics',
-            videoCategoryId : this.COMEDY_CHANNEL_ID
-        },
-            this.varietyChannelContents
-        )
 
-        /* 음악동영상 */
-        this.getData(Constant.VIDEO_URL, {
-            key : Constant.YOUTUBE_API_KEY,
-            chart : 'mostPopular',
-            regionCode : 'kr',
-            part : 'snippet,contentDetails,statistics',
-            videoCategoryId : this.MUSIC_CHANNEL_ID
-        },
-            this.musicChannelContents
-        )
+        for(let i = 0; i<this.gnb.length; i++){
+            this.channelData.push([]);
+        }
 
-        /* 게임동영상 */
-        this.getData(Constant.VIDEO_URL, {
-            key : Constant.YOUTUBE_API_KEY,
-            chart : 'mostPopular',
-            regionCode : 'kr',
-            part : 'snippet,contentDetails,statistics',
-            videoCategoryId : this.GAME_CHANNEL_ID
-        },
-            this.gameChannelContents
-        )
-
-        /* 영화동영상 */
-        this.getData(Constant.VIDEO_URL, {
-            key : Constant.YOUTUBE_API_KEY,
-            chart : 'mostPopular',
-            regionCode : 'kr',
-            part : 'snippet,contentDetails,statistics',
-            videoCategoryId : this.FET_CHANNEL_ID
-        },
-            this.movieChannelContents
-        )
+        this.gnb.forEach((item, index) => {
+            this.getData(Constant.VIDEO_URL, {
+                key : Constant.YOUTUBE_API_KEY,
+                chart : 'mostPopular',
+                regionCode : 'kr',
+                part : 'snippet,contentDetails,statistics',
+                videoCategoryId : item.id
+            },
+                this.channelData[index]
+            )
+        })
     },
 
     data() {
         return {
-            varietyChannelContents : [],
-            musicChannelContents : [],
-            gameChannelContents : [],
-            movieChannelContents : [],
-
-            COMEDY_CHANNEL_ID : 24,
-            MUSIC_CHANNEL_ID : 10,
-            GAME_CHANNEL_ID : 20,
-            FET_CHANNEL_ID : 15
+            gnb : this.$store.state.gnb,
+            channelData : []
         }
     },
 
