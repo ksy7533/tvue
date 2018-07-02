@@ -18,9 +18,8 @@
 </template>
 
 <script>
-import firebase from 'firebase'
-import { db } from '../../config/db.js'
-
+import firebase from 'firebase/app'
+import { db } from 'config/db.js'
 
 export default {
     props : ['toggleModal'],

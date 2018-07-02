@@ -14,7 +14,7 @@
 </template>
 
 <script>
-import { loadData } from '../../mixins/loadData.js'
+import loadData from 'mixins/loadData.js'
 
 export default {
     mixins: [loadData],

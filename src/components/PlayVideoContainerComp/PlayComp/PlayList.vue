@@ -16,12 +16,9 @@
 </template>
 
 <script>
-import { loadData } from '../../../mixins/loadData.js'
+import loadData from 'mixins/loadData.js'
 import moment from 'moment';
-
-var YOUTUBE_API = "AIzaSyBQ1G-JhjIMd0bGr9IeF49NKeQ29roBttY";
-var search_url = "https://www.googleapis.com/youtube/v3/search";
-var video_url = "https://www.googleapis.com/youtube/v3/videos";
+import Constant from 'constant'
 
 export default {
     mixins: [loadData],
@@ -32,8 +29,8 @@ export default {
             this.isBottom = this.goBottom(e.target);
         });
 
-        this.getSearchData(search_url, {
-            key : YOUTUBE_API,
+        this.getSearchData(Constant.SEARCH_URL, {
+            key : Constant.YOUTUBE_API_KEY,
             regionCode : 'kr',
             part : 'snippet',
             maxResults : '30',
@@ -84,8 +81,8 @@ export default {
                 });
 
                 tempData.forEach(function(videoId){
-                    that.getData(video_url, {
-                        key : YOUTUBE_API,
+                    that.getData(Constant.VIDEO_url, {
+                        key : Constant.YOUTUBE_API_KEY,
                         regionCode : 'kr',
                         part : 'snippet,contentDetails,statistics',
                         id : videoId
@@ -110,8 +107,8 @@ export default {
     watch :{
         isBottom : function(val){
             if(val === true){
-                this.getSearchData(search_url, {
-                    key : YOUTUBE_API,
+                this.getSearchData(Constant.SEARCH_URL, {
+                    key : Constant.YOUTUBE_API_KEY,
                     regionCode : 'kr',
                     part : 'snippet',
                     maxResults : '30',

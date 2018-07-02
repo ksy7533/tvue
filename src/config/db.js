@@ -1,5 +1,4 @@
 import Firebase from 'firebase'
-import { WSAEHOSTUNREACH } from 'constants';
 
 let config = {
     apiKey: "AIzaSyCz6UgLRKVd04oi6qAgJRfAD7Z-1GSDju8",

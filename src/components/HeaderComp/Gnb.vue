@@ -22,18 +22,10 @@
 <script>
 import HeaderTop from './HeaderTop.vue'
 import Gnb from './Gnb.vue'
-
-import firebase from 'firebase'
-import { db } from '../../config/db.js'
-
+import firebase from 'firebase/app'
+import { db } from 'config/db.js'
 
 export default {
-    // computed: {
-    //     currentGnbId () {
-    //         return this.$store.state.currentGnbId
-    //     }
-    // },
-
     mounted(){
         firebase.auth().onAuthStateChanged((user) => {
             if (user) {

@@ -11,15 +11,12 @@
 </template>
 
 <script>
-import { loadData } from '../../../mixins/loadData.js'
 import VideoItem from '../../CommonComp/videoItem.vue'
 
+import loadData from 'mixins/loadData.js'
 import ytDurationFormat from 'youtube-duration-format'
-import moment from 'moment';
-
-var YOUTUBE_API = "AIzaSyBQ1G-JhjIMd0bGr9IeF49NKeQ29roBttY";
-var video_url = "https://www.googleapis.com/youtube/v3/videos";
-var playList_url = "https://www.googleapis.com/youtube/v3/playlistItems";
+import moment from 'moment'
+import Constant from 'constant'
 
 export default {
     props : [
@@ -29,8 +26,8 @@ export default {
     mixins: [loadData],
 
     mounted(){
-        this.getSearchData(playList_url, {
-            key : YOUTUBE_API,
+        this.getSearchData(Constant.PLAYLIST_URL, {
+            key : Constant.YOUTUBE_API_KEY,
             part : "snippet,contentDetails",
             playlistId : this.categoryObj.id,
             maxResults : 12
@@ -73,8 +70,8 @@ export default {
                 });
 
                 tempData.forEach(function(videoId){
-                    that.getData(video_url, {
-                        key : YOUTUBE_API,
+                    that.getData(Constant.VIDEO_URL, {
+                        key : Constant.YOUTUBE_API_KEY,
                         regionCode : 'kr',
                         part : 'snippet,contentDetails,statistics',
                         id : videoId
@@ -88,8 +85,8 @@ export default {
         },
 
         addListData : function(){
-            this.getSearchData(playList_url, {
-                key : YOUTUBE_API,
+            this.getSearchData(Constant.PLAYLIST_URL, {
+                key : Constant.YOUTUBE_API_KEY,
                 part : "snippet,contentDetails",
                 playlistId : this.categoryObj.id,
                 maxResults : 12,

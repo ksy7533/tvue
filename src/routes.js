@@ -2,8 +2,8 @@ import MainContainerArea from './components/MainContainerComp/MainContainerArea.
 import PlayVideoArea from './components/PlayVideoContainerComp/PlayVideoArea.vue'
 import TotalVideoArea from './components/TotalVideoContainerComp/TotalVideoArea.vue'
 
-import LoginArea from './components/AuthComp/Login.vue'
-import SignupArea from './components/AuthComp/Signup.vue'
+// import LoginArea from './components/AuthComp/Login.vue'
+// import SignupArea from './components/AuthComp/Signup.vue'
 
 export default [{
         path: '/main',
@@ -36,17 +36,17 @@ export default [{
         component: TotalVideoArea
     },
 
-    {
-        path: '/login',
-        name: 'login',
-        component: LoginArea
-    },
+    // {
+    //     path: '/login',
+    //     name: 'login',
+    //     component: LoginArea
+    // },
 
-    {
-        path: '/signup',
-        name: 'signup',
-        component: SignupArea
-    },
+    // {
+    //     path: '/signup',
+    //     name: 'signup',
+    //     component: SignupArea
+    // },
 
     {
         path: '*',

@@ -148,17 +148,15 @@
 </template>
 
 <script>
-import { loadData } from '../../../mixins/loadData.js'
-
-var YOUTUBE_API = "AIzaSyBQ1G-JhjIMd0bGr9IeF49NKeQ29roBttY";
-var video_url = "https://www.googleapis.com/youtube/v3/videos";
+import loadData from 'mixins/loadData.js'
+import Constant from 'constant'
 
 export default {
     mixins: [loadData],
 
     mounted(){
-        this.getData(video_url, {
-            key : YOUTUBE_API,
+        this.getData(Constant.VIDEO_URL, {
+            key : Constant.YOUTUBE_API_KEY,
             chart : 'mostPopular',
             regionCode : 'kr',
             part : 'snippet,contentDetails,statistics',

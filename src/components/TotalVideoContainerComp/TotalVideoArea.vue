@@ -6,10 +6,6 @@
                 <span v-if="this.$route.params.channelId">채널</span>
                 <span v-else-if="this.$route.params.query"> 관련동영상</span>
             </h2>
-            <!-- <div class="rightBox">
-                <a href="#n" id="order_hot" v-on:click.prevent="sortList('viewcount')">조회순</a>
-                <a href="#n" id="order_date" v-on:click.prevent="sortList('date')">최신순</a>
-            </div> -->
         </div>
         <div class="" v-if="!loading">
             <ul class="list">
@@ -27,18 +23,14 @@
 </template>
 
 <script>
-import { loadData } from '../../mixins/loadData.js'
 import VideoItem from '../CommonComp/videoItem.vue'
 
 import ytDurationFormat from 'youtube-duration-format'
-import moment from 'moment';
-
-import firebase from 'firebase'
-import { db } from '../../config/db.js'
-
-var YOUTUBE_API = "AIzaSyBQ1G-JhjIMd0bGr9IeF49NKeQ29roBttY";
-var video_url = "https://www.googleapis.com/youtube/v3/videos";
-var search_url = "https://www.googleapis.com/youtube/v3/search";
+import moment from 'moment'
+import loadData from 'mixins/loadData.js'
+import firebase from 'firebase/app'
+import { db } from 'config/db.js'
+import Constant from 'constant'
 
 export default {
     mixins: [loadData],
@@ -58,8 +50,8 @@ export default {
                 }
             })
 
-            this.getVideoData(video_url, {
-                key : YOUTUBE_API,
+            this.getVideoData(Constant.VIDEO_URL, {
+                key : Constant.YOUTUBE_API_KEY,
                 chart : 'mostPopular',
                 regionCode : 'kr',
                 maxResults : '30',
@@ -79,7 +71,7 @@ export default {
             });
 
             this.getSearchData(search_url, {
-                key : YOUTUBE_API,
+                key : Constant.YOUTUBE_API_KEY,
                 regionCode : 'kr',
                 part : 'snippet',
                 maxResults : '30',
@@ -116,8 +108,8 @@ export default {
     methods : {
         addListData : function(){
             if(this.$route.params.channelId){
-                 this.getVideoData(video_url, {
-                    key : YOUTUBE_API,
+                 this.getVideoData(Constant.VIDEO_URL, {
+                    key : Constant.YOUTUBE_API_KEY,
                     chart : 'mostPopular',
                     regionCode : 'kr',
                     maxResults : '30',
@@ -128,7 +120,7 @@ export default {
             }
             else if(this.$route.params.query){
                 this.getSearchData(search_url, {
-                    key : YOUTUBE_API,
+                    key : Constant.YOUTUBE_API_KEY,
                     regionCode : 'Kr',
                     part : 'snippet',
                     maxResults : '30',
@@ -187,8 +179,8 @@ export default {
                 });
 
                 tempData.forEach(function(videoId) {
-                    that.getData(video_url, {
-                        key: YOUTUBE_API,
+                    that.getData(Constant.VIDEO_URL, {
+                        key: Constant.YOUTUBE_API_KEY,
                         regionCode: 'Kr',
                         part: 'snippet,contentDetails,statistics',
                         maxResults: '30',

@@ -18,25 +18,22 @@
 </template>
 
 <script>
-import { loadData } from '../../../mixins/loadData.js'
+import loadData from 'mixins/loadData.js'
 import VideoItem from '../../CommonComp/videoItem.vue'
 
 import $ from 'jquery'
 import Zumslide from '../../../assets/js/zumSlide.js'
-
-import firebase from 'firebase'
-import { db } from '../../../config/db.js'
-
-var YOUTUBE_API = "AIzaSyBQ1G-JhjIMd0bGr9IeF49NKeQ29roBttY";
-var search_url = "https://www.googleapis.com/youtube/v3/search";
+import firebase from 'firebase/app'
+import { db } from 'config/db.js'
+import Constant from 'constant'
 
 export default {
     props : ['contents'],
     mixins: [loadData],
 
     mounted(){
-        this.getSearchData(search_url, {
-            key : YOUTUBE_API,
+        this.getSearchData(Constant_SEARCH_URL, {
+            key : Constant_YOUTUBE_API_KEY,
             regionCode : 'KR',
             part : 'snippet',
             maxResults : this.maxResults,
@@ -71,8 +68,8 @@ export default {
     watch: {
         contents : function(val){
             this.arrData = [];
-            this.getSearchData(search_url, {
-                key : YOUTUBE_API,
+            this.getSearchData(Constant_SEARCH_URL, {
+                key : Constant_YOUTUBE_API_KEY,
                 regionCode : 'KR',
                 part : 'snippet',
                 maxResults : this.maxResults,

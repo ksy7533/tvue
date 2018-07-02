@@ -11,13 +11,11 @@
 <script>
 import PlayArea from './PlayComp/PlayArea.vue'
 import VideoCategory from './VideoCategoryComp/VideoCategoryArea.vue'
-import { loadData } from '../../mixins/loadData.js'
 
-import firebase from 'firebase'
-import { db } from '../../config/db.js'
-
-var YOUTUBE_API = "AIzaSyBQ1G-JhjIMd0bGr9IeF49NKeQ29roBttY";
-var video_url = "https://www.googleapis.com/youtube/v3/videos";
+import loadData from 'mixins/loadData.js'
+import firebase from 'firebase/app'
+import { db } from 'config/db.js'
+import Constant from 'constant'
 
 export default {  
     mixins: [loadData],
@@ -44,8 +42,8 @@ export default {
             }
         });
 
-        this.getData(video_url, {
-            key : YOUTUBE_API,
+        this.getData(Constant.VIDEO_URL, {
+            key : Constant.YOUTUBE_API_KEY,
             regionCode : 'kr',
             part : 'snippet,contentDetails,statistics',
             id : this.$route.params.videoId

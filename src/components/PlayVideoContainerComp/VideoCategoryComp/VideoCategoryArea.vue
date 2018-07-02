@@ -8,13 +8,12 @@
 <script>
 import CategoryList from './CategoryList.vue'
 
-var YOUTUBE_API = "AIzaSyBQ1G-JhjIMd0bGr9IeF49NKeQ29roBttY";
-var categoryList_url = "https://www.googleapis.com/youtube/v3/playlists";
+import Constant from 'constant'
 
 export default {
     mounted(){
-        this.getData(categoryList_url,{
-            key : YOUTUBE_API,
+        this.getData(Constant.PLAYLISTS_URL,{
+            key : Constant.YOUTUBE_API_KEY,
             part : 'snippet',
             channelId : this.$route.params.channelId
         }, this.arrCategory);
@@ -59,8 +58,8 @@ export default {
         },
 
         addListData : function(){
-            this.getData(categoryList_url,{
-                key : YOUTUBE_API,
+            this.getData(Constant.PLAYLISTS_URL,{
+                key : Constant.YOUTUBE_API_KEY,
                 part : 'snippet',
                 channelId : this.$route.params.channelId,
                 pageToken : this.tokenNextPage

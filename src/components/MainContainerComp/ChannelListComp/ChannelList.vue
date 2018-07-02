@@ -12,8 +12,9 @@
 </template>
 
 <script>
-import { loadData } from '../../../mixins/loadData.js'
 import VideoItem from '../../CommonComp/videoItem.vue'
+
+import loadData from 'mixins/loadData.js'
 
 export default {
     props : ['contents'],

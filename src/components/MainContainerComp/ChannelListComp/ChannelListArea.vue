@@ -29,18 +29,17 @@
 
 <script>
 import ChannelList from './ChannelList.vue'
-import { loadData } from '../../../mixins/loadData.js'
 
-var YOUTUBE_API = "AIzaSyBQ1G-JhjIMd0bGr9IeF49NKeQ29roBttY";
-var video_url = "https://www.googleapis.com/youtube/v3/videos";
+import loadData from 'mixins/loadData.js'
+import Constant from 'constant'
 
 export default {
     mixins: [loadData],
 
     mounted() {
         /* 예능동영상 */
-        this.getData(video_url, {
-            key : YOUTUBE_API,
+        this.getData(Constant.VIDEO_URL, {
+            key : Constant.YOUTUBE_API_KEY,
             chart : 'mostPopular',
             regionCode : 'kr',
             part : 'snippet,contentDetails,statistics',
@@ -50,8 +49,8 @@ export default {
         )
 
         /* 음악동영상 */
-        this.getData(video_url, {
-            key : YOUTUBE_API,
+        this.getData(Constant.VIDEO_URL, {
+            key : Constant.YOUTUBE_API_KEY,
             chart : 'mostPopular',
             regionCode : 'kr',
             part : 'snippet,contentDetails,statistics',
@@ -61,8 +60,8 @@ export default {
         )
 
         /* 게임동영상 */
-        this.getData(video_url, {
-            key : YOUTUBE_API,
+        this.getData(Constant.VIDEO_URL, {
+            key : Constant.YOUTUBE_API_KEY,
             chart : 'mostPopular',
             regionCode : 'kr',
             part : 'snippet,contentDetails,statistics',
@@ -72,8 +71,8 @@ export default {
         )
 
         /* 영화동영상 */
-        this.getData(video_url, {
-            key : YOUTUBE_API,
+        this.getData(Constant.VIDEO_URL, {
+            key : Constant.YOUTUBE_API_KEY,
             chart : 'mostPopular',
             regionCode : 'kr',
             part : 'snippet,contentDetails,statistics',

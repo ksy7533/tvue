@@ -1,11 +1,8 @@
 import ytDurationFormat from 'youtube-duration-format'
-import moment from 'moment';
+import moment from 'moment'
+import Constant from 'constant'
 
-var YOUTUBE_API = "AIzaSyBQ1G-JhjIMd0bGr9IeF49NKeQ29roBttY";
-var video_url = "https://www.googleapis.com/youtube/v3/videos";
-var search_url = "https://www.googleapis.com/youtube/v3/search";
-
-export const loadData = {
+export default {
     methods: {
         getData: function(url, params, arrData) {
             this.$axios.get(url, {
@@ -29,8 +26,8 @@ export const loadData = {
                 });
 
                 tempData.forEach(function(videoId) {
-                    that.getData(video_url, {
-                        key: YOUTUBE_API,
+                    that.getData(Constant.VIDEO_URL, {
+                        key: Constant.YOUTUBE_API_KEY,
                         regionCode: 'KR',
                         part: 'snippet,contentDetails,statistics',
                         maxResults: '30',
@@ -63,7 +60,6 @@ export const loadData = {
         },
 
         goPage: function(itemData) {
-
             this.$store.commit('setCurrentGnbId', {
                 currentGnbId: 'player'
             });

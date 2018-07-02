@@ -10,6 +10,7 @@
 @import "../../styles/variables";
 @import "../../styles/mixin";
 @import "../../styles/extend";
+
 footer{
     border-top:1px solid #d9d9d9;
     background-color:#ebedee;
