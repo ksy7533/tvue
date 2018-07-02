@@ -4,8 +4,8 @@
             <i class="fas fa-plus-circle"></i>
         </a>
 
-        <div class="lists" v-if="arrData.length !== 0">
-            <HotHorizonList v-for="(item, index) in arrData" v-bind:key="index" v-bind:contents="item">
+        <div class="lists" v-if="customListData.length !== 0">
+            <HotHorizonList v-for="(item, index) in customListData" v-bind:key="index" v-bind:contents="item">
                 <h2 slot="title"><span class="keyword">{{item.q}}</span> 관련동영상</h2>
             </HotHorizonList>
         </div>
@@ -19,8 +19,9 @@
 import HotHorizonList from './HotHorizonList.vue'
 import ModalCustomList from '../../ModalComp/CustomList.vue'
 
-import firebase from 'firebase/app';
+import firebase from 'firebase'
 import { db } from 'config/db.js'
+import {mapState} from 'vuex'
 
 export default {
 
@@ -29,6 +30,8 @@ export default {
             isModalVisible: false
         }
     },
+
+    computed:mapState(['customListData']),
 
     mounted(){
         firebase.auth().onAuthStateChanged((user) => {
@@ -53,17 +56,11 @@ export default {
             } else {
                 console.log("없음")
                 this.$store.commit('setCustomListData', {
-                customListData : []
+                    customListData : []
                 });
 
             }
         })
-    },
-
-    computed : {
-        arrData(){
-            return this.$store.state.customListData
-        }
     },
 
     methods : {

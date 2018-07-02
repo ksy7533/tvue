@@ -22,11 +22,9 @@
 <script>
 import HeaderTop from './HeaderTop.vue'
 import Gnb from './Gnb.vue'
-import firebase from 'firebase/app'
+import firebase from 'firebase'
 import { db } from 'config/db.js'
-
 import {mapState} from 'vuex'
-
 
 export default {
     mounted(){

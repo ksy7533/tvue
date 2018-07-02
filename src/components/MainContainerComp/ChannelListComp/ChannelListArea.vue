@@ -15,9 +15,12 @@ import ChannelList from './ChannelList.vue'
 
 import loadData from 'mixins/loadData.js'
 import Constant from 'constant'
+import {mapState} from 'vuex'
 
 export default {
     mixins: [loadData],
+
+    computed:mapState(['gnb']),
 
     mounted() {
 
@@ -40,7 +43,6 @@ export default {
 
     data() {
         return {
-            gnb : this.$store.state.gnb,
             channelData : []
         }
     },

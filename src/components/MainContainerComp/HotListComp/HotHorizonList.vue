@@ -22,7 +22,7 @@ import VideoItem from '../../CommonComp/videoItem.vue'
 
 import $ from 'jquery'
 import Zumslide from '../../../assets/js/zumSlide.js'
-import firebase from 'firebase/app'
+import firebase from 'firebase'
 import { db } from 'config/db.js'
 import Constant from 'constant'
 

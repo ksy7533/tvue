@@ -13,7 +13,7 @@ import PlayArea from './PlayComp/PlayArea.vue'
 import VideoCategory from './VideoCategoryComp/VideoCategoryArea.vue'
 
 import loadData from 'mixins/loadData.js'
-import firebase from 'firebase/app'
+import firebase from 'firebase'
 import { db } from 'config/db.js'
 import Constant from 'constant'
 

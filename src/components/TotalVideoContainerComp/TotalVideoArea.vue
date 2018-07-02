@@ -28,12 +28,15 @@ import VideoItem from '../CommonComp/videoItem.vue'
 import ytDurationFormat from 'youtube-duration-format'
 import moment from 'moment'
 import loadData from 'mixins/loadData.js'
-import firebase from 'firebase/app'
+import firebase from 'firebase'
 import { db } from 'config/db.js'
 import Constant from 'constant'
+import {mapState} from 'vuex'
 
 export default {
     mixins: [loadData],
+
+    computed:mapState(['gnb']),
 
     mounted(){
         /* 채널리스트 */
@@ -99,8 +102,7 @@ export default {
             tokenNextPage : '',
             title : '',
             orderText : '인기',
-            loading : true,
-            gnb: this.$store.state.gnb
+            loading : true
         }
     },
 
