@@ -31,5 +31,8 @@ export default {
     VIDEO_URL: "https://www.googleapis.com/youtube/v3/videos",
     SEARCH_URL: "https://www.googleapis.com/youtube/v3/search",
     PLAYLIST_URL: "https://www.googleapis.com/youtube/v3/playlistItems",
-    PLAYLISTS_URL: "https://www.googleapis.com/youtube/v3/playlists"
+    PLAYLISTS_URL: "https://www.googleapis.com/youtube/v3/playlists",
+
+    ADD_LIKE_VIDEO: 'addLikeVideo',
+    REMOVE_LIKE_VIDEO: 'removeLikeVideo'
 }

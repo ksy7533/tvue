@@ -2,6 +2,9 @@ import Vue from 'vue'
 import Vuex from 'vuex'
 import Constant from 'constant'
 
+import firebase from 'firebase'
+import { db } from 'config/db.js'
+
 Vue.use(Vuex);
 
 export const store = new Vuex.Store({
@@ -34,6 +37,25 @@ export const store = new Vuex.Store({
 
         [Constant.SET_IS_LIKE_VIDEO]: (state, payload) => {
             state.isLikeVideo = payload.isLikeVideo
+        }
+    },
+
+    actions: {
+        [Constant.ADD_LIKE_VIDEO]: (context, payload) => {
+            let user = firebase.auth().currentUser;
+            db.ref('lists/' + user.uid).child('like_video').push(payload.currentVideoData).then(() => {
+                context.commit('setIsLikeVideo', { isLikeVideo: true });
+            });
+        },
+
+        [Constant.REMOVE_LIKE_VIDEO]: (context, payload) => {
+            let user = firebase.auth().currentUser;
+            db.ref('lists/' + user.uid).child('like_video/').orderByChild('id').equalTo(payload.currentVideoId).once('value', (snapshot) => {
+                snapshot.forEach((childSnapshot) => {
+                    childSnapshot.ref.remove()
+                });
+                context.commit('setIsLikeVideo', { isLikeVideo: false });
+            })
         }
     }
 });

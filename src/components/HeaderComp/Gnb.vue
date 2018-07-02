@@ -49,39 +49,15 @@ export default {
         },
 
         likeVideo(){
-            if(this.isProcessing){
-                return;
-            }
-            this.isProcessing = true;
-            let user = firebase.auth().currentUser;
-
-            let pushedRef = db.ref('lists/' + user.uid).child('like_video').push(this.currentVideoData).then((data)=>{
-                this.$store.commit('setIsLikeVideo', {
-                    isLikeVideo : true
-                });
-                this.isProcessing = false;
+            this.$store.dispatch('addLikeVideo', {
+                currentVideoData: this.currentVideoData
             });
         },
 
         unLikeVideo(){
-            if(this.isProcessing_02){
-                return;
-            }
-
-            this.isProcessing_02 = true;
-            let currentVideoId = this.$route.params.videoId;
-            let user = firebase.auth().currentUser;
-
-            let listsRef = db.ref('lists/' + user.uid).child('like_video/').orderByChild('id').equalTo(currentVideoId).once('value', (snapshot) =>{
-                snapshot.forEach((childSnapshot) => {
-                    childSnapshot.ref.remove()
-                });
-            })
-
-            this.$store.commit('setIsLikeVideo', {
-                isLikeVideo : false
+            this.$store.dispatch('removeLikeVideo', {
+                currentVideoId : this.$route.params.videoId
             });
-            this.isProcessing_02 = false;
         }
     },
 
