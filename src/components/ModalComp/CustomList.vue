@@ -47,7 +47,6 @@ export default {
         addCustomListData : function(query){
             let user = firebase.auth().currentUser;
             let listsRef  = db.ref('lists/' + user.uid);
-
             listsRef.child('custom_query').push(query);
         }
     }

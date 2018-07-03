@@ -40,7 +40,8 @@ export default {
         },
 
         initData: function(response, arrData) {
-            var items = response.data.items;
+            let items = response.data.items;
+
             items.forEach(ele => {
                 arrData.push({
                     videoTitle: ele.snippet.title,
@@ -52,9 +53,9 @@ export default {
                     duration: ytDurationFormat(ele.contentDetails.duration),
                     description: ele.snippet.description,
                     viewCount: ele.statistics.viewCount,
-                    commentCount: ele.statistics.commentCount,
-                    likeCount: ele.statistics.likeCount,
-                    dislikeCount: ele.statistics.dislikeCount
+                    commentCount: ele.statistics.commentCount || 0,
+                    likeCount: ele.statistics.likeCount || 0,
+                    dislikeCount: ele.statistics.dislikeCount || 0
                 })
             });
         },

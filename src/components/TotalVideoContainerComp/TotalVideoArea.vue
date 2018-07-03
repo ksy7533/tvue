@@ -82,16 +82,19 @@ export default {
             }, this.contents);
         }
 
+        /* 나의 찜목록 */
         else if(this.$route.name === 'totalVideoMylist'){
-            this.title = '나의 찜목록'
-            let user = firebase.auth().currentUser;
-            let listsRef = db.ref('lists/' + user.uid).child('like_video/').once('value', (snapshot)=>{
-                snapshot.forEach((item, index)=>{
-                    this.contents.push(item.val());
-                })
-                this.loading = false;
+            this.title = '나의 찜목록';
+            firebase.auth().onAuthStateChanged((user) => {
+                if (user) {
+                    let listsRef = db.ref('lists/' + user.uid).child('like_video/').once('value', (snapshot) => {
+                        snapshot.forEach((item, index)=>{
+                            this.contents.push(item.val());
+                        })
+                        this.loading = false;
+                    })      
+                }
             })
-
         }
     },
 

@@ -26,19 +26,10 @@ export default {
         });
 
         firebase.auth().onAuthStateChanged((user) => {
-            let currentVideoId = this.$route.params.videoId;
             if (user) {
-                 let listsRef = db.ref('lists/' + user.uid).child('like_video/').on("value", (snapshot) => {
-                    snapshot.forEach((item)=>{
-                        if(item.val().id === currentVideoId){
-                            this.$store.commit('setIsLikeVideo', {
-                                isLikeVideo : true
-                            });
-                        }
-                    })
-                });
-            } else {
-                console.log("no")
+                this.$store.dispatch('setLikeVideo', {
+                    currentVideoId : this.$route.params.videoId
+                })
             }
         });
 

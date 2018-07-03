@@ -36,29 +36,11 @@ export default {
     mounted(){
         firebase.auth().onAuthStateChanged((user) => {
             if (user) {
-                let currentUser = firebase.auth().currentUser;
-                let listsRef = db.ref('lists/' + currentUser.uid).child('custom_query')
-
-                listsRef.on('value', (data) => {
-                    let customListData = [];
-
-                    data.forEach(function(item, index){
-                        customListData.push({
-                            id : item.key,
-                            q : item.val()
-                        });
-                    })
-
-                    this.$store.commit('setCustomListData', {
-                        customListData
-                    });
-                });
+                this.$store.dispatch('getCustomListData');
             } else {
-                console.log("없음")
                 this.$store.commit('setCustomListData', {
                     customListData : []
                 });
-
             }
         })
     },

@@ -34,5 +34,7 @@ export default {
     PLAYLISTS_URL: "https://www.googleapis.com/youtube/v3/playlists",
 
     ADD_LIKE_VIDEO: 'addLikeVideo',
-    REMOVE_LIKE_VIDEO: 'removeLikeVideo'
+    SET_LIKE_VIDEO: 'setLikeVideo',
+    REMOVE_LIKE_VIDEO: 'removeLikeVideo',
+    GET_CUSTOM_LIST_DATA: 'getCustomListData'
 }

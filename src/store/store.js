@@ -48,6 +48,17 @@ export const store = new Vuex.Store({
             });
         },
 
+        [Constant.SET_LIKE_VIDEO]: (context, payload) => {
+            let user = firebase.auth().currentUser;
+            db.ref('lists/' + user.uid).child('like_video/').on("value", (snapshot) => {
+                snapshot.forEach((item) => {
+                    if (item.val().id === payload.currentVideoId) {
+                        context.commit('setIsLikeVideo', { isLikeVideo: true });
+                    }
+                })
+            });
+        },
+
         [Constant.REMOVE_LIKE_VIDEO]: (context, payload) => {
             let user = firebase.auth().currentUser;
             db.ref('lists/' + user.uid).child('like_video/').orderByChild('id').equalTo(payload.currentVideoId).once('value', (snapshot) => {
@@ -56,6 +67,24 @@ export const store = new Vuex.Store({
                 });
                 context.commit('setIsLikeVideo', { isLikeVideo: false });
             })
+        },
+
+        [Constant.GET_CUSTOM_LIST_DATA]: (context, payload) => {
+            let currentUser = firebase.auth().currentUser;
+            let listsRef = db.ref('lists/' + currentUser.uid).child('custom_query');
+
+            listsRef.on('value', (data) => {
+                let customListData = [];
+
+                data.forEach(function(item, index) {
+                    customListData.push({
+                        id: item.key,
+                        q: item.val()
+                    });
+                })
+
+                context.commit('setCustomListData', { customListData });
+            });
         }
     }
 });
