@@ -2,6 +2,7 @@
     <div class="playContent" v-if="currentVideoData.length">
         <h2><strong>{{currentVideoData[0].channelTitle}}</strong>의 채널입니다</h2>
         <PlayArea v-bind:currentVideoData="currentVideoData[0]"></PlayArea>
+        <ReplyArea></ReplyArea>
         <VideoCategory></VideoCategory>
 
         <a href="#top" class="btnGotoTop"><i class="far fa-arrow-alt-circle-up"></i></a>
@@ -11,6 +12,7 @@
 <script>
 import PlayArea from './PlayComp/PlayArea.vue'
 import VideoCategory from './VideoCategoryComp/VideoCategoryArea.vue'
+import ReplyArea from './ReplyComp/ReplyArea.vue'
 
 import loadData from 'mixins/loadData.js'
 import firebase from 'firebase'
@@ -49,7 +51,8 @@ export default {
 
     components : {
         PlayArea,
-        VideoCategory
+        VideoCategory,
+        ReplyArea
     }
 }
 
