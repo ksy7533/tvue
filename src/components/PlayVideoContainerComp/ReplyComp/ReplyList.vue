@@ -1,53 +1,46 @@
 <template>
     <div class="list">
-        <div class="item">
+        <div class="item" v-for="(item, index) in arrReply" v-bind:key="index">
             <div class="info">
-                <span class="name">김세윤</span>
-                <span class="date">2014.08.12</span>
+                <span class="name">{{item.displayName}}</span>
+                <span class="date">{{item.date}}</span>
             </div>
-            <p class="txt">지금은 댓글영역 테스트입니다</p>
-        </div>
-        <div class="item">
-            <div class="info">
-                <span class="name">김세윤</span>
-                <span class="date">2014.08.12</span>
-            </div>
-            <p class="txt">지금은 댓글영역 테스트입니다</p>
-        </div>
-        <div class="item">
-            <div class="info">
-                <span class="name">김세윤</span>
-                <span class="date">2014.08.12</span>
-            </div>
-            <p class="txt">지금은 댓글영역 테스트입니다</p>
-        </div>
-        <div class="item">
-            <div class="info">
-                <span class="name">김세윤</span>
-                <span class="date">2014.08.12</span>
-            </div>
-            <p class="txt">지금은 댓글영역 테스트입니다</p>
-        </div>
-        <div class="item">
-            <div class="info">
-                <span class="name">김세윤</span>
-                <span class="date">2014.08.12</span>
-            </div>
-            <p class="txt">지금은 댓글영역 테스트입니다</p>
-        </div>
-        <div class="item">
-            <div class="info">
-                <span class="name">김세윤</span>
-                <span class="date">2014.08.12</span>
-            </div>
-            <p class="txt">지금은 댓글영역 테스트입니다</p>
+            <p class="txt">{{item.replyText}}</p>
         </div>
     </div>
 </template>
 
 <script>
+import firebase from 'firebase'
+import { db } from 'config/db.js'
+
 export default {
 
+    data(){
+        return{
+            arrReply : []
+        }
+    },
+
+    mounted(){
+        let videoId = this.$route.params.videoId;
+
+        let replysRef = db.ref('replys/'+videoId);
+
+        replysRef.on('value', (data) => {
+            console.log("ff")
+            data.forEach((item, index) => {
+                console.log(index)
+                this.arrReply.push({
+                    displayName: item.val().displayName,
+                    date: item.val().date,
+                    replyText: item.val().replyText
+                });
+                console.log(this.arrReply)
+            })
+        });
+        
+    }
 }
 </script>
 

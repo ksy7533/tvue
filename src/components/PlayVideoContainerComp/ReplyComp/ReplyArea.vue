@@ -39,6 +39,7 @@ export default {
             }
 
             db.ref('replys/'+videoId).push(replyObj).then(() => {
+                this.replyText = '';
             });
         }
     },
