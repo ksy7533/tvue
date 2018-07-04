@@ -82,7 +82,11 @@ export default {
         
         signOut(){
             firebase.auth().signOut().then(function() {
-            }).catch(function(error) {});
+                window.location.reload()
+            }).catch(function(error) {
+                console.log(error)
+                window.location.reload()
+            });
         },
 
         login(){
@@ -90,6 +94,7 @@ export default {
             firebase.auth().signInWithPopup(authProvider).then((result) => {
                 var user = result.user;
                 firebase.auth().setPersistence(firebase.auth.Auth.Persistence.SESSION)
+                window.location.reload()
             }).catch(function(error) {
                 
             });

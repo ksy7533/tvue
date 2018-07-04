@@ -15,7 +15,6 @@ import VideoItem from '../../CommonComp/videoItem.vue'
 
 import loadData from 'mixins/loadData.js'
 import ytDurationFormat from 'youtube-duration-format'
-import moment from 'moment'
 import Constant from 'constant'
 
 export default {

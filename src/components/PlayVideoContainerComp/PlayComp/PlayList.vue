@@ -17,7 +17,6 @@
 
 <script>
 import loadData from 'mixins/loadData.js'
-import moment from 'moment';
 import Constant from 'constant'
 
 export default {

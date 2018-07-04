@@ -62,13 +62,13 @@ export default {
     }
     .detail{
         position: relative;
-        padding:20px 0;
+        padding:20px 0 30px;
         border-bottom:1px solid #d9d9d9;
 
         h3{
-            margin-bottom:10px;
+            margin-bottom:20px;
             font-weight:bold;
-            font-size:16px;        
+            font-size:18px;        
         }
 
         .info{

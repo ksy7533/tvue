@@ -26,7 +26,6 @@
 import VideoItem from '../CommonComp/videoItem.vue'
 
 import ytDurationFormat from 'youtube-duration-format'
-import moment from 'moment'
 import loadData from 'mixins/loadData.js'
 import firebase from 'firebase'
 import { db } from 'config/db.js'

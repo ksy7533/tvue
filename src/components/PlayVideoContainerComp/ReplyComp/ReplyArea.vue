@@ -1,46 +1,87 @@
 <template>
     <section class="replyArea">
-        <div class="write">
-            <p class="tit">댓글</p>
-            <div class="inputBox">
-                <i class="far fa-comment-dots"></i>
-                <input type="text" v-model="replyText">
-                <button class="regBtn" v-on:click="addComment">등록</button>
+
+        <div v-if="isShowReply">
+            <div class="write">
+                <p class="tit">댓글 <span class="total">{{lengthReply}}</span></p>
+                <div class="inputBox">
+                    <i class="far fa-comment-dots"></i>
+                    <input type="text" v-model="replyText" v-on:focus="focusTxt" v-on:keyup.enter="addComment" placeholder="댓글을 입력해주세요">
+                    <button class="regBtn" v-on:click="addComment">등록</button>
+                </div>
             </div>
+
+            <ReplyList v-on:toggleReply="toggleReply"></ReplyList>
         </div>
-
-        <ReplyList></ReplyList>
-
+        <div v-else>
+            <a class="btnMore" v-on:click="toggleReply"><i class="fas fa-angle-down"></i><span class="num">{{lengthReply}}</span>개 댓글 보기</a>
+        </div>
     </section>
 </template>
 
 <script>
 import ReplyList from './ReplyList.vue'
 
+import moment from 'moment'
 import firebase from 'firebase'
 import { db } from 'config/db.js'
 
 export default {
     data(){
         return {
-            replyText : ''
+            replyText : '',
+            lengthReply : 0,
+            isShowReply :false
         }
+    },
+
+    mounted(){
+        this.getTotalReply();
     },
 
     methods : {
         addComment : function(){
+            let date = moment(firebase.database.ServerValue.TIMESTAMP).format(moment.HTML5_FMT.DATE);
             let currentUser = firebase.auth().currentUser;
             let videoId = this.$route.params.videoId;
-
             let replyObj = {
-                date : firebase.database.ServerValue.TIMESTAMP,
+                date,
                 displayName :currentUser.displayName,
-                replyText : this.replyText
+                replyText : this.replyText,
+                uid : currentUser.uid
             }
 
             db.ref('replys/'+videoId).push(replyObj).then(() => {
                 this.replyText = '';
             });
+        },
+
+        getTotalReply : function(){
+            let videoId = this.$route.params.videoId;
+            let replysRef = db.ref('replys/'+videoId);
+
+            replysRef.on('value', (data) => {
+                if(data.val() !== null){
+                    this.lengthReply = Object.keys(data.val()).length;
+                }else{
+                    this.lengthReply = 0;
+                }
+            });
+        },
+
+        focusTxt : function(event){
+            let target = event.target;
+            let currentUser = firebase.auth().currentUser;
+
+            if(currentUser === null){
+                alert('로그인해주세요');
+                target.blur();
+            }
+        },
+
+        toggleReply : function(){
+            console.log("csdfsdf")
+            this.isShowReply = !this.isShowReply;
         }
     },
 
@@ -63,6 +104,10 @@ export default {
         .tit{
             margin-bottom:15px;
             font-size:16px;
+            
+            .total{
+                color:$blue-color;
+            }
         }
 
         .inputBox{
@@ -102,6 +147,25 @@ export default {
             }
         }
     }
-}
 
+    .btnMore{
+        cursor: pointer;
+        display:block;
+        text-align: center;
+        padding:15px 0;
+        font-size:14px;
+        border-bottom:1px solid #d9d99d;
+        background-color:#F2F2F2;
+
+        i{
+            margin-right:5px;
+            font-size:14px;
+        }
+
+        .num{
+            color:$blue-color;
+            font-weight:bold;
+        }
+    }
+}
 </style>
