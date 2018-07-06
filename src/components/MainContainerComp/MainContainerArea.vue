@@ -43,6 +43,7 @@ export default {
 .mainContent{
     h2{
         margin:30px 0 20px;
+        padding:0 40px;
         font-size:26px;
         font-weight:bold;
     }

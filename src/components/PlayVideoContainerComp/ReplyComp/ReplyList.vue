@@ -61,7 +61,6 @@ export default {
         },
 
         clickBtnClose(){
-            console.log("ff")
             this.$emit('toggleReply')
         }
     }
@@ -74,7 +73,6 @@ export default {
 @import "../../../styles/extend";
 
 .list{
-    padding:40px 0 0 0;
     border-bottom:1px solid #d9d9d9;
 
     .item{
@@ -84,12 +82,7 @@ export default {
         border-top:1px solid #d9d9d9;
 
         &:first-child{
-            padding-top:0;
             border-top:0;
-        }
-
-        &:last-child{
-            padding-bottom:0;
         }
 
         .info{
@@ -123,9 +116,9 @@ export default {
         cursor: pointer;
         display:block;
         text-align: center;
-        margin-top:20px;
         padding:15px 0;
         font-size:14px;
+        border-top:1px solid #d9d9d9;
         background-color:#F2F2F2;  
     }
 }

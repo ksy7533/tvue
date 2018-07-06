@@ -84,8 +84,7 @@ export default {
     background-color:#fff;
 
     .content{
-        margin:0 auto;
-        width:1260px;
+        padding: 0 40px;
 
         &:after{
             @extend .clear;

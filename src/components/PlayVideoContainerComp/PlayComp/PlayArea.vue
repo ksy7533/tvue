@@ -55,11 +55,15 @@ export default {
 @import "../../../styles/extend";
 
 .areaPlay{
+
     .wrapPlay{
+        height:760px;
+
         &:after{
             @extend .clear;
         }
     }
+
     .detail{
         position: relative;
         padding:20px 0 30px;

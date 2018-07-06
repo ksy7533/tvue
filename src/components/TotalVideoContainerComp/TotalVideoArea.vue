@@ -54,7 +54,7 @@ export default {
                 key : Constant.YOUTUBE_API_KEY,
                 chart : 'mostPopular',
                 regionCode : 'kr',
-                maxResults : '30',
+                maxResults : '28',
                 part : 'snippet,contentDetails,statistics',
                 videoCategoryId : this.$route.params.channelId
             }, this.contents)
@@ -212,6 +212,8 @@ export default {
 @import "../../styles/extend";
 
 .totalContent{
+    padding: 20px 40px 0;
+
     .areaTop{
         position: relative;
         h2{
@@ -236,14 +238,20 @@ export default {
             @extend .clear;
         }
 
+
         li{
             float:left;
-            margin:0 5px 20px 0;
-            width:198px;
-            height:200px;
+            margin:0 0 20px 0.28%;
+            width:14%;
 
             &:first-child{
                 margin-left:0;
+            }
+
+            a{
+                /deep/ .areaBottom{
+                    height:80px;
+                }
             }
         }
     }

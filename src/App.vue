@@ -63,8 +63,8 @@ export default {
 }
 
 .content{
-  margin:0 auto;
-  padding:121px 0 183px 0;
-  width:1260px;
+  // margin:0 auto;
+  padding:95px 0 183px 0;
+  // width:1260px;
 }
 </style>

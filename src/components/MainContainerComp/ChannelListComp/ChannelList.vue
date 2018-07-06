@@ -72,8 +72,8 @@ export default {
         float:left;
         box-sizing:border-box;
         padding:20px;
-        width:185px;
-        height:200px;
+        width:10%;
+        
         border-radius:5px;
         .name{
             display:block;
@@ -92,6 +92,8 @@ export default {
 
     .list{
         float:left;
+        margin-left:.2%;
+        width:89.8%;
 
         &:after{
             @extend .clear;
@@ -99,11 +101,15 @@ export default {
 
         li{
             float:left;
-            margin-left:10px;
-            width:195px;
+            margin-left:.32%;
+            width:16.4%;
 
             &:first-child{
-                margin-left:10px;
+                margin-left:0;
+            }
+
+            /deep/ .areaBottom{
+                height:80px;
             }
         }
     }

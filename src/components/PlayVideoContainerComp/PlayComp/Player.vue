@@ -1,5 +1,5 @@
 <template>
-    <youtube :video-id="this.$route.params.videoId" @ready="ready" player-width="720" player-height="405" class="player"></youtube>
+    <youtube :video-id="this.$route.params.videoId" @ready="ready" player-width="100%" player-height="100%" class="player"></youtube>
 </template>
 
 <script>
@@ -30,6 +30,7 @@ export default {
 
 .player{
     float:left;
-    width:720px;
+    width:65%;
+    height:100%;
 }
 </style>

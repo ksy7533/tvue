@@ -4,12 +4,14 @@
             <img v-bind:src="itemData.img_src" alt="">
             <span class="playTime">{{itemData.duration}}</span>
         </p>
-        <p class="tit">{{itemData.videoTitle}}</p>
-        <p class="channelTit">{{itemData.channelTitle}}</p>
-        <p class="info">
-            <span class="viewCount"><i class="fas fa-play"></i> {{this.numberWithCommas(itemData.viewCount)}}회</span>
-            <span class="date">{{itemData.date}}</span>
-        </p>
+        <div class="areaBottom">
+            <p class="tit">{{itemData.videoTitle}}</p>
+            <p class="channelTit">{{itemData.channelTitle}}</p>
+            <p class="info">
+                <span class="viewCount"><i class="fas fa-play"></i> {{this.numberWithCommas(itemData.viewCount)}}회</span>
+                <span class="date">{{itemData.date}}</span>
+            </p>
+        </div>
     </a>
 </template>
 
@@ -82,7 +84,7 @@ export default {
     .tit{
         margin-top:5px;
         color:#000;
-        font-size:14px;
+        font-size:16px;
         font-weight:bold;
         @include txt_ellipse(18px, 2);
     }
@@ -91,7 +93,7 @@ export default {
         margin-top:5px;
         padding-right:20px;
         color:#848c9c;
-        font-size:12px;
+        font-size:14px;
         @include txt_ellipse(18px, 1);
     }
 
@@ -99,7 +101,7 @@ export default {
         margin-top:5px;
         padding-right:20px;
         color:#848c9c;
-        font-size:12px;
+        font-size:14px;
         @include txt_ellipse(12px, 1);
 
         .date{

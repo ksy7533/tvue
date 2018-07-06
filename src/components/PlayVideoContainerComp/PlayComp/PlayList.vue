@@ -128,7 +128,8 @@ export default {
 
 .listPlay{
     float:left;
-    width:538px;
+    width:calc(35% - 2px);
+    height:calc(100% - 2px);
     background-color:#F7F8FA;
     border:1px solid #d9d9d9;
 

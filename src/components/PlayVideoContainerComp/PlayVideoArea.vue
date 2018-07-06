@@ -64,6 +64,7 @@ export default {
 @import "../../styles/extend";
 
 .playContent{
+    padding:20px 40px 0;
     h2{
         margin-bottom:20px;
         font-weight: normal;

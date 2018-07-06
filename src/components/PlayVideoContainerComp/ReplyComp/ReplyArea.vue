@@ -80,7 +80,6 @@ export default {
         },
 
         toggleReply : function(){
-            console.log("csdfsdf")
             this.isShowReply = !this.isShowReply;
         }
     },
@@ -99,6 +98,7 @@ export default {
 .replyArea{
     .write{
         padding:30px 20px;
+        border-bottom:1px solid #d9d9d9;
         background-color:#F2F2F2;
 
         .tit{
@@ -154,7 +154,7 @@ export default {
         text-align: center;
         padding:15px 0;
         font-size:14px;
-        border-bottom:1px solid #d9d99d;
+        border-bottom:1px solid #d9d9d9;
         background-color:#F2F2F2;
 
         i{

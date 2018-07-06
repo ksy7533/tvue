@@ -125,9 +125,17 @@ export default {
 
         li{
             float:left;
-            margin:0 10px 20px 0;
-            width:200px;
-            height:200px;
+            margin:0 0 20px 0.28%;
+            width:14%;
+            
+
+            &:first-child{
+                margin-left:0;
+            }
+
+            /deep/ .areaBottom{
+                height:80px;
+            }
         }
     }
 

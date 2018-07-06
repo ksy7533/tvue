@@ -112,13 +112,6 @@ export default {
         border-top:none;    
     }
 
-    &:last-child{
-        .btnMore{
-            border-bottom-left-radius: 5px;
-            border-bottom-right-radius: 5px;
-        }
-    }
-
     h2{
         display: inline-block;
         margin-bottom:10px;
@@ -141,13 +134,17 @@ export default {
 
         li{
             float:left;
-            margin-left:10px;
-            width:194px;
-            height:200px;
+            margin-left:.32%;
+            width:16.4%;
+            max-height:100%;
 
             &:first-child{
                 margin-left:0;
             }
+        }
+
+        /deep/ .areaBottom{
+            height:100px;
         }
     }
 
@@ -176,7 +173,6 @@ export default {
         font-size:0;
         border:1px solid #d9d9d9;
         background-color:$white-color;
-        border-radius:5px;
 
         &.zum_prev_btn{
             left:-25px;
