@@ -2,7 +2,7 @@
     <section class="areaPlay">
         <div class="wrapPlay">
             <Player></Player>
-            <PlayList></PlayList>
+            <!-- <PlayList></PlayList> -->
         </div>
         <div class="detail">
             <h3>{{currentVideoData.videoTitle}}</h3>
@@ -57,7 +57,10 @@ export default {
 .areaPlay{
 
     .wrapPlay{
-        height:760px;
+        // height:600px;
+        // width:100%;
+        // height:700px;
+        background-color:#000;
 
         &:after{
             @extend .clear;
@@ -66,19 +69,18 @@ export default {
 
     .detail{
         position: relative;
-        padding:20px 0 30px;
-        border-bottom:1px solid #d9d9d9;
+        padding:20px 40px 30px;
 
         h3{
             margin-bottom:20px;
             font-weight:bold;
-            font-size:18px;        
+            font-size:24px;        
         }
 
         .info{
             margin-top:10px;
             color:#848c9c;
-            font-size:14px;
+            font-size:16px;
 
             .date{
                 position: relative;
@@ -101,7 +103,7 @@ export default {
         .count{
             position: absolute;
             top:25px;
-            right:0;
+            right:40px;
 
             span{
                 display: inline-block;
@@ -115,9 +117,9 @@ export default {
             margin-top:10px;
             padding-right:20px;
             color:#666;
-            font-size:12px;
+            font-size:16px;
 
-            @include txt_ellipse(18px, 3);
+            @include txt_ellipse(20px, 3);
         }
     }
 }

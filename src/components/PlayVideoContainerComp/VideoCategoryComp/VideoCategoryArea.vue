@@ -80,6 +80,7 @@ export default {
 
 .areaVideoCategory{
     margin-top:30px;
+    padding:0 40px;
 
     .btnMore{
         text-align: center;

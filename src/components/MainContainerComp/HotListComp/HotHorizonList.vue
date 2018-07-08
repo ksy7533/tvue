@@ -141,6 +141,40 @@ export default {
             &:first-child{
                 margin-left:0;
             }
+
+            .link{
+                position: relative;
+                overflow: hidden;
+
+                &:hover{
+                    .areaBottom{
+                        bottom:0;
+                    }
+                }
+
+                /deep/ .areaBottom{
+                    position: absolute;
+                    bottom:-40px;
+                    left:0;
+                    width:100%;
+                    padding:10px;
+                    box-sizing: border-box;
+                    background-color:#000;
+                    transition: all 1s;
+
+                    .tit{
+                        color:$white-color;
+                    }
+
+                    .channelTit{
+                        color:$white-color;
+                    }
+
+                    .info{
+                        color:$white-color;
+                    }
+                }
+            }
         }
 
         /deep/ .areaBottom{
@@ -173,6 +207,7 @@ export default {
         font-size:0;
         border:1px solid #d9d9d9;
         background-color:$white-color;
+        border-radius:5px;
 
         &.zum_prev_btn{
             left:-25px;

@@ -39,10 +39,6 @@ export default {
         border-top:none;
     }
 
-    &:after{
-        @extend .clear;
-    }
-
     &:nth-of-type(n){
         .channelName{
             background-color:#22B478;        
@@ -69,21 +65,19 @@ export default {
     
     .channelName{
         text-decoration:none;
-        float:left;
         box-sizing:border-box;
-        padding:20px;
-        width:10%;
+        display:block;
+        margin-bottom:10px;
+        padding:10px 20px;
         
         border-radius:5px;
         .name{
-            display:block;
             color:$white-color;
             font-weight:bold;
             font-size:22px
         }
         
         .sub_name{
-            display:block;
             margin-top:10px;
             color:$white-color;
             font-size:12px
@@ -91,10 +85,6 @@ export default {
     }
 
     .list{
-        float:left;
-        margin-left:.2%;
-        width:89.8%;
-
         &:after{
             @extend .clear;
         }
@@ -103,6 +93,7 @@ export default {
             float:left;
             margin-left:.32%;
             width:16.4%;
+            max-height:100%;
 
             &:first-child{
                 margin-left:0;

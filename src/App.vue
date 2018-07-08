@@ -64,6 +64,7 @@ export default {
 
 .content{
   // margin:0 auto;
+  min-width:1260px;
   padding:95px 0 183px 0;
   // width:1260px;
 }

@@ -29,8 +29,9 @@ export default {
 @import "../../../styles/extend";
 
 .player{
-    float:left;
-    width:65%;
-    height:100%;
+    // float:left;
+    margin:0 auto;
+    width:1070px;
+    height:605px;
 }
 </style>

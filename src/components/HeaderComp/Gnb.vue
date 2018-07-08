@@ -80,7 +80,9 @@ export default {
 @import "../../styles/extend";
 
 .wrapGnb{
-    box-shadow:0 1px 0 0 #D7DBE0;
+    min-width:1260px;
+    // box-shadow:0 1px 0 0 #D7DBE0;
+    border-bottom:1px solid #d9d9d9;
     background-color:#fff;
 
     .content{

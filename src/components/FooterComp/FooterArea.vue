@@ -12,6 +12,7 @@
 @import "../../styles/extend";
 
 footer{
+    min-width:1260px;
     border-top:1px solid #d9d9d9;
     background-color:#ebedee;
 

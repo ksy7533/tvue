@@ -115,6 +115,7 @@ export default {
 
 .headerTop{
     position:relative;
+    min-width:1260px;
     padding:10px 0;
     border-bottom:1px solid #f2f2f2;
 

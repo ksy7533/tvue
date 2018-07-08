@@ -1,5 +1,5 @@
 @mixin txt_ellipse($line_height, $line_number) {
-    max-height: $line_height*2;
+    max-height: $line_height*$line_number;
     line-height: $line_height;
     overflow: hidden;
     text-overflow: ellipsis;

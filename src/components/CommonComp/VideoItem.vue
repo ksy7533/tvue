@@ -93,15 +93,16 @@ export default {
         margin-top:5px;
         padding-right:20px;
         color:#848c9c;
-        font-size:14px;
+        font-size:12px;
         @include txt_ellipse(18px, 1);
     }
 
     .info{
         margin-top:5px;
         padding-right:20px;
+        height:14px;
         color:#848c9c;
-        font-size:14px;
+        font-size:12px;
         @include txt_ellipse(12px, 1);
 
         .date{

@@ -55,9 +55,5 @@ header{
     width:100%;
     background-color:#fff;
     transition: box-shadow 0.2s;
-
-    &.fixed{
-        box-shadow: 0px 5px 5px 0px rgba(217,217,217,1);
-    }
 }
 </style>
