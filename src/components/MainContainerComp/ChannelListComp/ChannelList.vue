@@ -91,8 +91,11 @@ export default {
 
         li{
             float:left;
-            margin-left:.32%;
-            width:16.4%;
+            // margin-left:.32%;
+            // width:16.4%;
+            margin-left:0.28%;
+            width:14%;
+
             max-height:100%;
 
             &:first-child{

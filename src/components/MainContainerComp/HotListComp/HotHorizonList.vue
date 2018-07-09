@@ -6,7 +6,7 @@
 
         <div class="wrapList">
             <ul class="list" v-for="(item, index) in ulOfNum" v-bind:key="index">
-                <li v-for="(item, index) in arrData.slice((6 * index), (6 * (index + 1)))" v-bind:key="index"><VideoItem v-bind:itemData="item"></VideoItem></li>
+                <li v-for="(item, index) in arrData.slice((7 * index), (7 * (index + 1)))" v-bind:key="index"><VideoItem v-bind:itemData="item"></VideoItem></li>
             </ul>
         </div>
 
@@ -51,8 +51,8 @@ export default {
 
     data(){
         return {
-            ulOfNum : 5,
-            liOfNum : 6,
+            ulOfNum : 4,
+            liOfNum : 7,
             arrData : [],
             isOver : false
         }
@@ -134,8 +134,12 @@ export default {
 
         li{
             float:left;
-            margin-left:.32%;
-            width:16.4%;
+            // margin-left:.32%;
+            // width:16.4%;
+
+            margin:0 0 20px 0.28%;
+            width:14%;
+
             max-height:100%;
 
             &:first-child{
@@ -145,24 +149,41 @@ export default {
             .link{
                 position: relative;
                 overflow: hidden;
+                border-radius: 5px;
 
                 &:hover{
-                    .areaBottom{
+                    /deep/ .areaBottom{
                         bottom:0;
+
+                        .tit{
+                            text-decoration:none;
+                        }
+                    }
+                }
+
+                /deep/ .wrapImg{
+                    .playTime{
+                        bottom:0;
+                        top:20px;
+                        right:20px;
+                        height:10px;
                     }
                 }
 
                 /deep/ .areaBottom{
                     position: absolute;
-                    bottom:-40px;
+                    bottom:-50px;
                     left:0;
                     width:100%;
-                    padding:10px;
+                    height:115px;
+                    padding:15px 20px;
                     box-sizing: border-box;
-                    background-color:#000;
+                    background:linear-gradient(to bottom, rgba(0,0,0,0), rgba(0,0,0,1));
                     transition: all 1s;
 
                     .tit{
+                        margin:0 0 10px 0;
+                        height:40px;
                         color:$white-color;
                     }
 

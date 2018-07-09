@@ -86,7 +86,7 @@ export default {
         color:#000;
         font-size:16px;
         font-weight:bold;
-        @include txt_ellipse(18px, 2);
+        @include txt_ellipse(20px, 2);
     }
 
     .channelTit{

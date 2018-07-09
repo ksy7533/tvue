@@ -32,7 +32,7 @@ export default {
                 chart : 'mostPopular',
                 regionCode : 'kr',
                 part : 'snippet,contentDetails,statistics',
-                maxResults: 6,
+                maxResults: 7,
                 videoCategoryId : item.id
             },
                 this.channelData[index]

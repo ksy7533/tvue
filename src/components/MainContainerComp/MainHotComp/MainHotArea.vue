@@ -5,7 +5,7 @@
         <div class="hotList">
             <!-- <button class="arrow prev"><i class="fas fa-angle-left"></i></button> -->
             <ul class="list">
-                <li v-for="(item, index) in arrData" v-bind:key="index">
+                <li v-for="(item, index) in arrData" v-bind:key="index" v-bind:class="{on : onCurrent(item.id)}">
                     <a v-on:click="setCurrentVideo(item)">
                         <span class="wrapImg"><img v-bind:src="item.img_src" alt=""></span>
                     </a>
@@ -50,6 +50,13 @@ export default {
     methods: {
         setCurrentVideo(data){
             this.currentVideo = data;
+        },
+
+        onCurrent(itemId){
+            if(itemId === this.currentVideo.id){
+                return true
+            };
+            return false;
         }
     },
 
@@ -98,16 +105,30 @@ export default {
 
             li{
                 float:left;
-                // margin-left:.32%;
-                // width:16.4%;
                 width:10%;
-                // max-height:100%;
 
                 &:first-child{
                     margin-left:0;
                 }
 
+                &.on{
+                    a{
+                        &:after{
+                            content:'';
+                            display:block;
+                            position: absolute;
+                            top:0;
+                            left:0;
+                            width:100%;
+                            height:100%;
+                            background-color:rgba(0,0,0,0.4);
+                        }
+                    }
+                }
+
                 a{
+                    display:block;
+                    position: relative;
                     .wrapImg{
 
                         img{
