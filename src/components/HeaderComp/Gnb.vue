@@ -6,8 +6,15 @@
                     <router-link class="link" v-bind:to="'/main'">전체</router-link>
                 </li>
 
-                <li v-for="(item, index) in gnb" v-bind:key="index" v-bind:class="{on : changeClassOn(item.id)}">
-                    <router-link class="link" v-bind:to="'/totalVideo/channel/'+item.id">{{item.name}}</router-link>
+                <li v-on:mouseover="overGnb" v-on:mouseout="outGnb">
+                    <a>채널</a>
+                    <div class="depth">
+                        <ul>
+                           <li v-for="(item, index) in gnb" v-bind:key="index" v-bind:class="{on : changeClassOn(item.id)}">
+                                <router-link class="link" v-bind:to="'/totalVideo/channel/'+item.id">{{item.name}}</router-link>
+                            </li>
+                        </ul>
+                    </div> 
                 </li>
             </ul>
 
@@ -58,6 +65,20 @@ export default {
             this.$store.dispatch('removeLikeVideo', {
                 currentVideoId : this.$route.params.videoId
             });
+        },
+
+        overGnb(e){
+            let target = e.target;
+            let eleDepth = target.nextElementSibling;
+            eleDepth.style.display = "block";
+        },
+
+        outGnb(e){
+            let target = e.target;
+            let eleDepth = e.target.parentElement.parentElement.parentElement;
+            if(eleDepth.classList.contains('depth')){
+                eleDepth.style.display="none";
+            }
         }
     },
 
@@ -98,7 +119,7 @@ export default {
                 @extend .clear;
             }
 
-            li{
+            &>li{
                 float:left;
                 position: relative;
                 margin-left:10px;
@@ -124,14 +145,41 @@ export default {
                     }
                 }
 
-                a{
+                &>a{
+                    cursor: pointer;
                     display: block;
                     padding:15px 20px;
                     color:#6c7280;
                     font-size:13px;
                     font-weight:600;
-                    text-decoration:none
+                    text-decoration:none;
                 }
+
+                .depth{
+                    display:none;
+                    position: absolute;
+                    top:43px;
+                    left:0;
+                    width:200px;
+                    background-color:#fff;
+                    box-shadow:0 0 0 1px rgba(0, 0, 0, 0.03), 0 1px 2px 0 rgba(0, 0, 0, 0.19);
+
+                    a{
+                        display: block;
+                        padding:15px 20px;
+                        color:#6c7280;
+                        font-size:13px;
+                        font-weight:600;
+                        text-decoration:none;
+                    }
+                }
+            }
+
+            &>li.over{
+                .depth{
+                    display:block;
+                }
+
             }
         }
 
