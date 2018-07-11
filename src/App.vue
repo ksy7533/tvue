@@ -1,11 +1,17 @@
 <template>
   <div id="app" class="wrap">
     <HeaderArea></HeaderArea>
+
+    <transition name="main">
+    
     <div class="container" v-bind:class="{main : containerName}">
       <div class="content">
         <router-view :key="$route.path"></router-view>
       </div>
     </div>
+
+    </transition>
+
     <FooterArea></FooterArea>
   </div>
 </template>
@@ -67,5 +73,9 @@ export default {
   min-width:1260px;
   padding:95px 0 183px 0;
   // width:1260px;
+}
+
+.main-enter{
+  opacity:0.5;
 }
 </style>

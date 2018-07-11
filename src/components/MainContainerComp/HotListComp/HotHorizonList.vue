@@ -163,10 +163,11 @@ export default {
 
                 /deep/ .wrapImg{
                     .playTime{
-                        bottom:0;
-                        top:20px;
-                        right:20px;
-                        height:10px;
+                        display:none;
+                        // bottom:0;
+                        // top:20px;
+                        // right:20px;
+                        // height:10px;
                     }
                 }
 

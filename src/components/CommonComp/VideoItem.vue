@@ -48,6 +48,10 @@ export default {
     .wrapImg{
         display: block;
         position: relative;
+        width:100%;
+        height:0;
+        overflow: hidden;
+        padding-bottom:56.26%;
 
         &:after{
             content:'';
@@ -62,6 +66,9 @@ export default {
         }
 
         img{
+            position: absolute;
+            top:0;
+            left:0;
             width:100%;
             height:100%;
             border-radius: 5px;

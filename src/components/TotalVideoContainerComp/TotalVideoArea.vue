@@ -16,7 +16,7 @@
             <a href="#n" class="btnMore" v-if="isNextPage" v-on:click.prevent="addListData()">비디오 더보기</a>
             <a href="#top" class="btnGotoTop"><i class="far fa-arrow-alt-circle-up"></i></a>
         </div>
-        <div class="totalContent loading" v-else>
+        <div class="loading" v-else>
             <i class="fas fa-spinner"></i>
         </div>
     </div>
@@ -74,7 +74,7 @@ export default {
                 key : Constant.YOUTUBE_API_KEY,
                 regionCode : 'kr',
                 part : 'snippet',
-                maxResults : '30',
+                maxResults : '28',
                 type : 'video',
                 order : this.sort,
                 q : this.$route.params.query
@@ -115,7 +115,7 @@ export default {
                     key : Constant.YOUTUBE_API_KEY,
                     chart : 'mostPopular',
                     regionCode : 'kr',
-                    maxResults : '30',
+                    maxResults : '28',
                     part : 'snippet,contentDetails,statistics',
                     videoCategoryId : this.$route.params.channelId,
                     pageToken : this.tokenNextPage
@@ -126,7 +126,7 @@ export default {
                     key : Constant.YOUTUBE_API_KEY,
                     regionCode : 'Kr',
                     part : 'snippet',
-                    maxResults : '30',
+                    maxResults : '28',
                     type : 'video',
                     order : this.sort,
                     q : this.$route.params.query,
@@ -244,7 +244,7 @@ export default {
             margin:0 0 20px 0.28%;
             width:14%;
 
-            &:first-child{
+            &:nth-child(7n+1){
                 margin-left:0;
             }
 
@@ -277,7 +277,7 @@ export default {
         cursor: pointer;
     }
 
-    &.loading{
+    .loading{
         text-align: center;
         padding-top:300px;
         .fa-spinner{

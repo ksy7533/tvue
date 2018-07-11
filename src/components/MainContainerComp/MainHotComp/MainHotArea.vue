@@ -114,14 +114,31 @@ export default {
                 &.on{
                     a{
                         &:after{
-                            content:'';
+                            z-index:1;
+                            content: '';
                             display:block;
                             position: absolute;
                             top:0;
                             left:0;
                             width:100%;
                             height:100%;
+                            line-height:100%;
                             background-color:rgba(0,0,0,0.4);
+                        }
+
+                        &:before{
+                            z-index:10;
+                            position: absolute;
+                            top:50%;
+                            left:50%;
+
+                            transform:translate(-50%, -50%);
+
+                            content:'\f144';
+                            color:$blue-color;
+                            font-family: "Font Awesome 5 Free";
+                            font-weight: 900;
+                            font-size:40px;
                         }
                     }
                 }
@@ -130,7 +147,6 @@ export default {
                     display:block;
                     position: relative;
                     .wrapImg{
-
                         img{
                             width:100%;
                             height:100%;

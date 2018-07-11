@@ -6,8 +6,8 @@
                     <router-link class="link" v-bind:to="'/main'">전체</router-link>
                 </li>
 
-                <li v-on:mouseover="overGnb" v-on:mouseout="outGnb">
-                    <a>채널</a>
+                <li v-bind:class="{on : menus.channels.open}">
+                    <a class="menuTitle" v-on:click="toggle('channels')">채널</a>
                     <div class="depth">
                         <ul>
                            <li v-for="(item, index) in gnb" v-bind:key="index" v-bind:class="{on : changeClassOn(item.id)}">
@@ -34,6 +34,16 @@ import { db } from 'config/db.js'
 import {mapState} from 'vuex'
 
 export default {
+    created(){
+        let that = this;
+        window.addEventListener('click', function(e){
+            let target = e.target;
+            if(!target.classList.contains('menuTitle')){
+                that.close();
+            }
+        })
+    },
+
     mounted(){
         firebase.auth().onAuthStateChanged((user) => {
             if (user) {
@@ -67,17 +77,13 @@ export default {
             });
         },
 
-        overGnb(e){
-            let target = e.target;
-            let eleDepth = target.nextElementSibling;
-            eleDepth.style.display = "block";
+        toggle(menuName){
+            this.menus[menuName].open =! this.menus[menuName].open;
         },
 
-        outGnb(e){
-            let target = e.target;
-            let eleDepth = e.target.parentElement.parentElement.parentElement;
-            if(eleDepth.classList.contains('depth')){
-                eleDepth.style.display="none";
+        close(){
+            for(var menu in this.menus){
+                this.menus[menu].open = false;
             }
         }
     },
@@ -89,7 +95,12 @@ export default {
             currentVideoKey: '',
             isLogin :false,
             isProcessing: false,
-            isProcessing_02: false
+            isProcessing_02: false,
+            menus : {
+                channels: {
+                    open : false
+                }
+            }
         }
     }
 }
@@ -140,7 +151,7 @@ export default {
                         bottom:0;
                         left:0;
                         width:100%;
-                        height:2px;
+                        height:3px;
                         background-color:#f7d715;
                     }
                 }
@@ -171,11 +182,16 @@ export default {
                         font-size:13px;
                         font-weight:600;
                         text-decoration:none;
+
+                        &:hover{
+                            color:#fff;
+                            background-color:$blue-color;
+                        }
                     }
                 }
             }
 
-            &>li.over{
+            &>li.on{
                 .depth{
                     display:block;
                 }
