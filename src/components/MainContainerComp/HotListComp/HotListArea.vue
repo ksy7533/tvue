@@ -68,7 +68,7 @@ export default {
 @import "../../../styles/extend";
 
 .areaHotList{
-    padding:0 40px;
+    padding:0 100px;
 
     .addList{
         cursor: pointer;

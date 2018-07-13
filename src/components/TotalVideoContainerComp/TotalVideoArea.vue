@@ -212,7 +212,7 @@ export default {
 @import "../../styles/extend";
 
 .totalContent{
-    padding: 20px 40px 0;
+    padding: 20px 100px 0;
 
     .areaTop{
         position: relative;

@@ -72,7 +72,7 @@ export default {
 @import "../../../styles/extend";
 
 .wrapMainHot{
-    padding:0 40px;
+    padding:0 100px;
     background-color:#000;
 
     .hotList{

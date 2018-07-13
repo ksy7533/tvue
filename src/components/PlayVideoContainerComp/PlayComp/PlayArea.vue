@@ -69,7 +69,7 @@ export default {
 
     .detail{
         position: relative;
-        padding:20px 40px 30px;
+        padding:20px 100px 30px;
 
         h3{
             margin-bottom:20px;
@@ -103,7 +103,7 @@ export default {
         .count{
             position: absolute;
             top:25px;
-            right:40px;
+            right:100px;
 
             span{
                 display: inline-block;

@@ -64,7 +64,7 @@ export default {
 @import "../../../styles/extend";
 
 .areaChannel{
-    margin:0 40px;
+    margin:0 100px;
     padding:20px 0;
     border:1px solid #ccc;
     background-color:$white-color;

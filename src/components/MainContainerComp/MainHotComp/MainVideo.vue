@@ -42,8 +42,8 @@ export default {
 @import "../../../styles/extend";
 
 .mainVideo{
-    margin:0 auto;
-    width:1180px;
+    // margin:0 auto;
+    // width:1180px;
 
     &:after{
         @extend .clear;
@@ -51,12 +51,25 @@ export default {
 
     .video{
         float:left;
-        width:760px;
-        height:450px;
+
+        width:60%;
+        position: relative;
+        height:0;
+        overflow: hidden;
+        padding-bottom:33.3%;
+
+
+        // width:760px;
+        // height:450px;
 
         .player{
             width:100%;
             height:100%;
+
+            position: absolute;
+            top:0;
+            left:0;
+
         }
     }
 
@@ -64,12 +77,13 @@ export default {
         float:left;
         box-sizing: border-box;
         padding:40px 0 40px 40px;
-        width:420px;
+        width:40%;
+        // width:420px;
         color:#fff;
 
         .intro{
             text-align:right;
-            margin-bottom:60px;
+            margin-bottom:55px;
             line-height:48px;
             font-size:40px;
             font-weight:bold;

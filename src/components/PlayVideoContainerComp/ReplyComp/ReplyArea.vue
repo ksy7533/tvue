@@ -96,7 +96,7 @@ export default {
 @import "../../../styles/extend";
 
 .replyArea{
-    padding:0 40px;
+    padding:0 100px;
     
     .write{
         padding:30px 20px;
