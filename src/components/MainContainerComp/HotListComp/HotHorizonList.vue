@@ -88,6 +88,10 @@ export default {
             let currentUser = firebase.auth().currentUser;
             let listsRef = db.ref('lists/' + currentUser.uid).child('custom_query/' + contentsId);
             listsRef.remove();
+
+            this.$store.commit('removeCustomListData', {
+                contentsId
+            });
         }
     },
     

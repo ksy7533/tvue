@@ -1,6 +1,8 @@
 export default {
     SET_CURRENT_GNB_ID: 'setCurrentGnbId',
     SET_CUSTOM_LIST_DATA: 'setCustomListData',
+    REMOVE_CUSTOM_LIST_DATA: 'removeCustomListData',
+    ADD_CUSTOM_LIST_DATA: 'addCustomListData',
     SET_KEYWORD: 'setKeyword',
     SET_CURRENT_VIDEO: 'setCurrentVideo',
     SET_IS_LIKE_VIDEO: 'setIsLikeVideo',

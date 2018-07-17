@@ -96,7 +96,7 @@ export default {
                 firebase.auth().setPersistence(firebase.auth.Auth.Persistence.SESSION)
                 window.location.reload()
             }).catch(function(error) {
-                
+                console.log(error)
             });
         },
 

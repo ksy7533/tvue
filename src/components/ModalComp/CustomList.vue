@@ -47,7 +47,12 @@ export default {
         addCustomListData : function(query){
             let user = firebase.auth().currentUser;
             let listsRef  = db.ref('lists/' + user.uid);
-            listsRef.child('custom_query').push(query);
+            let item = listsRef.child('custom_query').push(query);
+
+            this.$store.commit('addCustomListData', {
+                    id : item.key,
+                    q : query
+            });
         }
     }
 }

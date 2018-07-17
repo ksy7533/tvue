@@ -13,7 +13,7 @@ export const store = new Vuex.Store({
         gnb: Constant.GNB_LIST,
         customListData: [],
         keyword: '',
-        userInfo: {},
+        // userInfo: {},
         currentVideoData: {},
         isLikeVideo: false
     },
@@ -21,6 +21,21 @@ export const store = new Vuex.Store({
     mutations: {
         [Constant.SET_CURRENT_GNB_ID]: (state, payload) => {
             state.currentGnbId = payload.currentGnbId;
+        },
+
+        [Constant.ADD_CUSTOM_LIST_DATA]: (state, payload) => {
+            state.customListData.push(payload);
+        },
+
+        [Constant.REMOVE_CUSTOM_LIST_DATA]: (state, payload) => {
+            let removeItemIndex = 0;
+            state.customListData.forEach(function(item, index) {
+                if (item.id === payload.contentsId) {
+                    removeItemIndex = item.index;
+                    state.customListData.splice(index, 1);
+                    return;
+                }
+            })
         },
 
         [Constant.SET_CUSTOM_LIST_DATA]: (state, payload) => {
@@ -73,7 +88,7 @@ export const store = new Vuex.Store({
             let currentUser = firebase.auth().currentUser;
             let listsRef = db.ref('lists/' + currentUser.uid).child('custom_query');
 
-            listsRef.on('value', (data) => {
+            listsRef.once('value', (data) => {
                 let customListData = [];
 
                 data.forEach(function(item, index) {
