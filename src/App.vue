@@ -1,17 +1,13 @@
 <template>
   <div id="app" class="wrap">
     <HeaderArea></HeaderArea>
-
-    <transition name="main">
     
     <div class="container" v-bind:class="{main : containerName}">
       <div class="content">
         <router-view :key="$route.path"></router-view>
       </div>
     </div>
-
-    </transition>
-
+    
     <FooterArea></FooterArea>
   </div>
 </template>
